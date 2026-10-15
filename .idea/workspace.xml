@@ -4,19 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dffd961e-0736-4b4b-a247-e69744157624" name="Changes" comment="added pdfs">
-      <change afterPath="$PROJECT_DIR$/kundendaten/kd100.arff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kundendaten/kd100.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kundendaten/kd1000.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kundendaten/kd10000.csv" afterDir="false" />
+    <list default="true" id="dffd961e-0736-4b4b-a247-e69744157624" name="Changes" comment="added abgabe">
+      <change afterPath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt2.TeX" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aufgaben/abgaben/test.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aufgaben/C3_SPM_Blatt1.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt1.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt1.pdf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="2" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -27,15 +25,74 @@
     &quot;assignee&quot;: &quot;zRoYalNemo&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/0nikun/SPM_MoinMetrics.git",
-    "accountId": "8af184a1-4e7b-4ef2-b69a-14326a99f1ff"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/0nikun/SPM_MoinMetrics.git&quot;,
+    &quot;accountId&quot;: &quot;8af184a1-4e7b-4ef2-b69a-14326a99f1ff&quot;
   }
-}]]></component>
+}</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0001203897344353" />
+      <entry key="MS500" value="1.164481815628626" />
+      <entry key="S2" value="1.6368387376632496" />
+      <entry key="S5" value="1.834856531538605" />
+      <entry key="S10" value="1.9142901723600707" />
+      <entry key="S30" value="2.144154771742793" />
+      <entry key="S60" value="2.7070187364081493" />
+      <entry key="M2" value="3.4641315147677845" />
+      <entry key="M5" value="4.253247840808854" />
+      <entry key="M10" value="4.600176102761594" />
+      <entry key="M15" value="4.727197032694843" />
+      <entry key="M30" value="4.860371882455771" />
+      <entry key="H1" value="4.9293600127360975" />
+      <entry key="H2" value="4.964471065132317" />
+      <entry key="H4" value="4.982182986664242" />
+      <entry key="D1" value="4.997023173223075" />
+      <entry key="W1" value="4.999574559308291" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9461731322781747" />
+      <entry key="MS500" value="1.1520902848420513" />
+      <entry key="S2" value="1.6327470960049026" />
+      <entry key="S5" value="1.8330539852409542" />
+      <entry key="S10" value="1.9133552584023696" />
+      <entry key="S30" value="2.1437709145001604" />
+      <entry key="S60" value="2.7067229144918925" />
+      <entry key="M2" value="3.4639126248685437" />
+      <entry key="M5" value="4.253130525600944" />
+      <entry key="M10" value="4.6001108879501755" />
+      <entry key="M15" value="4.727151954409431" />
+      <entry key="M30" value="4.860348503323928" />
+      <entry key="H1" value="4.929348105541299" />
+      <entry key="H2" value="4.964465056146883" />
+      <entry key="H4" value="4.982179968200198" />
+      <entry key="D1" value="4.997022668194639" />
+      <entry key="W1" value="4.999574487113452" />
+    </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2,
@@ -47,28 +104,60 @@
     <option name="showLibraryContents" value="true" />
     <option name="sortKey" value="BY_TIME_DESCENDING" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHELLCHECK.PATH": "I do mind",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/oniku/IdeaProjects/SPM_MoinMetrics/kundendaten",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "to.speed.mode.migration.done": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHELLCHECK.PATH&quot;: &quot;I do mind&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/oniku/IdeaProjects/SPM_MoinMetrics/kundendaten&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\oniku\IdeaProjects\SPM_MoinMetrics\kundendaten" />
+      <recent name="C:\Users\oniku\IdeaProjects\SPM_MoinMetrics\aufgaben" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\oniku\IdeaProjects\SPM_MoinMetrics\aufgaben\abgaben" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="SPM_MoinMetrics" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="SPM_MoinMetrics" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
+      <steps>
+        <latexmkCompile id="ca90077b-7e20-4345-9668-abfd3cbc24e4" />
+        <pdfViewer id="222578da-5324-47f1-a474-3ee6d0b26db1" />
+      </steps>
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -90,8 +179,25 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added pdfs" />
-    <option name="LAST_COMMIT_MESSAGE" value="added pdfs" />
+    <MESSAGE value="added kundendaten" />
+    <MESSAGE value="added abgabe" />
+    <option name="LAST_COMMIT_MESSAGE" value="added abgabe" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
