@@ -77,7 +77,7 @@ Der folgende Katalog strukturiert die oben ausgewählten Anforderungen. Die Beze
 
 ### d) Eigenschaften gut formulierter Anforderungen
 
-In Anlehnung an Foliensatz 3, PDF-Seite 76 (Foliennummer 190), soll eine Anforderungsspezifikation folgende Eigenschaften erfüllen:
+Eine Anforderungsspezifikation soll folgende Eigenschaften erfüllen:
 
 - **Eindeutig:** Die sprachliche Formulierung lässt nur eine Interpretation zu. Unklare Begriffe wie „gut“ oder „schnell“ werden konkretisiert.
 - **Vollständig:** Die Spezifikation enthält alle erforderlichen Anforderungen und alle Bestandteile, die der zugrunde gelegte Standard verlangt.
