@@ -229,45 +229,45 @@ R06 & - Umfang der Javadoc-Kommentierung \\
 Der folgende Abschnitt befasst sich mit verschiedenen Methoden der Aufwandsschätzung und deren Zusammenhänge mit der Größen- und Kostenschätzung.
 Darüber hinaus wird vorgestellt, warum die Aufwandschätzung von Softwareentwicklungsprojekten in der Praxis häufig von dem tatsächlichen Aufwand abweicht\\
 \newline
- \paragraph*{Expertenschätzung}
+ \subsection*{Expertenschätzung}
     \begin{itemize}
         \item Schätzung durch erfahrene Projektmitarbeitende oder Fachleute auf Grundlage ihres Fachwissens und ihrer bisherigen Erfahrungen.
         \item Die Schätzung berücksichtigt Komplexität der Aufgabenstellung, verfügbaren Ressourcen und mögliche technische Schwierigkeiten.
-        \item Vorteil: Es bedarf keiner/weniger historischen Projektdaten
-        \item Nachteil: Genauigkeit abhängig von Erfahrung der Experten (Subjektivität und Optimismus sind Einflussfaktoren der Schätzung)
+        \item \textbf{Vorteil:} Es bedarf keiner/weniger historischen Projektdaten
+        \item \textbf{Nachteil:} Genauigkeit abhängig von Erfahrung der Experten (Subjektivität und Optimismus sind Einflussfaktoren der Schätzung)
     \end{itemize}
-\paragraph*{Analogieschätzung}
+    \subsection*{Analogieschätzung}
     \begin{itemize}
         \item geplantes Projekt wird mit bereits abgeschlossenen, möglichst ähnlichen Projekten oder Teilaufgaben verglichen
         \item tatsächliche Aufwand früherer Projekte dient als Ausgangspunkt für die neue Schätzung
-        \item Vorteil: bei geeigneten Vergleichsprojekten hat man eine sehr praxisnahe Schätzung
-        \item Nachteil: macht wenig Sinn, wenn keine geeigneten Vergleichsdaten vorhanden
+        \item \textbf{Vorteil:} bei geeigneten Vergleichsprojekten hat man eine sehr praxisnahe Schätzung
+        \item \textbf{Nachteil:} macht wenig Sinn, wenn keine geeigneten Vergleichsdaten vorhanden
     \end{itemize}
-\paragraph*{Dreipunktschätzung}
+    \subsection*{Dreipunktschätzung}
     \begin{itemize}
         \item Schätzung auf Grundlage von drei Schätzungsansätzen: optimistischer (O), realistischer (R) und pessimistischer (P) Ansatz
         \item Die Werte können beispielsweise mit einem gewichteten Erwartungswert zusammengeführt werden.
         \item Dazu kann die PERT-Formel (\textbf{P}rogram \textbf{E}valuation and \textbf{R}eview \textbf{T}echnique) verwendet werden: \[ E = \frac{O+4R+P}{6}\]
-        \item Vorteil: Unsicherheiten und mögliche Risiken werden auf alle Fälle in der Schätzung berücksichtigt
-        \item Nachteil: Ergebnis ist trotzdem von der Qualität der Ausgangsschätzungen (z.B. Expertenschätzungen) abhängig
+        \item \textbf{Vorteil:} Unsicherheiten und mögliche Risiken werden auf alle Fälle in der Schätzung berücksichtigt
+        \item \textbf{Nachteil:} Ergebnis ist trotzdem von der Qualität der Ausgangsschätzungen (z.B. Expertenschätzungen) abhängig
     \end{itemize}
-\paragraph*{Zusammenhang zur Größen- und Kostenschätzung}
+    \subsection*{Zusammenhang zur Größen- und Kostenschätzung}
     Bei der Planung von Softwareentwicklungsprojekten bauen die Größen-, Kosten- und Aufwandsschätzung aufeinander auf.
     Sie dienen dazu, den Umfang, die vorraussichtlichen finanziellen Kosten und den benötigenden Arbeitsaufwand so genau wie möglich vorherzusagen.
-    \newline
+    \\\newline
     Die Größenschätzung ermittelt den voraussichtlichen Umfang der zu entwickelnden Software.
     Dieser kann beispielsweise anhand von Quellcodezeilen (Lines of Code), Anzahl der Funktionen und die Komplexität des Codes abgeschätzt werden.
     Eine ungenaue Größenschätzung kann dazu führen, dass der benötigte Arbeitsaufwand überschätzt bzw. unterschätzt wird
-    \newline
+    \\\newline
     Die Aufwandsschätzung bestimmt, wie viel menschliche Arbeitsleistung erforderlich ist, um das geplante Projekt umzusetzen. Der Aufwand wird zum Beispiel in Personenstunden, -tagen oder -monaten angegeben.
     Er hängt nicht ausschließlich von der Softwaregröße ab, sondern auch von der Komplexität, den eingesetzten Technologien, den Fähigkeiten des Teams und den erforderlichen Qualitätssicherungsmaßnahmen.
     Eine größere Software erfordert grundsätzlich häufig mehr Aufwand. Der Zusammenhang ist jedoch nicht zwangsläufig linear, da beispielsweise Wiederverwendung, Automatisierung oder zusätzliche technische Anforderungen den Aufwand beeinflussen können.
-    \newline
+    \\\newline
     Die Kostenschätzung ermittelt die voraussichtlichen finanziellen Mittel, die für die Durchführung des Projekts benötigt werden.
     Eine wesentliche Grundlage bildet der geschätzte Arbeitsaufwand multipliziert mit den jeweiligen Personal- bzw. Verrechnungssätzen.
     Zusätzlich können Sachkosten, Softwarelizenzen, Infrastrukturkosten, externe Dienstleistungen und weitere projektbezogene Kosten berücksichtigt werden.
     Die Höhe der Kosten hängt daher sowohl vom benötigten Aufwand als auch von den Kosten der eingesetzten Ressourcen ab.
-    \paragraph*{Ursachen für Abweichungen bei der Aufwandsschätzung}
+    \subsection*{Ursachen für Abweichungen bei der Aufwandsschätzung}
     In Softwareentwicklungsprojekten weicht der geschätzte Aufwand häufig vom tatsächlichen Aufwand ab, da zu Beginn nicht alle Anforderungen bekannt sind und die technische Komplexität unterschätzt werden kann.
     Änderungen an den Anforderungen, unerwartete Probleme, Risiken, Unsicherheiten und unterschiedliche Erfahrungen im Entwicklungsteam können zusätzlichen Aufwand verursachen.
     Außerdem werden Tätigkeiten wie Tests, Debugging und Dokumentation häufig nicht ausreichend eingeplant.
