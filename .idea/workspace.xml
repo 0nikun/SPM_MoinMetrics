@@ -7,12 +7,17 @@
     <list default="true" id="dffd961e-0736-4b4b-a247-e69744157624" name="Changes" comment="AB2 Aufg 1 PDF und Latex">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt2.TeX" beforeDir="false" afterPath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt2.TeX" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt2.md" beforeDir="false" afterPath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt2.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt2.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt2.pdf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="2" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -23,35 +28,35 @@
     &quot;assignee&quot;: &quot;zRoYalNemo&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/0nikun/SPM_MoinMetrics.git&quot;,
-    &quot;accountId&quot;: &quot;8af184a1-4e7b-4ef2-b69a-14326a99f1ff&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/0nikun/SPM_MoinMetrics.git",
+    "accountId": "fb20245e-0ca3-40ce-be15-88f7034176ab"
   }
-}</component>
+}]]></component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0022126638384683" />
-      <entry key="MS500" value="1.2945591594272186" />
-      <entry key="S2" value="1.9296940143460684" />
-      <entry key="S5" value="2.9506935948546285" />
-      <entry key="S10" value="3.9593360162911364" />
-      <entry key="S30" value="5.18306561324095" />
-      <entry key="S60" value="6.043936379444214" />
-      <entry key="M2" value="7.630976590565863" />
-      <entry key="M5" value="10.05019623047961" />
-      <entry key="M10" value="11.65404170595608" />
-      <entry key="M15" value="12.65102057245023" />
-      <entry key="M30" value="14.411170347542846" />
-      <entry key="H1" value="15.866369142105595" />
-      <entry key="H2" value="16.828471609277827" />
-      <entry key="H4" value="17.38504739747332" />
-      <entry key="D1" value="17.89316967042794" />
-      <entry key="W1" value="17.984628363418363" />
+      <entry key="MS100" value="1.0000035593875183" />
+      <entry key="MS500" value="1.102026320050789" />
+      <entry key="S2" value="2.4302543198773314" />
+      <entry key="S5" value="4.2322837323641025" />
+      <entry key="S10" value="5.788314200728116" />
+      <entry key="S30" value="7.668244044812315" />
+      <entry key="S60" value="8.74766472404726" />
+      <entry key="M2" value="10.449828496006429" />
+      <entry key="M5" value="12.957940382882168" />
+      <entry key="M10" value="14.60138854296749" />
+      <entry key="M15" value="15.613226989835244" />
+      <entry key="M30" value="17.38990399253998" />
+      <entry key="H1" value="18.8547577510973" />
+      <entry key="H2" value="19.822342687324383" />
+      <entry key="H4" value="20.381889459499206" />
+      <entry key="D1" value="20.892629125500594" />
+      <entry key="W1" value="20.984550777036475" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -73,23 +78,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.8084895280633873" />
-      <entry key="MS500" value="1.2420648392217544" />
-      <entry key="S2" value="1.9099223723956293" />
-      <entry key="S5" value="2.9372174406790648" />
-      <entry key="S10" value="3.949529471884442" />
-      <entry key="S30" value="5.178521798507929" />
-      <entry key="S60" value="6.041410059963907" />
-      <entry key="M2" value="7.629599927393977" />
-      <entry key="M5" value="10.049594610856746" />
-      <entry key="M10" value="11.653724221569119" />
-      <entry key="M15" value="12.650801108254186" />
-      <entry key="M30" value="14.41105310036131" />
-      <entry key="H1" value="15.866307252142116" />
-      <entry key="H2" value="16.828439562048523" />
-      <entry key="H4" value="17.385031052100462" />
-      <entry key="D1" value="17.89316689698332" />
-      <entry key="W1" value="17.98462796594311" />
+      <entry key="MS100" value="0.23981603004327276" />
+      <entry key="MS500" value="0.7804555814794476" />
+      <entry key="S2" value="2.1251016756653027" />
+      <entry key="S5" value="4.038438011132469" />
+      <entry key="S10" value="5.67216656011868" />
+      <entry key="S30" value="7.623838254501828" />
+      <entry key="S60" value="8.724582471060675" />
+      <entry key="M2" value="10.438010999387433" />
+      <entry key="M5" value="12.95312214867596" />
+      <entry key="M10" value="14.598955890403706" />
+      <entry key="M15" value="15.61159587669643" />
+      <entry key="M30" value="17.38908014601468" />
+      <entry key="H1" value="18.85434236473899" />
+      <entry key="H2" value="19.822133841971773" />
+      <entry key="H4" value="20.381784702449924" />
+      <entry key="D1" value="20.8926116150107" />
+      <entry key="W1" value="20.9845482742256" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{

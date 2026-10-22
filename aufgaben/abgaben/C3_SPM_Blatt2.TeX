@@ -3,7 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[ngerman]{babel}
-\usepackage[landscape,margin=1.5cm]{geometry}
+\usepackage[a4paper,portrait,left=22mm,right=22mm,top=22mm,bottom=24mm]{geometry}
 \usepackage{longtable,array,booktabs}
 \usepackage{enumitem}
 \usepackage{microtype}
@@ -16,17 +16,22 @@
 \renewcommand{\footrulewidth}{0.4pt}
 \setlength{\footskip}{22pt}
 \setlength{\parindent}{0pt}
-\setlength{\parskip}{5pt}
+\setlength{\parskip}{4pt}
 \setlength{\emergencystretch}{3em}
-\setlist{nosep}
+\setlist{nosep,leftmargin=*,topsep=3pt}
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\raggedbottom
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.15}
 \setlength{\LTpre}{8pt}
 \setlength{\LTpost}{12pt}
-\newcommand{\sectionspace}[1]{\par\ifdim\dimexpr\pagegoal-\pagetotal\relax<#1\newpage\fi\addvspace{14pt}}
-\title{MoinMetrics\\C3 SPM Blatt 2\\Aufgabe 1: Anforderungsanalyse}
+\newcommand{\sectionspace}[1]{\par\ifdim\dimexpr\pagegoal-\pagetotal\relax<#1\relax\newpage\fi\addvspace{14pt}}
+
+\title{Anforderungsanalyse und Aufwandsschätzung\\{\large Übungsblatt 2}}
 \author{Gruppe C3 / MoinMetrics\\{}Alexander Borrmann\\{}Lukas Pancratius\\{}Ino Wölke}
-\date{Hochschule Emden-Leer\\Software-Projektmanagement}
+\date{Hochschule Emden-Leer\\Software-Projektmanagement\\Wintersemester 2026/27\\Prof. Dr. Gerrit Jan Veltink\\[1em]Abgabedatum: 25.10.2026}
 \begin{document}
     \maketitle
     \thispagestyle{fancy}
@@ -73,170 +78,80 @@
     Der folgende Katalog strukturiert die oben ausgewählten Anforderungen. Die Bezeichner F, Q und R stehen für Funktionsanforderungen, Qualitätsmerkmale und Randbedingungen. Die ursprünglichen Nummern aus der PDF bleiben zur Rückverfolgbarkeit angegeben.
 
 \subsection*{a) Funktionsanforderungen}
-
-
-    \normalsize
-\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.085\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.15\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.365\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.1\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.3\linewidth-2\tabcolsep\relax}}
-        \toprule
-        \textbf{Bezeichner} & \textbf{Funktion} & \textbf{Beschreibung} & \textbf{Priorität / Bezug} & \textbf{Offene Abstimmungspunkte} \\
-        \midrule
-        \endhead
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.13\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.27\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.46\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.14\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Bezeichner} & \textbf{Funktion} & \textbf{Beschreibung} & \textbf{Priorität / Bezug} \\
+\midrule\endhead
 \bottomrule\endfoot
-        F01 & CSV-Import & Die Anwendung muss eine CSV-Datei im vereinbarten Format hochladen und die enthaltenen Einkaufsdaten zur Analyse einlesen können. & Muss & - \\
-        \midrule
-        F02 & Fehlermeldung bei CSV-Fehlern & Die Anwendung muss bei einer fehlerhaften CSV-Datei eine Fehlermeldung anzeigen. & Pflicht, \#5 & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Fehlerfälle
-\item Umgang mit teilweise gültigen Dateien
-            \end{itemize}\end{minipage} \\
-        \midrule
-        F03 & Passwortschutz & Die Anwendung muss vor dem Zugriff auf Daten und Auswertungen die Eingabe eines gültigen Passworts verlangen. & Muss & - \\
-        \midrule
-        F04 & Grafische Darstellung & Die Anwendung muss Analyseergebnisse grafisch darstellen. & Muss & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Diagrammarten
-\item Zuordnung zu Analysen
-            \end{itemize}\end{minipage} \\
-        \midrule
-        F05 & Marketingmaßnahmen anzeigen & Die Anwendung muss eine Liste allgemeiner Marketingmaßnahmen anzeigen. \textbf{???} & Muss &  \\
-        \midrule
-        F06 & Marketingmaßnahmen erweitern & Die Liste allgemeiner Marketingmaßnahmen muss um zusätzliche Einträge erweitert werden können. & Muss & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Art der Erweiterung
-\item Zuständige Personen
-            \end{itemize}\end{minipage} \\
-        \midrule
-        F07 & Gemeinsam gekaufte Waren & Die Anwendung muss mithilfe des Apriori-Verfahrens Waren ermitteln und darstellen, die zusammen gekauft wurden. & Pflicht, \#12 & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Apriori-Parameter
-\item Umfang der Ergebnisdarstellung
-            \end{itemize}\end{minipage} \\
-        \midrule
-        F08 & Umsatzstärkster Einkaufstag & Die Anwendung muss den Einkaufstag mit dem höchsten Umsatz ermitteln und anzeigen. & Pflicht, \#6 & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Auswertungszeitraum
-\item Tag: Datum oder Wochentag
-\item Umgang mit Gleichständen
-            \end{itemize}\end{minipage} \\
-        \midrule
-        F09 & Umsatzstärkste Einkaufsuhrzeit & Die Anwendung muss die Einkaufsuhrzeit mit dem höchsten Umsatz ermitteln und anzeigen. & Pflicht, \#6 & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Auswertungszeitraum
-\item Zeitintervalle
-\item Umgang mit Gleichständen
-            \end{itemize}\end{minipage} \\
-        \midrule
-        F10 & Stärkster Einkaufstag nach Kundenhäufigkeit & Die Anwendung muss den Einkaufstag mit der höchsten Kundenhäufigkeit ermitteln und anzeigen. & Pflicht, \#7 & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Auswertungszeitraum
-\item Tag: Datum oder Wochentag
-\item Umgang mit Gleichständen
-\item Kundenhäufigkeit: unterschiedliche Kund*innen oder Einkaufsvorgänge
-            \end{itemize}\end{minipage} \\
-        \midrule
-        F11 & Stärkste Einkaufsuhrzeit nach Kundenhäufigkeit & Die Anwendung muss die Einkaufsuhrzeit mit der höchsten Kundenhäufigkeit ermitteln und anzeigen. & Pflicht, \#7 & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Auswertungszeitraum
-\item Zeitintervalle
-\item Umgang mit Gleichständen
-\item Kundenhäufigkeit: unterschiedliche Kund*innen oder Einkaufsvorgänge
-            \end{itemize}\end{minipage} \\
-        \midrule
-        F12 & Umsatzstärkste Einkaufsuhrzeit je Tag & Die Anwendung muss für jeden betrachteten Tag die Einkaufsuhrzeit mit dem höchsten Umsatz ermitteln und anzeigen. & Pflicht, \#8 & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Auswertungszeitraum
-\item Zeitintervalle
-\item Tag: Datum oder Wochentag
-\item Umgang mit Gleichständen
-            \end{itemize}\end{minipage} \\*
-        \midrule\noalign{\penalty10000}
-        F13 & Top- und Flop-Artikel nach Umsatz & Die Anwendung soll die Artikel mit dem höchsten und niedrigsten Umsatz ermitteln und anzeigen. & Optional, \#9 & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Auswertungszeitraum
-\item Umgang mit Gleichständen
-\item Anzahl der Top-/Flop-Ergebnisse
-\item Artikel oder Warengruppen
-            \end{itemize}\end{minipage} \\*
-        \midrule\noalign{\penalty10000}
-        F14 & Top- und Flop-Artikel nach Deckungsbeitrag & Die Anwendung soll die Artikel mit dem höchsten und niedrigsten Deckungsbeitrag ermitteln und anzeigen. & Optional, \#10 & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Auswertungszeitraum
-\item Umgang mit Gleichständen
-\item Anzahl der Top-/Flop-Ergebnisse
-\item Artikel oder Warengruppen
-            \end{itemize}\end{minipage} \\
-        \midrule
-    \end{longtable}
-\normalsize
-
+F01 & CSV-Import & Die Anwendung muss eine CSV-Datei im vereinbarten Format hochladen und die enthaltenen Einkaufsdaten zur Analyse einlesen können. & Muss \\
+\midrule
+F02 & Fehlermeldung bei CSV-Fehlern & Die Anwendung muss bei einer fehlerhaften CSV-Datei eine Fehlermeldung anzeigen. & Pflicht, \#5 \\
+\midrule
+F03 & Passwortschutz & Die Anwendung muss vor dem Zugriff auf Daten und Auswertungen die Eingabe eines gültigen Passworts verlangen. & Muss \\
+\midrule
+F04 & Grafische Darstellung & Die Anwendung muss Analyseergebnisse grafisch darstellen. & Muss \\
+\midrule
+F05 & Marketingmaßnahmen anzeigen & Die Anwendung muss eine Liste allgemeiner Marketingmaßnahmen anzeigen. \textbf{???} & Muss \\
+\midrule
+F06 & Marketingmaßnahmen erweitern & Die Liste allgemeiner Marketingmaßnahmen muss um zusätzliche Einträge erweitert werden können. & Muss \\
+\midrule
+F07 & Gemeinsam gekaufte Waren & Die Anwendung muss mithilfe des Apriori-Verfahrens Waren ermitteln und darstellen, die zusammen gekauft wurden. & Pflicht, \#12 \\
+\midrule
+F08 & Umsatzstärkster Einkaufstag & Die Anwendung muss den Einkaufstag mit dem höchsten Umsatz ermitteln und anzeigen. & Pflicht, \#6 \\
+\midrule
+F09 & Umsatzstärkste Einkaufsuhrzeit & Die Anwendung muss die Einkaufsuhrzeit mit dem höchsten Umsatz ermitteln und anzeigen. & Pflicht, \#6 \\
+\midrule
+F10 & Stärkster Einkaufstag nach Kundenhäufigkeit & Die Anwendung muss den Einkaufstag mit der höchsten Kundenhäufigkeit ermitteln und anzeigen. & Pflicht, \#7 \\
+\midrule
+F11 & Stärkste Einkaufsuhrzeit nach Kundenhäufigkeit & Die Anwendung muss die Einkaufsuhrzeit mit der höchsten Kundenhäufigkeit ermitteln und anzeigen. & Pflicht, \#7 \\
+\midrule
+F12 & Umsatzstärkste Einkaufsuhrzeit je Tag & Die Anwendung muss für jeden betrachteten Tag die Einkaufsuhrzeit mit dem höchsten Umsatz ermitteln und anzeigen. & Pflicht, \#8 \\
+\midrule
+F13 & Top- und Flop-Artikel nach Umsatz & Die Anwendung soll die Artikel mit dem höchsten und niedrigsten Umsatz ermitteln und anzeigen. & Optional, \#9 \\
+\midrule
+F14 & Top- und Flop-Artikel nach Deckungsbeitrag & Die Anwendung soll die Artikel mit dem höchsten und niedrigsten Deckungsbeitrag ermitteln und anzeigen. & Optional, \#10 \\
+\end{longtable}
 \clearpage
 \subsection*{b) Qualitätsmerkmale und Quantifizierung}
-
-
-    \normalsize
-\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.085\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.14\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.31\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.205\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.26\linewidth-2\tabcolsep\relax}}
-        \toprule
-        \textbf{Bezeichner} & \textbf{Qualitätsmerkmal} & \textbf{Messbares Kriterium} & \textbf{Nachweis / Status} & \textbf{Offene Abstimmungspunkte} \\
-        \midrule
-        \endhead
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.13\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.22\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.33\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.32\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Bezeichner} & \textbf{Qualitätsmerkmal} & \textbf{Messbares Kriterium} & \textbf{Nachweis / Status} \\
+\midrule\endhead
 \bottomrule\endfoot
-        Q01 & Analysezeit & Die Analyse von 10.000 Datensätzen muss spätestens nach 5 Sekunden abgeschlossen sein; 1-2 Sekunden sind der Zielwert. & Bezug: \#1. Vorschlag: Messung vom Start der Analyse bei bereits eingelesenen Daten bis zur vollständig sichtbaren Ergebnisausgabe; jede vereinbarte Analyse muss in 10 Testläufen die 5-Sekunden-Grenze einhalten. & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Referenzhardware und Testdatei
-\item Analyseparameter und einbezogene Analysen
-\item Messbeginn und Messende
-\item Messvorschlag und Anzahl der Testläufe bestätigen
-            \end{itemize}\end{minipage} \\
-        \midrule
-        Q02 & Robustheit beim CSV-Import & Bei 100 \% der vereinbarten fehlerhaften CSV-Testdateien darf die Anwendung nicht abstürzen. Sie muss eine Fehlermeldung anzeigen und anschließend einen erneuten Upload ermöglichen. & Vorschlag zur Quantifizierung. Testfälle mindestens: falsches Trennzeichen, fehlende Pflichtspalten, ungültige Zahlen-/Datumswerte und leere Datei. & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item CSV-Format
-\item Fehlerfallkatalog
-\item Quantifizierung bestätigen
-            \end{itemize}\end{minipage} \\
-        \midrule
-        Q03 & Bedienbarkeit & \textbf{???} & Vorschlag zur Quantifizierung für die Zielgruppe Marktleitung. & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Quantifizierung und Testablauf
-            \end{itemize}\end{minipage} \\*
-        \midrule\noalign{\penalty10000}
-        Q04 & Zugriffsschutz & Bei 100 \% der vereinbarten Zugriffstests ohne gültige Anmeldung dürfen weder Einkaufsdaten noch Analyseergebnisse ausgeliefert werden. Mit gültigem Passwort muss der Zugriff möglich sein. & Vorschlag zur Quantifizierung von F03. Tests umfassen den Aufruf der Oberfläche und direkte Aufrufe der datenliefernden Endpunkte. & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Testumfang
-\item Sitzungsverhalten
-\item Quantifizierung bestätigen
-            \end{itemize}\end{minipage} \\
-        \midrule
-    \end{longtable}
-\normalsize
-
+Q01 & Analysezeit & Die Analyse von 10.000 Datensätzen muss spätestens nach 5 Sekunden abgeschlossen sein; 1-2 Sekunden sind der Zielwert. & Bezug: \#1. Vorschlag: Messung vom Start der Analyse bei bereits eingelesenen Daten bis zur vollständig sichtbaren Ergebnisausgabe; jede vereinbarte Analyse muss in 10 Testläufen die 5-Sekunden-Grenze einhalten. \\
+\midrule
+Q02 & Robustheit beim CSV-Import & Bei 100 \% der vereinbarten fehlerhaften CSV-Testdateien darf die Anwendung nicht abstürzen. Sie muss eine Fehlermeldung anzeigen und anschließend einen erneuten Upload ermöglichen. & Vorschlag zur Quantifizierung. Testfälle mindestens: falsches Trennzeichen, fehlende Pflichtspalten, ungültige Zahlen-/Datumswerte und leere Datei. \\
+\midrule
+Q03 & Bedienbarkeit & \textbf{???} & Vorschlag zur Quantifizierung für die Zielgruppe Marktleitung. \\
+\midrule
+Q04 & Zugriffsschutz & Bei 100 \% der vereinbarten Zugriffstests ohne gültige Anmeldung dürfen weder Einkaufsdaten noch Analyseergebnisse ausgeliefert werden. Mit gültigem Passwort muss der Zugriff möglich sein. & Vorschlag zur Quantifizierung von F03. Tests umfassen den Aufruf der Oberfläche und direkte Aufrufe der datenliefernden Endpunkte. \\
+\end{longtable}
 \clearpage
 \subsection*{c) Randbedingungen}
-
-
-    \normalsize
-\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.085\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.17\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.47\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.275\linewidth-2\tabcolsep\relax}}
-        \toprule
-        \textbf{Bezeichner} & \textbf{Merkmal} & \textbf{Beschreibung} & \textbf{Offene Abstimmungspunkte} \\
-        \midrule
-        \endhead
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.13\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.26\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.61\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Bezeichner} & \textbf{Merkmal} & \textbf{Beschreibung} \\
+\midrule\endhead
 \bottomrule\endfoot
-        R01 & Programmiersprache & Die Anwendung muss in Java implementiert werden. & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Java-Version
-            \end{itemize}\end{minipage} \\
-        \midrule
-        R02 & Analysewerkzeug & Die Datenanalyse muss mit der Data-Mining-Software Weka erfolgen. & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Weka-Version
-            \end{itemize}\end{minipage} \\
-        \midrule
-        R03 & Weboberfläche und Betrieb & Das Front-End muss als Webseite auf dem firmeninternen Tomcat-Webserver betrieben werden können. & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Tomcat-Version
-\item Zielumgebung
-            \end{itemize}\end{minipage} \\
-        \midrule
-        R04 & Auslieferungsformat & Die Anwendung muss als WAR-Datei ausgeliefert werden. & - \\
-        \midrule
-        R05 & Quellcodeauslieferung & Der Quellcode des Produkts muss mit ausgeliefert werden. & - \\
-        \midrule
-        R06 & Quellcodedokumentation & Die Software muss mit Javadoc kommentiert werden. Vorschlag: alle öffentlichen Klassen und Methoden. & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
-\item Umfang der Javadoc-Kommentierung
-            \end{itemize}\end{minipage} \\
-        \midrule
-        R07 & Dokumentformate & Alle sonstigen Dokumente müssen im PDF-Format vorliegen. & - \\*
-        \midrule\noalign{\penalty10000}
-        R08 & Eingabedaten & Die Einkaufsdaten müssen aus CSV-Dateien im festgelegten Format übernommen werden. & - \\*
-        \midrule\noalign{\penalty10000}
-        R09 & Umfang der Benutzerverwaltung & Eine Benutzerverwaltung ist nicht erforderlich und gehört nicht zum vereinbarten Funktionsumfang. Der Passwortschutz nach F03 bleibt erforderlich. & - \\
-        \midrule
-    \end{longtable}
-\normalsize
-
-\sectionspace{180pt}
+R01 & Programmiersprache & Die Anwendung muss in Java implementiert werden. \\
+\midrule
+R02 & Analysewerkzeug & Die Datenanalyse muss mit der Data-Mining-Software Weka erfolgen. \\
+\midrule
+R03 & Weboberfläche und Betrieb & Das Front-End muss als Webseite auf dem firmeninternen Tomcat-Webserver betrieben werden können. \\
+\midrule
+R04 & Auslieferungsformat & Die Anwendung muss als WAR-Datei ausgeliefert werden. \\
+\midrule
+R05 & Quellcodeauslieferung & Der Quellcode des Produkts muss mit ausgeliefert werden. \\
+\midrule
+R06 & Quellcodedokumentation & Die Software muss mit Javadoc kommentiert werden. Vorschlag: alle öffentlichen Klassen und Methoden. \\
+\midrule
+R07 & Dokumentformate & Alle sonstigen Dokumente müssen im PDF-Format vorliegen. \\
+\midrule
+R08 & Eingabedaten & Die Einkaufsdaten müssen aus CSV-Dateien im festgelegten Format übernommen werden. \\
+\midrule
+R09 & Umfang der Benutzerverwaltung & Eine Benutzerverwaltung ist nicht erforderlich und gehört nicht zum vereinbarten Funktionsumfang. Der Passwortschutz nach F03 bleibt erforderlich. \\
+\end{longtable}
+\sectionspace{280pt}
 \subsection*{d) Eigenschaften gut formulierter Anforderungen}
 
 Eine Anforderungsspezifikation soll folgende Eigenschaften erfüllen:
@@ -249,4 +164,65 @@ Eine Anforderungsspezifikation soll folgende Eigenschaften erfüllen:
 \item \textbf{Änderbar:} Eine klare Gliederung, ein Inhaltsverzeichnis, ein Index und Querverweise erleichtern Änderungen. Redundante Beschreibungen werden vermieden, damit eine Änderung nicht an mehreren Stellen nachgeführt werden muss.
 \item \textbf{Verfolgbar:} Entscheidungen und ihre Begründungen sind nachvollziehbar dokumentiert. Eindeutige Bezeichner und Verweise ermöglichen die Zuordnung der Anforderungen zu ihren Quellen, ihrer Umsetzung und ihren Tests.
 \end{itemize}
+\clearpage
+\section*{Offene Abstimmungspunkte}
+\sectionspace{120pt}
+\subsection*{Funktionsanforderungen}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.16\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.84\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Bezeichner} & \textbf{Offene Abstimmungspunkte} \\
+\midrule\endhead
+\bottomrule\endfoot
+F02 & - Fehlerfälle\newline - Umgang mit teilweise gültigen Dateien \\
+\midrule
+F04 & - Diagrammarten\newline - Zuordnung zu Analysen \\
+\midrule
+F06 & - Art der Erweiterung\newline - Zuständige Personen \\
+\midrule
+F07 & - Apriori-Parameter\newline - Umfang der Ergebnisdarstellung \\
+\midrule
+F08 & - Auswertungszeitraum\newline - Tag: Datum oder Wochentag\newline - Umgang mit Gleichständen \\
+\midrule
+F09 & - Auswertungszeitraum\newline - Zeitintervalle\newline - Umgang mit Gleichständen \\
+\midrule
+F10 & - Auswertungszeitraum\newline - Tag: Datum oder Wochentag\newline - Umgang mit Gleichständen\newline - Kundenhäufigkeit: unterschiedliche Kund*innen oder Einkaufsvorgänge \\
+\midrule
+F11 & - Auswertungszeitraum\newline - Zeitintervalle\newline - Umgang mit Gleichständen\newline - Kundenhäufigkeit: unterschiedliche Kund*innen oder Einkaufsvorgänge \\
+\midrule
+F12 & - Auswertungszeitraum\newline - Zeitintervalle\newline - Tag: Datum oder Wochentag\newline - Umgang mit Gleichständen \\
+\midrule
+F13 & - Auswertungszeitraum\newline - Umgang mit Gleichständen\newline - Anzahl der Top-/Flop-Ergebnisse\newline - Artikel oder Warengruppen \\
+\midrule
+F14 & - Auswertungszeitraum\newline - Umgang mit Gleichständen\newline - Anzahl der Top-/Flop-Ergebnisse\newline - Artikel oder Warengruppen \\
+\end{longtable}
+\clearpage
+\subsection*{Qualitätsmerkmale}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.16\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.84\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Bezeichner} & \textbf{Offene Abstimmungspunkte} \\
+\midrule\endhead
+\bottomrule\endfoot
+Q01 & - Referenzhardware und Testdatei\newline - Analyseparameter und einbezogene Analysen\newline - Messbeginn und Messende\newline - Messvorschlag und Anzahl der Testläufe bestätigen \\
+\midrule
+Q02 & - CSV-Format\newline - Fehlerfallkatalog\newline - Quantifizierung bestätigen \\
+\midrule
+Q03 & - Quantifizierung und Testablauf \\
+\midrule
+Q04 & - Testumfang\newline - Sitzungsverhalten\newline - Quantifizierung bestätigen \\
+\end{longtable}
+\sectionspace{120pt}
+\subsection*{Randbedingungen}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.16\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.84\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Bezeichner} & \textbf{Offene Abstimmungspunkte} \\
+\midrule\endhead
+\bottomrule\endfoot
+R01 & - Java-Version \\
+\midrule
+R02 & - Weka-Version \\
+\midrule
+R03 & - Tomcat-Version\newline - Zielumgebung \\
+\midrule
+R06 & - Umfang der Javadoc-Kommentierung \\
+\end{longtable}
 \end{document}
