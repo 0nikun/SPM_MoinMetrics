@@ -1,22 +1,36 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{lmodern}
 \usepackage[ngerman]{babel}
 \usepackage[landscape,margin=1.5cm]{geometry}
 \usepackage{longtable,array,booktabs}
 \usepackage{enumitem}
 \usepackage{microtype}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[L]{\small\texttt{C3\_SPM\_Blatt2.pdf}}
+\fancyfoot[R]{\small Seite \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\footskip}{22pt}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{5pt}
 \setlength{\emergencystretch}{3em}
 \setlist{nosep}
 \setlength{\tabcolsep}{4pt}
-\renewcommand{\arraystretch}{1.3}
-\title{C3 SPM Blatt 2}
-\author{}
-\date{}
+\renewcommand{\arraystretch}{1.15}
+\setlength{\LTpre}{8pt}
+\setlength{\LTpost}{12pt}
+\newcommand{\sectionspace}[1]{\par\ifdim\dimexpr\pagegoal-\pagetotal\relax<#1\newpage\fi\addvspace{14pt}}
+\title{MoinMetrics\\C3 SPM Blatt 2\\Aufgabe 1: Anforderungsanalyse}
+\author{Gruppe C3 / MoinMetrics\\{}[Vorname Nachname 1]\\{}[Vorname Nachname 2]\\{}[Vorname Nachname 3]}
+\date{Hochschule Emden-Leer\\Software-Projektmanagement}
 \begin{document}
     \maketitle
+    \thispagestyle{fancy}
+    \clearpage
     \subsection*{Bedingungen}
     \begin{itemize}
         \item Der Quellcode des Produkts wird mit ausgeliefert.
@@ -57,14 +71,17 @@
 
     Der folgende Katalog strukturiert die oben ausgewählten Anforderungen. Die Bezeichner F, Q und R stehen für Funktionsanforderungen, Qualitätsmerkmale und Randbedingungen. Die ursprünglichen Nummern aus der PDF bleiben zur Rückverfolgbarkeit angegeben.
 
-    \subsection*{a) Funktionsanforderungen}
+\sectionspace{140pt}
+\subsection*{a) Funktionsanforderungen}
 
 
-    \begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.055\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.14\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.31\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.235\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.26\linewidth-2\tabcolsep\relax}}
+    \normalsize
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.085\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.15\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.365\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.1\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.3\linewidth-2\tabcolsep\relax}}
         \toprule
         \textbf{Bezeichner} & \textbf{Funktion} & \textbf{Beschreibung} & \textbf{Priorität / Bezug} & \textbf{Offene Abstimmungspunkte} \\
         \midrule
-        \bottomrule\endfoot
+        \endhead
+\bottomrule\endfoot
         F01 & CSV-Import & Die Anwendung muss eine CSV-Datei im vereinbarten Format hochladen und die enthaltenen Einkaufsdaten zur Analyse einlesen können. & Muss & - \\
         \midrule
         F02 & Fehlermeldung bei CSV-Fehlern & Die Anwendung muss bei einer fehlerhaften CSV-Datei eine Fehlermeldung anzeigen. & Pflicht, \#5 & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
@@ -122,15 +139,15 @@
 \item Zeitintervalle
 \item Tag: Datum oder Wochentag
 \item Umgang mit Gleichständen
-            \end{itemize}\end{minipage} \\
-        \midrule
+            \end{itemize}\end{minipage} \\*
+        \midrule\noalign{\penalty10000}
         F13 & Top- und Flop-Artikel nach Umsatz & Die Anwendung soll die Artikel mit dem höchsten und niedrigsten Umsatz ermitteln und anzeigen. & Optional, \#9 & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
 \item Auswertungszeitraum
 \item Umgang mit Gleichständen
 \item Anzahl der Top-/Flop-Ergebnisse
 \item Artikel oder Warengruppen
-            \end{itemize}\end{minipage} \\
-        \midrule
+            \end{itemize}\end{minipage} \\*
+        \midrule\noalign{\penalty10000}
         F14 & Top- und Flop-Artikel nach Deckungsbeitrag & Die Anwendung soll die Artikel mit dem höchsten und niedrigsten Deckungsbeitrag ermitteln und anzeigen. & Optional, \#10 & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
 \item Auswertungszeitraum
 \item Umgang mit Gleichständen
@@ -139,16 +156,19 @@
             \end{itemize}\end{minipage} \\
         \midrule
     \end{longtable}
+\normalsize
+
+\sectionspace{220pt}
+\subsection*{b) Qualitätsmerkmale und Quantifizierung}
 
 
-    \subsection*{b) Qualitätsmerkmale und Quantifizierung}
-
-
-    \begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.055\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.14\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.31\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.235\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.26\linewidth-2\tabcolsep\relax}}
+    \normalsize
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.085\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.14\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.31\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.205\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.26\linewidth-2\tabcolsep\relax}}
         \toprule
         \textbf{Bezeichner} & \textbf{Qualitätsmerkmal} & \textbf{Messbares Kriterium} & \textbf{Nachweis / Status} & \textbf{Offene Abstimmungspunkte} \\
         \midrule
-        \bottomrule\endfoot
+        \endhead
+\bottomrule\endfoot
         Q01 & Analysezeit & Die Analyse von 10.000 Datensätzen muss spätestens nach 5 Sekunden abgeschlossen sein; 1-2 Sekunden sind der Zielwert. & Bezug: \#1. Vorschlag: Messung vom Start der Analyse bei bereits eingelesenen Daten bis zur vollständig sichtbaren Ergebnisausgabe; jede vereinbarte Analyse muss in 10 Testläufen die 5-Sekunden-Grenze einhalten. & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
 \item Referenzhardware und Testdatei
 \item Analyseparameter und einbezogene Analysen
@@ -162,10 +182,11 @@
 \item Quantifizierung bestätigen
             \end{itemize}\end{minipage} \\
         \midrule
+        \noalign{\penalty-10000}
         Q03 & Bedienbarkeit & \textbf{???} & Vorschlag zur Quantifizierung für die Zielgruppe Marktleitung. & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
 \item Quantifizierung und Testablauf
-            \end{itemize}\end{minipage} \\
-        \midrule
+            \end{itemize}\end{minipage} \\*
+        \midrule\noalign{\penalty10000}
         Q04 & Zugriffsschutz & Bei 100 \% der vereinbarten Zugriffstests ohne gültige Anmeldung dürfen weder Einkaufsdaten noch Analyseergebnisse ausgeliefert werden. Mit gültigem Passwort muss der Zugriff möglich sein. & Vorschlag zur Quantifizierung von F03. Tests umfassen den Aufruf der Oberfläche und direkte Aufrufe der datenliefernden Endpunkte. & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
 \item Testumfang
 \item Sitzungsverhalten
@@ -173,16 +194,19 @@
             \end{itemize}\end{minipage} \\
         \midrule
     \end{longtable}
+\normalsize
+
+\sectionspace{140pt}
+\subsection*{c) Randbedingungen}
 
 
-    \subsection*{c) Randbedingungen}
-
-
-    \begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.065\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.17\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.49\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.275\linewidth-2\tabcolsep\relax}}
+    \normalsize
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.085\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.17\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.47\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.275\linewidth-2\tabcolsep\relax}}
         \toprule
         \textbf{Bezeichner} & \textbf{Merkmal} & \textbf{Beschreibung} & \textbf{Offene Abstimmungspunkte} \\
         \midrule
-        \bottomrule\endfoot
+        \endhead
+\bottomrule\endfoot
         R01 & Programmiersprache & Die Anwendung muss in Java implementiert werden. & \begin{minipage}[t]{\linewidth}\begin{itemize}[leftmargin=*,label=-]
 \item Java-Version
             \end{itemize}\end{minipage} \\
@@ -204,27 +228,26 @@
 \item Umfang der Javadoc-Kommentierung
             \end{itemize}\end{minipage} \\
         \midrule
-        R07 & Dokumentformate & Alle sonstigen Dokumente müssen im PDF-Format vorliegen. & - \\
-        \midrule
-        R08 & Eingabedaten & Die Einkaufsdaten müssen aus CSV-Dateien im festgelegten Format übernommen werden. & - \\
-        \midrule
+        R07 & Dokumentformate & Alle sonstigen Dokumente müssen im PDF-Format vorliegen. & - \\*
+        \midrule\noalign{\penalty10000}
+        R08 & Eingabedaten & Die Einkaufsdaten müssen aus CSV-Dateien im festgelegten Format übernommen werden. & - \\*
+        \midrule\noalign{\penalty10000}
         R09 & Umfang der Benutzerverwaltung & Eine Benutzerverwaltung ist nicht erforderlich und gehört nicht zum vereinbarten Funktionsumfang. Der Passwortschutz nach F03 bleibt erforderlich. & - \\
         \midrule
     \end{longtable}
+\normalsize
 
+\sectionspace{180pt}
+\subsection*{d) Eigenschaften gut formulierter Anforderungen}
 
-    \subsection*{d) Eigenschaften gut formulierter Anforderungen}
+In Anlehnung an Foliensatz 3, PDF-Seite 76 (Foliennummer 190), soll eine Anforderungsspezifikation folgende Eigenschaften erfüllen:
 
-    \begin{itemize}
-        \item \textbf{Eindeutig:} Die Anforderung lässt nur eine fachliche Interpretation zu; Begriffe wie „schnell“ oder „benutzerfreundlich“ werden konkretisiert.
-        \item \textbf{Verständlich:} Auftraggebende und Entwicklungsteam verstehen die verwendeten Begriffe gleich.
-        \item \textbf{Vollständig:} Auslöser, Eingaben, erwartetes Verhalten und relevante Fehlerfälle sind beschrieben.
-        \item \textbf{Widerspruchsfrei:} Die Anforderung widerspricht weder anderen Anforderungen noch den Randbedingungen.
-        \item \textbf{Notwendig:} Die Anforderung trägt zu einem vereinbarten Projektziel bei.
-        \item \textbf{Realisierbar:} Sie lässt sich innerhalb der verfügbaren Zeit, Mittel und technischen Umgebung umsetzen.
-        \item \textbf{Einzeln formuliert:} Jede Anforderung beschreibt einen separat prüfbaren Sachverhalt.
-        \item \textbf{Prüfbar:} Ein Test oder eine Prüfung kann eindeutig feststellen, ob sie erfüllt ist; Qualitätsmerkmale besitzen messbare Grenzwerte und definierte Testbedingungen.
-        \item \textbf{Identifizierbar und nachvollziehbar:} Ein stabiler Bezeichner wie F01, Q01 oder R01 ermöglicht die Zuordnung zu Quelle, Umsetzung und Test.
-        \item \textbf{Priorisiert und abgestimmt:} Pflichtanforderungen und optionale Anforderungen sind gekennzeichnet und mit der beauftragenden Firma vereinbart.
-    \end{itemize}
+\begin{itemize}
+\item \textbf{Eindeutig:} Die sprachliche Formulierung lässt nur eine Interpretation zu. Unklare Begriffe wie „gut“ oder „schnell“ werden konkretisiert.
+\item \textbf{Vollständig:} Die Spezifikation enthält alle erforderlichen Anforderungen und alle Bestandteile, die der zugrunde gelegte Standard verlangt.
+\item \textbf{Überprüfbar:} Für jede Forderung lässt sich durch einen Test oder eine Prüfung feststellen, ob sie erfüllt ist. Qualitätsmerkmale erhalten dazu messbare Kriterien und definierte Testbedingungen.
+\item \textbf{Konsistent:} Begriffe werden einheitlich verwendet; Synonyme für denselben Sachverhalt werden vermieden. Die Anforderungen stimmen mit den geltenden Standards überein und enthalten keine logischen, zeitlichen oder ursächlichen Widersprüche.
+\item \textbf{Änderbar:} Eine klare Gliederung, ein Inhaltsverzeichnis, ein Index und Querverweise erleichtern Änderungen. Redundante Beschreibungen werden vermieden, damit eine Änderung nicht an mehreren Stellen nachgeführt werden muss.
+\item \textbf{Verfolgbar:} Entscheidungen und ihre Begründungen sind nachvollziehbar dokumentiert. Eindeutige Bezeichner und Verweise ermöglichen die Zuordnung der Anforderungen zu ihren Quellen, ihrer Umsetzung und ihren Tests.
+\end{itemize}
 \end{document}

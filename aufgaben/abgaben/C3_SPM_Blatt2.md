@@ -77,15 +77,11 @@ Der folgende Katalog strukturiert die oben ausgewählten Anforderungen. Die Beze
 
 ### d) Eigenschaften gut formulierter Anforderungen
 
-- **Eindeutig:** Die Anforderung lässt nur eine fachliche Interpretation zu; Begriffe wie „schnell“ oder „benutzerfreundlich“ werden konkretisiert.
-- **Verständlich:** Auftraggebende und Entwicklungsteam verstehen die verwendeten Begriffe gleich.
-- **Vollständig:** Auslöser, Eingaben, erwartetes Verhalten und relevante Fehlerfälle sind beschrieben.
-- **Widerspruchsfrei:** Die Anforderung widerspricht weder anderen Anforderungen noch den Randbedingungen.
-- **Notwendig:** Die Anforderung trägt zu einem vereinbarten Projektziel bei.
-- **Realisierbar:** Sie lässt sich innerhalb der verfügbaren Zeit, Mittel und technischen Umgebung umsetzen.
-- **Einzeln formuliert:** Jede Anforderung beschreibt einen separat prüfbaren Sachverhalt.
-- **Prüfbar:** Ein Test oder eine Prüfung kann eindeutig feststellen, ob sie erfüllt ist; Qualitätsmerkmale besitzen messbare Grenzwerte und definierte Testbedingungen.
-- **Identifizierbar und nachvollziehbar:** Ein stabiler Bezeichner wie F01, Q01 oder R01 ermöglicht die Zuordnung zu Quelle, Umsetzung und Test.
-- **Priorisiert und abgestimmt:** Pflichtanforderungen und optionale Anforderungen sind gekennzeichnet und mit der beauftragenden Firma vereinbart.
+In Anlehnung an Foliensatz 3, PDF-Seite 76 (Foliennummer 190), soll eine Anforderungsspezifikation folgende Eigenschaften erfüllen:
 
-
+- **Eindeutig:** Die sprachliche Formulierung lässt nur eine Interpretation zu. Unklare Begriffe wie „gut“ oder „schnell“ werden konkretisiert.
+- **Vollständig:** Die Spezifikation enthält alle erforderlichen Anforderungen und alle Bestandteile, die der zugrunde gelegte Standard verlangt.
+- **Überprüfbar:** Für jede Forderung lässt sich durch einen Test oder eine Prüfung feststellen, ob sie erfüllt ist. Qualitätsmerkmale erhalten dazu messbare Kriterien und definierte Testbedingungen.
+- **Konsistent:** Begriffe werden einheitlich verwendet; Synonyme für denselben Sachverhalt werden vermieden. Die Anforderungen stimmen mit den geltenden Standards überein und enthalten keine logischen, zeitlichen oder ursächlichen Widersprüche.
+- **Änderbar:** Eine klare Gliederung, ein Inhaltsverzeichnis, ein Index und Querverweise erleichtern Änderungen. Redundante Beschreibungen werden vermieden, damit eine Änderung nicht an mehreren Stellen nachgeführt werden muss.
+- **Verfolgbar:** Entscheidungen und ihre Begründungen sind nachvollziehbar dokumentiert. Eindeutige Bezeichner und Verweise ermöglichen die Zuordnung der Anforderungen zu ihren Quellen, ihrer Umsetzung und ihren Tests.
