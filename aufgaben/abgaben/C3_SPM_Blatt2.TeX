@@ -5,6 +5,7 @@
 \usepackage[ngerman]{babel}
 \usepackage[a4paper,portrait,left=22mm,right=22mm,top=22mm,bottom=24mm]{geometry}
 \usepackage{longtable,array,booktabs}
+\usepackage{tabular}
 \usepackage{enumitem}
 \usepackage{microtype}
 \usepackage{fancyhdr}
@@ -28,6 +29,8 @@
 \setlength{\LTpre}{8pt}
 \setlength{\LTpost}{12pt}
 \newcommand{\sectionspace}[1]{\par\ifdim\dimexpr\pagegoal-\pagetotal\relax<#1\relax\newpage\fi\addvspace{14pt}}
+\newcommand{\TODO}{\textcolor{red}{[Platzhalter]}}
+
 
 \title{Anforderungsanalyse und Aufwandsschätzung\\{\large Übungsblatt 2}}
 \author{Gruppe C3 / MoinMetrics\\{}Alexander Borrmann\\{}Lukas Pancratius\\{}Ino Wölke}
@@ -273,6 +276,45 @@ Darüber hinaus wird vorgestellt, warum die Aufwandschätzung von Softwareentwic
     Außerdem werden Tätigkeiten wie Tests, Debugging und Dokumentation häufig nicht ausreichend eingeplant.
     Auch zu subjektive oder optimistische Schätzungen und fehlende Erfahrungswerte aus früheren Projekten können zu Abweichungen führen.
 
+\section{Aufwandsschätzung für das Softwareprojekt}
+Im Folgenden wird der voraussichtliche Gesamtaufwand des Softwareprojekts mithilfe zweier Schätzverfahren ermittelt. Z
+unächst erfolgt eine Expertenschätzung unter Anwendung des PERT-Verfahrens, bei der alle Gruppenmitglieder unabhängig voneinander eine eigene Aufwandsschätzung vornehmen.
+Anschließend wird eine Analogieschätzung auf Grundlage der prozentualen Aufwandsverteilung nach Steve McConnell durchgeführt.
+Als Ausgangswert dient der für die Anforderungsanalyse veranschlagte Aufwand.
+\subsection*{Expertenschätzung mit PERT-Verfahren}
+\begin{table}[h]
+  \centering
+  \caption{Aufwandsschätzung pro Gruppenmitglied (in Stunden)}
+    \begin{tabular}{lrrrr}
+    \hline
 
+    \textbf{Gruppenmitglied} & \textbf{Optimistisch} & \textbf{Realistisch} & \textbf{Pessimistisch} & \textbf{PERT} \\
+    \hline
 
+  Alexander B. & 1 & 10 & 100 & \textbf{24} \\
+  Lukas P.   & 120 & 210 & 270 & \textbf{205} \\
+  Ino W. & 0 & 0 & 0 & \textbf{0} \\
+  \midrule
+  \textbf{Mittelwert} & \textbf{41} & \textbf{74} & \textbf{124} & \textbf{33} \\
+
+\end{tabular}
+\end{table}
+
+    \TODO{Begründung Alex}\\\newline
+    Die realistische Aufwandsschätzung des Gruppenmitglieds Lukas P. basiert auf einer Aufteilung des Gesamtaufwands in die Bereiche Implementierung, Testing und Debugging sowie Softwaremanagement.
+    Für die Implementierung werden etwa 120 Personenstunden veranschlagt.
+    Dies entspricht bei einer angenommenen Projektlaufzeit von 30 Wochen durchschnittlich vier Personenstunden pro Woche.\\
+    Für das Testing, die Fehlerbehebung (Debugging) und die Erstellung von Tests werden weitere 60 Personenstunden eingeplant.\\
+    Der Aufwand für das Softwaremanagement wird auf 30 Personenstunden geschätzt, da insbesondere in der Anfangsphase des Projekts ein erhöhter Bedarf an Planung, Koordination und Organisation besteht.\\
+    Der optimistische Aufwand beschreibt ein günstiges Projektszenario, bei dem die Anforderungen klar definiert sind, die eingesetzten Technologien wie erwartet funktionieren und nur wenige technische Schwierigkeiten auftreten.
+    Dadurch wird ein vergleichsweise geringer Aufwand für die Implementierung sowie für das Testing und Debugging angenommen. \\
+    Der pessimistische Aufwand berücksichtigt hingegen mögliche Risiken und unvorhergesehene Probleme, wie beispielsweise Fehler in der Software, Schwierigkeiten bei der Integration einzelner Komponenten oder nachträgliche Änderungen an den Anforderungen.
+    Insbesondere für Testing und Debugging wird daher mehr Zeit eingeplant, da zusätzliche Tests, Fehleranalysen und Korrekturen erforderlich sein können.\\\newline
+
+    \TODO{Begründung INO}
+
+    \subsection*{Prozentuale Schätzung nach McConnell}
+    \TODO
+    \subsection*{Begründeter Gesamtaufwand}
+    \TODO
 \end{document}
