@@ -5,7 +5,7 @@
 \usepackage[ngerman]{babel}
 \usepackage[a4paper,portrait,left=22mm,right=22mm,top=22mm,bottom=24mm]{geometry}
 \usepackage{longtable,array,booktabs}
-\usepackage{tabular}
+\usepackage{xcolor}
 \usepackage{enumitem}
 \usepackage{microtype}
 \usepackage{fancyhdr}
@@ -55,7 +55,7 @@
     \begin{itemize}
         \item csv-Datei hochladen können, Fehler dürfen nicht zum Systemabsturz führen
         \item Graphische Aufbereitung der Daten
-        \item Liste für allgemeine Marketingmaßnahmen, diese muss erweiterbar sein
+        \item Liste für allgemeine Marketingma\ss{}nahmen, diese muss erweiterbar sein
     \end{itemize}
 
     \subsection*{Pflichtanforderungen}
@@ -93,9 +93,9 @@ F03 & Passwortschutz & Die Anwendung muss vor dem Zugriff auf Daten und Auswertu
 \midrule
 F04 & Grafische Darstellung & Die Anwendung muss Analyseergebnisse grafisch darstellen. & Muss \\
 \midrule
-F05 & Marketingmaßnahmen anzeigen & Die Anwendung muss eine Liste allgemeiner Marketingmaßnahmen anzeigen. \textbf{???} & Muss \\
+F05 & Marketingma\ss{}nahmen anzeigen & Die Anwendung muss eine Liste allgemeiner Marketingma\ss{}nahmen anzeigen. \textbf{???} & Muss \\
 \midrule
-F06 & Marketingmaßnahmen erweitern & Die Liste allgemeiner Marketingmaßnahmen muss um zusätzliche Einträge erweitert werden können. & Muss \\
+F06 & Marketingma\ss{}nahmen erweitern & Die Liste allgemeiner Marketingma\ss{}nahmen muss um zusätzliche Einträge erweitert werden können. & Muss \\
 \midrule
 F07 & Gemeinsam gekaufte Waren & Die Anwendung muss mithilfe des Apriori-Verfahrens Waren ermitteln und darstellen, die zusammen gekauft wurden. & Pflicht, \#12 \\
 \midrule
@@ -122,7 +122,7 @@ F14 & Top- und Flop-Artikel nach Deckungsbeitrag & Die Anwendung soll die Artike
 \bottomrule\endfoot
 Q01 & Analysezeit & Die Analyse von 10.000 Datensätzen muss spätestens nach 5 Sekunden abgeschlossen sein; 1-2 Sekunden sind der Zielwert. & Bezug: \#1. Vorschlag: Messung vom Start der Analyse bei bereits eingelesenen Daten bis zur vollständig sichtbaren Ergebnisausgabe; jede vereinbarte Analyse muss in 10 Testläufen die 5-Sekunden-Grenze einhalten. \\
 \midrule
-Q02 & Robustheit beim CSV-Import & Bei 100 \% der vereinbarten fehlerhaften CSV-Testdateien darf die Anwendung nicht abstürzen. Sie muss eine Fehlermeldung anzeigen und anschließend einen erneuten Upload ermöglichen. & Vorschlag zur Quantifizierung. Testfälle mindestens: falsches Trennzeichen, fehlende Pflichtspalten, ungültige Zahlen-/Datumswerte und leere Datei. \\
+Q02 & Robustheit beim CSV-Import & Bei 100 \% der vereinbarten fehlerhaften CSV-Testdateien darf die Anwendung nicht abstürzen. Sie muss eine Fehlermeldung anzeigen und anschlie\ss{}end einen erneuten Upload ermöglichen. & Vorschlag zur Quantifizierung. Testfälle mindestens: falsches Trennzeichen, fehlende Pflichtspalten, ungültige Zahlen-/Datumswerte und leere Datei. \\
 \midrule
 Q03 & Bedienbarkeit & \textbf{???} & Vorschlag zur Quantifizierung für die Zielgruppe Marktleitung. \\
 \midrule
@@ -159,7 +159,7 @@ R09 & Umfang der Benutzerverwaltung & Eine Benutzerverwaltung ist nicht erforder
 Eine Anforderungsspezifikation soll folgende Eigenschaften erfüllen:
 
 \begin{itemize}
-\item \textbf{Eindeutig:} Die sprachliche Formulierung lässt nur eine Interpretation zu. Unklare Begriffe wie „gut“ oder „schnell“ werden konkretisiert.
+\item \textbf{Eindeutig:} Die sprachliche Formulierung lässt nur eine Interpretation zu. Unklare Begriffe wie \glqq{}gut\grqq{} oder \glqq{}schnell\grqq{} werden konkretisiert.
 \item \textbf{Vollständig:} Die Spezifikation enthält alle erforderlichen Anforderungen und alle Bestandteile, die der zugrunde gelegte Standard verlangt.
 \item \textbf{Überprüfbar:} Für jede Forderung lässt sich durch einen Test oder eine Prüfung feststellen, ob sie erfüllt ist. Qualitätsmerkmale erhalten dazu messbare Kriterien und definierte Testbedingungen.
 \item \textbf{Konsistent:} Begriffe werden einheitlich verwendet; Synonyme für denselben Sachverhalt werden vermieden. Die Anforderungen stimmen mit den geltenden Standards überein und enthalten keine logischen, zeitlichen oder ursächlichen Widersprüche.
@@ -227,9 +227,9 @@ R03 & - Tomcat-Version\newline - Zielumgebung \\
 \midrule
 R06 & - Umfang der Javadoc-Kommentierung \\
 \end{longtable}\newpage
-    \section{Aufwandsschätzung}
+    \section*{Aufgabe 2: Aufwandsschätzung}
 
-Der folgende Abschnitt befasst sich mit verschiedenen Methoden der Aufwandsschätzung und deren Zusammenhänge mit der Größen- und Kostenschätzung.
+Der folgende Abschnitt befasst sich mit verschiedenen Methoden der Aufwandsschätzung und deren Zusammenhänge mit der Grö\ss{}en- und Kostenschätzung.
 Darüber hinaus wird vorgestellt, warum die Aufwandschätzung von Softwareentwicklungsprojekten in der Praxis häufig von dem tatsächlichen Aufwand abweicht\\
 \newline
  \subsection*{Expertenschätzung}
@@ -254,17 +254,17 @@ Darüber hinaus wird vorgestellt, warum die Aufwandschätzung von Softwareentwic
         \item \textbf{Vorteil:} Unsicherheiten und mögliche Risiken werden auf alle Fälle in der Schätzung berücksichtigt
         \item \textbf{Nachteil:} Ergebnis ist trotzdem von der Qualität der Ausgangsschätzungen (z.B. Expertenschätzungen) abhängig
     \end{itemize}
-    \subsection*{Zusammenhang zur Größen- und Kostenschätzung}
-    Bei der Planung von Softwareentwicklungsprojekten bauen die Größen-, Kosten- und Aufwandsschätzung aufeinander auf.
+    \subsection*{Zusammenhang zur Grö\ss{}en- und Kostenschätzung}
+    Bei der Planung von Softwareentwicklungsprojekten bauen die Grö\ss{}en-, Kosten- und Aufwandsschätzung aufeinander auf.
     Sie dienen dazu, den Umfang, die vorraussichtlichen finanziellen Kosten und den benötigenden Arbeitsaufwand so genau wie möglich vorherzusagen.
     \\\newline
-    Die Größenschätzung ermittelt den voraussichtlichen Umfang der zu entwickelnden Software.
+    Die Grö\ss{}enschätzung ermittelt den voraussichtlichen Umfang der zu entwickelnden Software.
     Dieser kann beispielsweise anhand von Quellcodezeilen (Lines of Code), Anzahl der Funktionen und die Komplexität des Codes abgeschätzt werden.
-    Eine ungenaue Größenschätzung kann dazu führen, dass der benötigte Arbeitsaufwand überschätzt bzw. unterschätzt wird
+    Eine ungenaue Grö\ss{}enschätzung kann dazu führen, dass der benötigte Arbeitsaufwand überschätzt bzw. unterschätzt wird
     \\\newline
     Die Aufwandsschätzung bestimmt, wie viel menschliche Arbeitsleistung erforderlich ist, um das geplante Projekt umzusetzen. Der Aufwand wird zum Beispiel in Personenstunden, -tagen oder -monaten angegeben.
-    Er hängt nicht ausschließlich von der Softwaregröße ab, sondern auch von der Komplexität, den eingesetzten Technologien, den Fähigkeiten des Teams und den erforderlichen Qualitätssicherungsmaßnahmen.
-    Eine größere Software erfordert grundsätzlich häufig mehr Aufwand. Der Zusammenhang ist jedoch nicht zwangsläufig linear, da beispielsweise Wiederverwendung, Automatisierung oder zusätzliche technische Anforderungen den Aufwand beeinflussen können.
+    Er hängt nicht ausschlie\ss{}lich von der Softwaregrö\ss{}e ab, sondern auch von der Komplexität, den eingesetzten Technologien, den Fähigkeiten des Teams und den erforderlichen Qualitätssicherungsma\ss{}nahmen.
+    Eine grö\ss{}ere Software erfordert grundsätzlich häufig mehr Aufwand. Der Zusammenhang ist jedoch nicht zwangsläufig linear, da beispielsweise Wiederverwendung, Automatisierung oder zusätzliche technische Anforderungen den Aufwand beeinflussen können.
     \\\newline
     Die Kostenschätzung ermittelt die voraussichtlichen finanziellen Mittel, die für die Durchführung des Projekts benötigt werden.
     Eine wesentliche Grundlage bildet der geschätzte Arbeitsaufwand multipliziert mit den jeweiligen Personal- bzw. Verrechnungssätzen.
@@ -273,13 +273,13 @@ Darüber hinaus wird vorgestellt, warum die Aufwandschätzung von Softwareentwic
     \subsection*{Ursachen für Abweichungen bei der Aufwandsschätzung}
     In Softwareentwicklungsprojekten weicht der geschätzte Aufwand häufig vom tatsächlichen Aufwand ab, da zu Beginn nicht alle Anforderungen bekannt sind und die technische Komplexität unterschätzt werden kann.
     Änderungen an den Anforderungen, unerwartete Probleme, Risiken, Unsicherheiten und unterschiedliche Erfahrungen im Entwicklungsteam können zusätzlichen Aufwand verursachen.
-    Außerdem werden Tätigkeiten wie Tests, Debugging und Dokumentation häufig nicht ausreichend eingeplant.
+    Au\ss{}erdem werden Tätigkeiten wie Tests, Debugging und Dokumentation häufig nicht ausreichend eingeplant.
     Auch zu subjektive oder optimistische Schätzungen und fehlende Erfahrungswerte aus früheren Projekten können zu Abweichungen führen.
 
-\section{Aufwandsschätzung für das Softwareprojekt}
+\section*{Aufgabe 3: Aufwandsschätzung für das Softwareprojekt}
 Im Folgenden wird der voraussichtliche Gesamtaufwand des Softwareprojekts mithilfe zweier Schätzverfahren ermittelt. Z
 unächst erfolgt eine Expertenschätzung unter Anwendung des PERT-Verfahrens, bei der alle Gruppenmitglieder unabhängig voneinander eine eigene Aufwandsschätzung vornehmen.
-Anschließend wird eine Analogieschätzung auf Grundlage der prozentualen Aufwandsverteilung nach Steve McConnell durchgeführt.
+Anschlie\ss{}end wird eine Analogieschätzung auf Grundlage der prozentualen Aufwandsverteilung nach Steve McConnell durchgeführt.
 Als Ausgangswert dient der für die Anforderungsanalyse veranschlagte Aufwand.
 \subsection*{Expertenschätzung mit PERT-Verfahren}
 \begin{table}[h]
@@ -291,7 +291,7 @@ Als Ausgangswert dient der für die Anforderungsanalyse veranschlagte Aufwand.
     \textbf{Gruppenmitglied} & \textbf{Optimistisch} & \textbf{Realistisch} & \textbf{Pessimistisch} & \textbf{PERT} \\
     \hline
 
-  Alexander B. & 1 & 10 & 100 & \textbf{24} \\
+  Alexander B. & 144 & 234 & 306 & \textbf{231} \\
   Lukas P.   & 120 & 210 & 270 & \textbf{205} \\
   Ino W. & 0 & 0 & 0 & \textbf{0} \\
   \midrule
@@ -300,8 +300,15 @@ Als Ausgangswert dient der für die Anforderungsanalyse veranschlagte Aufwand.
 \end{tabular}
 \end{table}
 
-    \TODO{Begründung Alex}\\\newline
-    Die realistische Aufwandsschätzung des Gruppenmitglieds Lukas P. basiert auf einer Aufteilung des Gesamtaufwands in die Bereiche Implementierung, Testing und Debugging sowie Softwaremanagement.
+    \subsubsection*{Begründung Alexander B.}
+Die Schätzung berücksichtigt die Umsetzung der vereinbarten Pflichtanforderungen sowie Einarbeitung, Tests, Fehlerbehebung, Dokumentation und Projektabstimmung. Für den realistischen Fall wird ein Gesamtaufwand von 234 Personenstunden angenommen. Über zwölf Wochen entspricht dies bei drei Gruppenmitgliedern durchschnittlich 6,5 Stunden pro Person und Woche einschlie\ss{}lich der Präsenzzeit.
+
+Im optimistischen Fall gelingen die Einarbeitung in das Framework und die Integration der Funktionen ohne grö\ss{}ere Schwierigkeiten, sodass 144 Personenstunden als ausreichend eingeschätzt werden. Im pessimistischen Fall verursachen Schwierigkeiten mit dem unbekannten Framework, technische Probleme bei der Integration, notwendige Nacharbeiten und noch nicht vollständig bekannte Dokumentationsaufgaben zusätzlichen Aufwand. Dafür werden 306 Personenstunden veranschlagt.
+
+Der daraus berechnete PERT-Erwartungswert beträgt 231 Personenstunden.
+
+    \subsubsection*{Begründung Lukas P.}
+Die realistische Aufwandsschätzung des Gruppenmitglieds Lukas P. basiert auf einer Aufteilung des Gesamtaufwands in die Bereiche Implementierung, Testing und Debugging sowie Softwaremanagement.
     Für die Implementierung werden etwa 120 Personenstunden veranschlagt.
     Dies entspricht bei einer angenommenen Projektlaufzeit von 30 Wochen durchschnittlich vier Personenstunden pro Woche.\\
     Für das Testing, die Fehlerbehebung (Debugging) und die Erstellung von Tests werden weitere 60 Personenstunden eingeplant.\\

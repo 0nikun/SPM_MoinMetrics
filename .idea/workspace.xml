@@ -7,7 +7,6 @@
     <list default="true" id="dffd961e-0736-4b4b-a247-e69744157624" name="Changes" comment="AB2 Aufg 1 PDF und Latex">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt2.TeX" beforeDir="false" afterPath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt2.TeX" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt2.md" beforeDir="false" afterPath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt2.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt2.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt2.pdf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,12 +27,12 @@
     &quot;assignee&quot;: &quot;zRoYalNemo&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/0nikun/SPM_MoinMetrics.git",
-    "accountId": "fb20245e-0ca3-40ce-be15-88f7034176ab"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/0nikun/SPM_MoinMetrics.git&quot;,
+    &quot;accountId&quot;: &quot;fb20245e-0ca3-40ce-be15-88f7034176ab&quot;
   }
-}]]></component>
+}</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
@@ -142,17 +141,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="SPM_MoinMetrics" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="SPM_MoinMetrics" />
-      <option name="filePath" />
-      <method v="2" />
-    </configuration>
     <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <steps>
         <latexmkCompile id="ca90077b-7e20-4345-9668-abfd3cbc24e4" />
@@ -181,6 +169,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.tex" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
