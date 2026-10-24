@@ -10,6 +10,7 @@
 \usepackage{microtype}
 \usepackage{fancyhdr}
 \usepackage{amsmath}
+\usepackage[font=small,skip=5pt]{caption}
 \pagestyle{fancy}
 \fancyhf{}
 \fancyfoot[L]{\small\texttt{C3\_SPM\_Blatt2.pdf}}
@@ -27,8 +28,9 @@
 \raggedbottom
 \setlength{\tabcolsep}{4pt}
 \renewcommand{\arraystretch}{1.15}
-\setlength{\LTpre}{8pt}
-\setlength{\LTpost}{12pt}
+\setlength{\LTpre}{4pt}
+\setlength{\LTpost}{8pt}
+\setlength{\LTcapwidth}{\textwidth}
 \newcommand{\sectionspace}[1]{\par\ifdim
                                       \dimexpr\pagegoal-\pagetotal\relax<#1\relax\newpage
 \fi\addvspace{14pt}}
@@ -37,29 +39,30 @@
 
 \title{Anforderungsanalyse und Aufwandsschätzung\\{\large Übungsblatt 2}}
 \author{Gruppe C3 / MoinMetrics\\{}Alexander Borrmann\\{}Lukas Pancratius\\{}Ino Wölke}
-\date{Hochschule Emden-Leer\\Software-Projektmanagement\\Wintersemester 2026/27\\Prof. Dr. Gerrit Jan Veltink\\[1em]Abgabedatum: 25.10.2026}
+\date{Hochschule Emden-Leer\\Software-Projektmanagement\\Wintersemester 2026/27\\Prof. Dr. Gerrit Jan Veltink\\[1em]Abgabedatum: 24.10.2026}
 \begin{document}
             \maketitle
         \thispagestyle{fancy}
         \clearpage
 
-        \subsection*{Bedingungen}
+        \section*{Schriftliche Anforderungen des Auftraggebers}
+\subsection*{Bedingungen}
         \begin{itemize}
             \item Der Quellcode des Produkts wird mit ausgeliefert.
             \item Die Anwendung wird in Java programmiert.
-            \item Die Analyse der Daten soll durch die Data-Mining Software Weka erfolgen.
-            \item Es wird eine war-Datei ausgeliefert.
-            \item Die Software wird in javadoc kommentiert.
+            \item Die Analyse der Daten soll durch die Data-Mining-Software Weka erfolgen.
+            \item Es wird eine WAR-Datei ausgeliefert.
+            \item Die Software wird in Javadoc kommentiert.
             \item Alle sonstigen Dokumente liegen im PDF-Format vor.
-            \item Das Front-End der Analysesoftware soll eine Webseite sein, die auf dem firmeninternen TomCat Webserver laufen soll.
+            \item Das Front-End der Analysesoftware soll eine Webseite sein, die auf dem firmeninternen Tomcat-Webserver laufen soll.
             \item Die Webseite wird hauptsächlich durch die jeweilige Marktleitung (keine IT-Fachleute) benutzt werden.
             \item Die Anwendung muss durch ein Passwort geschützt werden, jedoch ist keine Benutzerverwaltung nötig.
         \end{itemize}
 
         \subsection*{Muss-Anforderungen an die Webseite}
         \begin{itemize}
-            \item csv-Datei hochladen können, Fehler dürfen nicht zum Systemabsturz führen
-            \item Graphische Aufbereitung der Daten
+            \item CSV-Datei hochladen können, Fehler dürfen nicht zum Systemabsturz führen
+            \item Grafische Aufbereitung der Daten
             \item Liste für allgemeine Marketingma\ss{}nahmen, diese muss erweiterbar sein
         \end{itemize}
 
@@ -67,16 +70,16 @@
         \begin{enumerate}
             \item \#1 10.000 Datensätze in 1-2 Sekunden, maximal 5 Sekunden
             \item \#12 Darstellung von Waren, die zusammen gekauft wurden (Apriori)
-            \item \#5 Fehler in der csv-Datei sollten zu einer Fehlermeldung führen
+            \item \#5 Fehler in der CSV-Datei sollten zu einer Fehlermeldung führen
             \item \#6 Umsatzstärkster Einkaufstag, Umsatzstärkste Einkaufsuhrzeit
             \item \#7 Stärkster Einkaufstag, stärkste Einkaufsuhrzeit, nach Kundenhäufigkeit
             \item \#8 Umsatzstärkste Einkaufsuhrzeit an den einzelnen Tagen
         \end{enumerate}
 
-        \subsection*{optional}
+        \subsection*{Optionale Anforderungen}
         \begin{enumerate}
-            \item \#9 Top und Flop - Artikel, nach Umsatz
-            \item \#10 Top und Flop - Artikel, nach Deckungsbeitrag
+            \item \#9 Top- und Flop-Artikel, nach Umsatz
+            \item \#10 Top- und Flop-Artikel, nach Deckungsbeitrag
         \end{enumerate}
 
         \clearpage
@@ -87,7 +90,10 @@
         Der folgende Katalog strukturiert die oben ausgewählten Anforderungen. Die Bezeichner F, Q und R stehen für Funktionsanforderungen, Qualitätsmerkmale und Randbedingungen. Die ursprünglichen Nummern aus der PDF bleiben zur Rückverfolgbarkeit angegeben.
 
         \subsection*{a) Funktionsanforderungen}
-        \begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.13\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.27\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.46\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.14\linewidth-2\tabcolsep\relax}}
+        \begingroup
+\renewcommand{\arraystretch}{1.10}
+\begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.13\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.27\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.46\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.14\linewidth-2\tabcolsep\relax}}
+
             \toprule
             \textbf{Bezeichner} & \textbf{Funktion}                              & \textbf{Beschreibung}                                                                                                             & \textbf{Priorität / Bezug} \\
             \midrule\endhead
@@ -100,7 +106,7 @@
             \midrule
             F04                 & Grafische Darstellung                          & Die Anwendung muss Analyseergebnisse grafisch darstellen. & Muss \\
             \midrule
-            F05                 & Marketingma\ss{}nahmen anzeigen                & Die Anwendung muss eine Liste allgemeiner Marketingma\ss{}nahmen anzeigen. \textbf{???} & Muss \\
+            F05                 & Marketingma\ss{}nahmen anzeigen                & Die Anwendung muss eine Liste allgemeiner Marketingma\ss{}nahmen anzeigen. & Muss \\
             \midrule
             F06                 & Marketingma\ss{}nahmen erweitern               & Die Liste allgemeiner Marketingma\ss{}nahmen muss um zusätzliche Einträge erweitert werden können. & Muss \\
             \midrule
@@ -120,10 +126,13 @@
             \midrule
             F14                 & Top- und Flop-Artikel nach Deckungsbeitrag     & Die Anwendung soll die Artikel mit dem höchsten und niedrigsten Deckungsbeitrag ermitteln und anzeigen. & Optional, \#10 \\
         \end{longtable}
+\addtocounter{table}{-1}
+\endgroup
         \clearpage
 
         \subsection*{b) Qualitätsmerkmale und Quantifizierung}
         \begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.13\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.22\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.33\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.32\linewidth-2\tabcolsep\relax}}
+
             \toprule
             \textbf{Bezeichner} & \textbf{Qualitätsmerkmal}  & \textbf{Messbares Kriterium}                                                                                                                                                                 & \textbf{Nachweis / Status}                                                                                                                                                                                          \\
             \midrule\endhead
@@ -132,14 +141,16 @@
             \midrule
             Q02                 & Robustheit beim CSV-Import & Bei 100 \% der vereinbarten fehlerhaften CSV-Testdateien darf die Anwendung nicht abstürzen. Sie muss eine Fehlermeldung anzeigen und anschlie\ss{}end einen erneuten Upload ermöglichen. & Vorschlag zur Quantifizierung. Testfälle mindestens: falsches Trennzeichen, fehlende Pflichtspalten, ungültige Zahlen-/Datumswerte und leere Datei. \\
             \midrule
-            Q03                 & Bedienbarkeit              & \textbf{???}                                                                                                                                                                                 & Vorschlag zur Quantifizierung für die Zielgruppe Marktleitung.                                                                                                                                                      \\
+            Q03                 & Bedienbarkeit              & noch offen                                                                                                                                                                                 & Vorschlag zur Quantifizierung für die Zielgruppe Marktleitung.                                                                                                                                                      \\
             \midrule
             Q04                 & Zugriffsschutz             & Bei 100 \% der vereinbarten Zugriffstests ohne gültige Anmeldung dürfen weder Einkaufsdaten noch Analyseergebnisse ausgeliefert werden. Mit gültigem Passwort muss der Zugriff möglich sein. & Vorschlag zur Quantifizierung von F03. Tests umfassen den Aufruf der Oberfläche und direkte Aufrufe der datenliefernden Endpunkte. \\
         \end{longtable}
+\addtocounter{table}{-1}
         \clearpage
 
         \subsection*{c) Randbedingungen}
         \begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.13\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.26\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.61\linewidth-2\tabcolsep\relax}}
+
             \toprule
             \textbf{Bezeichner} & \textbf{Merkmal}              & \textbf{Beschreibung}                                                                                                                              \\
             \midrule\endhead
@@ -162,7 +173,8 @@
             \midrule
             R09                 & Umfang der Benutzerverwaltung & Eine Benutzerverwaltung ist nicht erforderlich und gehört nicht zum vereinbarten Funktionsumfang. Der Passwortschutz nach F03 bleibt erforderlich. \\
         \end{longtable}
-        \sectionspace{280pt}
+\addtocounter{table}{-1}
+        
 
         \subsection*{d) Eigenschaften gut formulierter Anforderungen}
 
@@ -179,11 +191,12 @@
         \clearpage
 
 
-        \section*{Offene Abstimmungspunkte}
-        \sectionspace{120pt}
+        \subsection*{Offene Abstimmungspunkte}
+        
 
-        \subsection*{Funktionsanforderungen}
+        \subsubsection*{Funktionsanforderungen}
         \begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.16\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.84\linewidth-2\tabcolsep\relax}}
+
             \toprule
             \textbf{Bezeichner} & \textbf{Offene Abstimmungspunkte}                                                                                                                                          \\
             \midrule\endhead
@@ -192,65 +205,63 @@
             \midrule
             F04                 & - Diagrammarten\newline - Zuordnung zu Analysen                                                                                                                            \\
             \midrule
+            F05 & - Bedeutungsklärung: Was ist unter allgemeinen Marketingma\ss{}nahmen zu verstehen? \\
+            \midrule
             F06                 & - Art der Erweiterung\newline - Zuständige Personen                                                                                                                        \\
             \midrule
             F07                 & - Apriori-Parameter\newline - Umfang der Ergebnisdarstellung                                                                                                               \\
             \midrule
-            F08                 & - Auswertungszeitraum\newline - Tag: Datum oder Wochentag\newline - Umgang mit Gleichständen                                                                               \\
+            F08                 & - Auswertungszeitraum\newline - Umgang mit Gleichständen                                                                               \\
             \midrule
             F09                 & - Auswertungszeitraum\newline - Zeitintervalle\newline - Umgang mit Gleichständen                                                                                          \\
             \midrule
-            F10                 & - Auswertungszeitraum\newline - Tag: Datum oder Wochentag\newline - Umgang mit Gleichständen\newline - Kundenhäufigkeit: unterschiedliche Kund*innen oder Einkaufsvorgänge \\
+            F10                 & - Auswertungszeitraum\newline - Umgang mit Gleichständen\newline - Kundenhäufigkeit: unterschiedliche Kund*innen oder Einkaufsvorgänge \\
             \midrule
             F11                 & - Auswertungszeitraum\newline - Zeitintervalle\newline - Umgang mit Gleichständen\newline - Kundenhäufigkeit: unterschiedliche Kund*innen oder Einkaufsvorgänge            \\
             \midrule
-            F12                 & - Auswertungszeitraum\newline - Zeitintervalle\newline - Tag: Datum oder Wochentag\newline - Umgang mit Gleichständen                                                      \\
+            F12                 & - Auswertungszeitraum\newline - Zeitintervalle\newline - Umgang mit Gleichständen                                                      \\
             \midrule
             F13                 & - Auswertungszeitraum\newline - Umgang mit Gleichständen\newline - Anzahl der Top-/Flop-Ergebnisse\newline - Artikel oder Warengruppen                                     \\
             \midrule
             F14                 & - Auswertungszeitraum\newline - Umgang mit Gleichständen\newline - Anzahl der Top-/Flop-Ergebnisse\newline - Artikel oder Warengruppen                                     \\
         \end{longtable}
+\addtocounter{table}{-1}
         \clearpage
 
-        \subsection*{Qualitätsmerkmale}
+        \subsubsection*{Qualitätsmerkmale}
         \begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.16\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.84\linewidth-2\tabcolsep\relax}}
+
             \toprule
             \textbf{Bezeichner} & \textbf{Offene Abstimmungspunkte}                                                                                                                                                  \\
             \midrule\endhead
             \bottomrule\endfoot
             Q01                 & - Referenzhardware und Testdatei\newline - Analyseparameter und einbezogene Analysen\newline - Messbeginn und Messende\newline - Messvorschlag und Anzahl der Testläufe bestätigen \\
             \midrule
-            Q02                 & - CSV-Format\newline - Fehlerfallkatalog\newline - Quantifizierung bestätigen                                                                                                      \\
-            \midrule
             Q03                 & - Quantifizierung und Testablauf                                                                                                                                                   \\
-            \midrule
-            Q04                 & - Testumfang\newline - Sitzungsverhalten\newline - Quantifizierung bestätigen                                                                                                      \\
         \end{longtable}
-        \sectionspace{120pt}
+\addtocounter{table}{-1}
+        
 
-        \subsection*{Randbedingungen}
+        \subsubsection*{Randbedingungen}
         \begin{longtable}{>{\raggedright\arraybackslash}p{\dimexpr 0.16\linewidth-2\tabcolsep\relax}>{\raggedright\arraybackslash}p{\dimexpr 0.84\linewidth-2\tabcolsep\relax}}
+
             \toprule
             \textbf{Bezeichner} & \textbf{Offene Abstimmungspunkte}       \\
             \midrule\endhead
             \bottomrule\endfoot
-            R01                 & - Java-Version                          \\
-            \midrule
-            R02                 & - Weka-Version                          \\
-            \midrule
             R03                 & - Tomcat-Version\newline - Zielumgebung \\
             \midrule
             R06                 & - Umfang der Javadoc-Kommentierung      \\
-        \end{longtable}\newpage
+        \end{longtable}
+\addtocounter{table}{-1}
 
 
         \section*{Aufgabe 2: Aufwandsschätzung}
 
         Der folgende Abschnitt befasst sich mit verschiedenen Methoden der Aufwandsschätzung und deren Zusammenhänge mit der Grö\ss{}en- und Kostenschätzung.
-    Darüber hinaus wird vorgestellt, warum die Aufwandschätzung von Softwareentwicklungsprojekten in der Praxis häufig von dem tatsächlichen Aufwand abweicht\\
-        \newline
+    Darüber hinaus wird vorgestellt, warum die Aufwandsschätzung von Softwareentwicklungsprojekten in der Praxis häufig von dem tatsächlichen Aufwand abweicht\par
 
-        \subsection*{Expertenschätzung}
+\subsection*{Expertenschätzung}
         \begin{itemize}
             \item Schätzung durch erfahrene Projektmitarbeitende oder Fachleute auf Grundlage ihres Fachwissens und ihrer bisherigen Erfahrungen.
             \item Die Schätzung berücksichtigt Komplexität der Aufgabenstellung, verfügbaren Ressourcen und mögliche technische Schwierigkeiten.
@@ -266,31 +277,35 @@
             \item \textbf{Nachteil:} macht wenig Sinn, wenn keine geeigneten Vergleichsdaten vorhanden
         \end{itemize}
 
-        \subsection*{Dreipunktschätzung}
+        \par\noindent\begin{minipage}{\linewidth}
+\subsection*{Dreipunktschätzung}
         \begin{itemize}
             \item Schätzung auf Grundlage von drei Schätzungsansätzen: optimistischer (O), realistischer (R) und pessimistischer (P) Ansatz
             \item Die Werte können beispielsweise mit einem gewichteten Erwartungswert zusammengeführt werden.
             \item Dazu kann die PERT-Formel (\textbf{P}rogram \textbf{E}valuation and \textbf{R}eview \textbf{T}echnique) verwendet werden: \[ E = \frac{O+4R+P}{6}\]
             \item \textbf{Vorteil:} Unsicherheiten und mögliche Risiken werden auf alle Fälle in der Schätzung berücksichtigt
-            \item \textbf{Nachteil:} Ergebnis ist trotzdem von der Qualität der Ausgangsschätzungen (z.B. Expertenschätzungen) abhängig
+            \item \textbf{Nachteil:} Ergebnis ist trotzdem von der Qualität der Ausgangsschätzungen (z.\,B. Expertenschätzungen) abhängig
         \end{itemize}
+\end{minipage}\par
 
         \subsection*{Zusammenhang zur Grö\ss{}en- und Kostenschätzung}
         Bei der Planung von Softwareentwicklungsprojekten bauen die Grö\ss{}en-, Kosten- und Aufwandsschätzung aufeinander auf.
-    Sie dienen dazu, den Umfang, die vorraussichtlichen finanziellen Kosten und den benötigenden Arbeitsaufwand so genau wie möglich vorherzusagen.
-        \\\newline
+    Sie dienen dazu, den Umfang, die voraussichtlichen finanziellen Kosten und den benötigenden Arbeitsaufwand so genau wie möglich vorherzusagen.
+\par
         Die Grö\ss{}enschätzung ermittelt den voraussichtlichen Umfang der zu entwickelnden Software.
     Dieser kann beispielsweise anhand von Quellcodezeilen (Lines of Code), Anzahl der Funktionen und die Komplexität des Codes abgeschätzt werden.
     Eine ungenaue Grö\ss{}enschätzung kann dazu führen, dass der benötigte Arbeitsaufwand überschätzt bzw. unterschätzt wird
-        \\\newline
+\par
         Die Aufwandsschätzung bestimmt, wie viel menschliche Arbeitsleistung erforderlich ist, um das geplante Projekt umzusetzen. Der Aufwand wird zum Beispiel in Personenstunden, -tagen oder -monaten angegeben.
         Er hängt nicht ausschlie\ss{}lich von der Softwaregrö\ss{}e ab, sondern auch von der Komplexität, den eingesetzten Technologien, den Fähigkeiten des Teams und den erforderlichen Qualitätssicherungsma\ss{}nahmen.
     Eine grö\ss{}ere Software erfordert grundsätzlich häufig mehr Aufwand. Der Zusammenhang ist jedoch nicht zwangsläufig linear, da beispielsweise Wiederverwendung, Automatisierung oder zusätzliche technische Anforderungen den Aufwand beeinflussen können.
-        \\\newline
-        Die Kostenschätzung ermittelt die voraussichtlichen finanziellen Mittel, die für die Durchführung des Projekts benötigt werden.
+\par
+        \par\noindent\begin{minipage}{\linewidth}
+Die Kostenschätzung ermittelt die voraussichtlichen finanziellen Mittel, die für die Durchführung des Projekts benötigt werden.
         Eine wesentliche Grundlage bildet der geschätzte Arbeitsaufwand multipliziert mit den jeweiligen Personal- bzw. Verrechnungssätzen.
         Zusätzlich können Sachkosten, Softwarelizenzen, Infrastrukturkosten, externe Dienstleistungen und weitere projektbezogene Kosten berücksichtigt werden.
         Die Höhe der Kosten hängt daher sowohl vom benötigten Aufwand als auch von den Kosten der eingesetzten Ressourcen ab.
+\end{minipage}\par
 
         \subsection*{Ursachen für Abweichungen bei der Aufwandsschätzung}
         In Softwareentwicklungsprojekten weicht der geschätzte Aufwand häufig vom tatsächlichen Aufwand ab, da zu Beginn nicht alle Anforderungen bekannt sind und die technische Komplexität unterschätzt werden kann.
@@ -300,15 +315,14 @@
 
 
         \section*{Aufgabe 3: Aufwandsschätzung für das Softwareprojekt}
-        Im Folgenden wird der voraussichtliche Gesamtaufwand des Softwareprojekts mithilfe zweier Schätzverfahren ermittelt. Z
-        unächst erfolgt eine Expertenschätzung unter Anwendung des PERT-Verfahrens, bei der alle Gruppenmitglieder unabhängig voneinander eine eigene Aufwandsschätzung vornehmen.
+        Im Folgenden wird der voraussichtliche Gesamtaufwand des Softwareprojekts mithilfe zweier Schätzverfahren ermittelt. Zunächst erfolgt eine Expertenschätzung unter Anwendung des PERT-Verfahrens, bei der alle Gruppenmitglieder unabhängig voneinander eine eigene Aufwandsschätzung vornehmen.
         Anschlie\ss{}end wird eine Analogieschätzung auf Grundlage der prozentualen Aufwandsverteilung nach Steve McConnell durchgeführt.
     Als Ausgangswert dient der für die Anforderungsanalyse veranschlagte Aufwand.
 
         \subsection*{Expertenschätzung mit PERT-Verfahren}
-        \begin{table}[h]
+        \par\noindent\begin{minipage}{\linewidth}
             \centering
-            \caption{Aufwandsschätzung pro Gruppenmitglied (in Stunden)}
+            \captionof{table}{Aufwandsschätzung pro Gruppenmitglied (in Stunden)}
             \begin{tabular}{lrrrr}
                 \hline
 
@@ -322,68 +336,78 @@
                 \textbf{Mittelwert}      & \textbf{134}          & \textbf{224}         & \textbf{290}           & \textbf{220}  \\
 
             \end{tabular}
-        \end{table}
+        \end{minipage}\par
 
-        \subsubsection*{Begründung Alexander B.}
+        \par\noindent\begin{minipage}{\linewidth}
+\subsubsection*{Begründung Alexander B.}
         Die Schätzung berücksichtigt die Umsetzung der vereinbarten Pflichtanforderungen sowie Einarbeitung, Tests, Fehlerbehebung, Dokumentation und Projektabstimmung. Für den realistischen Fall wird ein Gesamtaufwand von 234 Personenstunden angenommen. Über zwölf Wochen entspricht dies bei drei Gruppenmitgliedern durchschnittlich 6,5 Stunden pro Person und Woche einschlie\ss{}lich der Präsenzzeit.
 
     Im optimistischen Fall gelingen die Einarbeitung in das Framework und die Integration der Funktionen ohne grö\ss{}ere Schwierigkeiten, sodass 144 Personenstunden als ausreichend eingeschätzt werden. Im pessimistischen Fall verursachen Schwierigkeiten mit dem unbekannten Framework, technische Probleme bei der Integration, notwendige Nacharbeiten und noch nicht vollständig bekannte Dokumentationsaufgaben zusätzlichen Aufwand. Dafür werden 306 Personenstunden veranschlagt.
 
     Der daraus berechnete PERT-Erwartungswert beträgt 231 Personenstunden.
 
-        \subsubsection*{Begründung Lukas P.}
+        
+\end{minipage}\par
+\subsubsection*{Begründung Lukas P.}
         Die realistische Aufwandsschätzung des Gruppenmitglieds Lukas P. basiert auf einer Aufteilung des Gesamtaufwands in die Bereiche Implementierung, Testing und Debugging sowie Softwaremanagement.
         Für die Implementierung werden etwa 120 Personenstunden veranschlagt.
-        Dies entspricht bei einer angenommenen Projektlaufzeit von 30 Wochen durchschnittlich vier Personenstunden pro Woche.\\
-        Für das Testing, die Fehlerbehebung (Debugging) und die Erstellung von Tests werden weitere 60 Personenstunden eingeplant.\\
-        Der Aufwand für das Softwaremanagement wird auf 30 Personenstunden geschätzt, da insbesondere in der Anfangsphase des Projekts ein erhöhter Bedarf an Planung, Koordination und Organisation besteht.\\
+        Dies entspricht bei einer angenommenen Projektlaufzeit von 30 Wochen durchschnittlich vier Personenstunden pro Woche.\par
+        Für das Testing, die Fehlerbehebung (Debugging) und die Erstellung von Tests werden weitere 60 Personenstunden eingeplant.\par
+        Der Aufwand für das Softwaremanagement wird auf 30 Personenstunden geschätzt, da insbesondere in der Anfangsphase des Projekts ein erhöhter Bedarf an Planung, Koordination und Organisation besteht.\par
         Der optimistische Aufwand beschreibt ein günstiges Projektszenario, bei dem die Anforderungen klar definiert sind, die eingesetzten Technologien wie erwartet funktionieren und nur wenige technische Schwierigkeiten auftreten.
-        Dadurch wird ein vergleichsweise geringer Aufwand für die Implementierung sowie für das Testing und Debugging angenommen. \\
+        Dadurch wird ein vergleichsweise geringer Aufwand für die Implementierung sowie für das Testing und Debugging angenommen. \par
         Der pessimistische Aufwand berücksichtigt hingegen mögliche Risiken und unvorhergesehene Probleme, wie beispielsweise Fehler in der Software, Schwierigkeiten bei der Integration einzelner Komponenten oder nachträgliche Änderungen an den Anforderungen.
-        Insbesondere für Testing und Debugging wird daher mehr Zeit eingeplant, da zusätzliche Tests, Fehleranalysen und Korrekturen erforderlich sein können.\\\newline
+        Insbesondere für Testing und Debugging wird daher mehr Zeit eingeplant, da zusätzliche Tests, Fehleranalysen und Korrekturen erforderlich sein können.\par
 
-        \subsection{Begründung Ino W.}
+        \par\noindent\begin{minipage}{\linewidth}
+\vspace{10pt}
+\subsubsection*{Begründung Ino W.}
         Die realistische Schätzung von Ino W. geht von 228 Personenstunden aus.
         Davon entfallen rund 120 Stunden auf die Implementierung und Integration der Webanwendung,
         70 Stunden auf Tests, Fehlerbehebung und Dokumentation sowie 38 Stunden auf Planung,
-        Abstimmung und die Einarbeitung in Java, Weka und Tomcat.\\
+        Abstimmung und die Einarbeitung in Java, Weka und Tomcat.\par
         Damit berücksichtigt die Schätzung die zentralen Pflichtanforderungen wie CSV-Import,
         Apriori-Analyse sowie die Umsatz- und
         Häufigkeitsauswertungen.
-        \\\\
+\par
         Im optimistischen Fall werden 138 Personenstunden veranschlagt: Die Anforderungen sind früh
         geklärt, die eingesetzten Technologien funktionieren wie erwartet und es treten nur geringe
-        Integrationsprobleme auf. \\
+        Integrationsprobleme auf. \par
         Im pessimistischen Fall werden 294 Personenstunden eingeplant, da
         zusätzlicher Aufwand für unbekannte Framework-Details, aufwändige Fehlersuche, Nachbesserungen
         am CSV-Import und an der Apriori-Auswertung sowie einen höheren Dokumentationsumfang entstehen
-        kann. \\
+        kann. \par
 
 
-        \subsection*{Prozentuale Schätzung nach McConnell}
-        \begin{tabular}{c|c|c}
+        
+\end{minipage}\par
+\subsection*{Prozentuale Schätzung nach McConnell}
+        \par\noindent\begin{minipage}{\linewidth}
+\centering
+\captionof{table}{Aufwandsverteilung nach McConnell}
+\begin{tabular}{c|c|c}
             \hline
             Phase & Aufwandsverteilung & Aufwandsverteilung in Personenstunden \\
             \hline
-            Anforderungen & 6\% & 17,5 \\
-            Architektur & 8\% & 23,3 \\
-            Feinentwurf & 16\% & 46,6 \\
-            Codierung & 40\% & 116,6 \\
-            System-Test & 20\% & 58,3 \\
-            Release & 10\% & 29,2 \\
+            Anforderungen & 6\,\% & 17,5 \\
+            Architektur & 8\,\% & 23,3 \\
+            Feinentwurf & 16\,\% & 46,6 \\
+            Codierung & 40\,\% & 116,6 \\
+            System-Test & 20\,\% & 58,3 \\
+            Release & 10\,\% & 29,2 \\
             \hline
-            \textbf{Gesamt} & \textbf{100\%} & \textbf{291,2}
+            \textbf{Gesamt} & \textbf{100\,\%} & \textbf{291,2}
         \end{tabular}
+\end{minipage}\par
 
-\newpage
 \subsection*{Begründeter Gesamtaufwand}
 Die Expertenschätzung mit dem PERT-Verfahren ergibt einen Mittelwert von
 220 Personenstunden. Die Analogieschätzung nach McConnell kommt bei dem in der
 Tabelle angesetzten Ausgangswert von 17,5 Personenstunden für die
-Anforderungsanalyse und einem Analyseanteil von 6\% auf einen Gesamtaufwand
+Anforderungsanalyse und einem Analyseanteil von 6\,\% auf einen Gesamtaufwand
 von rund 291 Personenstunden.
 
-Die McConnell-Schätzung liegt damit etwa 32\% über der PERT-Schätzung. Das ist
+Die McConnell-Schätzung liegt damit etwa 32\,\% über der PERT-Schätzung. Das ist
 nachvollziehbar, weil die prozentuale Verteilung auch Release- und Testaufwände
 stärker gewichtet, die in den Expertenschätzungen teilweise nur pauschal
 enthalten sind. Umgekehrt hängt die McConnell-Schätzung stark von dem einen
@@ -405,7 +429,7 @@ E_{\text{Planung}} = 256 \cdot 1{,}10 = 281{,}6 \approx 282
 
 Der geschätzte Gesamtaufwand beträgt damit \textbf{256 Personenstunden}; für die
 Projektplanung werden \textbf{282 Personenstunden} angesetzt. Der Aufschlag von
-10\% deckt insbesondere Risiken aus der noch nicht vollständig abgeschlossenen
+10\,\% deckt insbesondere Risiken aus der noch nicht vollständig abgeschlossenen
 Anforderungsanalyse, der Einarbeitung in Weka und Tomcat sowie zusätzlichen
 Test- und Dokumentationsaufwand ab.
 

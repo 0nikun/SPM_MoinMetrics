@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dffd961e-0736-4b4b-a247-e69744157624" name="Changes" comment="AB2 Aufg 1 PDF und Latex">
+    <list default="true" id="dffd961e-0736-4b4b-a247-e69744157624" name="Changes" comment="Pert Schätzung und Begründung ergänzt und ß korrigiert">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt2.TeX" beforeDir="false" afterPath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt2.TeX" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt2.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/aufgaben/abgaben/C3_SPM_Blatt2.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aufgaben/abgaben/test.tex" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="2" />
+    <option name="cachedIndexableFilesCount" value="31" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -27,12 +28,12 @@
     &quot;assignee&quot;: &quot;zRoYalNemo&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/0nikun/SPM_MoinMetrics.git&quot;,
-    &quot;accountId&quot;: &quot;fb20245e-0ca3-40ce-be15-88f7034176ab&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/0nikun/SPM_MoinMetrics.git",
+    "accountId": "08836be4-a9c8-49aa-913c-31a20ad4f560"
   }
-}</component>
+}]]></component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
@@ -191,7 +192,9 @@
     <MESSAGE value="Blatt 2 Aufg 1 LaTeX document" />
     <MESSAGE value="Update Blatt 2 LaTeX and Markdown documents with refined structure, formatting, and enhanced requirement descriptions." />
     <MESSAGE value="AB2 Aufg 1 PDF und Latex" />
-    <option name="LAST_COMMIT_MESSAGE" value="AB2 Aufg 1 PDF und Latex" />
+    <MESSAGE value="Blatt 1" />
+    <MESSAGE value="Pert Schätzung und Begründung ergänzt und ß korrigiert" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pert Schätzung und Begründung ergänzt und ß korrigiert" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
