@@ -6,5 +6,11 @@
 </head>
 <body>
 <h1 th:text="${message}">Willkommen</h1>
+<form th:action="@{/begruessen}" method="post">
+    <label for="name">Dein Name</label>
+    <input id="name" type="text" name="name" placeholder="Dein Name" required>
+    <button type="submit">Absenden</button>
+</form>
+<p th:text="${ergebnis}"></p>
 </body>
 </html>
