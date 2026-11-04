@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ImportController {
@@ -17,7 +19,23 @@ public class ImportController {
     }
 
     @PostMapping("/api/import")
-    public void importCSV() {
-        importService.importCSV();
+    public String importCSV(
+            @RequestParam("file") MultipartFile file,
+            RedirectAttributes redirectAttributes) {
+
+        if (file.isEmpty()) {
+            redirectAttributes.addFlashAttribute(
+                    "importErgebnis", "Bitte eine nicht leere Datei auswählen.");
+            return "redirect:/import";
+        }
+
+        // Hier kannst du die CSV über file.getInputStream()
+        // einlesen und an einen Service zur Verarbeitung übergeben.
+
+        redirectAttributes.addFlashAttribute(
+                "importErgebnis",
+                "Datei empfangen: " + file.getOriginalFilename());
+
+        return "redirect:/metrics";
     }
 }
