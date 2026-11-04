@@ -12,13 +12,6 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("message", "Willkommen bei MoinMetrics!");
-        return "import";
-    }
-
-    @PostMapping("/begruessen")
-    public String begruessen(@RequestParam("name") String name, Model model) {
-        model.addAttribute("message", "Willkommen bei MoinMetrics!");
-        model.addAttribute("ergebnis", "Hallo, " + name + "!");
-        return "import";
+        return "redirect:/login";
     }
 }

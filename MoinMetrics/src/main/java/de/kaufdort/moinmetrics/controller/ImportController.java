@@ -18,6 +18,12 @@ public class ImportController {
         this.importService = importService;
     }
 
+    @GetMapping("/import")
+    public String showImport(Model model) {
+        model.addAttribute("message", "Willkommen bei MoinMetrics!");
+        return "import";
+    }
+
     @PostMapping("/api/import")
     public String importCSV(
             @RequestParam("file") MultipartFile file,

@@ -46,7 +46,13 @@
         document.querySelectorAll('.charts canvas').forEach(canvas => {
             new Chart(canvas, {
                 type: 'bar',
-                data: { labels: [], datasets: [] },
+                data: {
+                        labels: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag'],
+                        datasets: [{
+                        label: 'Umsatz in €',
+                        data: [1200, 950, 1400, 1100, 1800],
+                        backgroundColor: '#3498db'
+                    }] },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
