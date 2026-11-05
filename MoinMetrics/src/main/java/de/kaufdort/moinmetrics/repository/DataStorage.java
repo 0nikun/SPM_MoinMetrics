@@ -8,7 +8,7 @@ import weka.core.Instances;
 
 @Component
 @SessionScope
-public class StorageSession {
+public class DataStorage {
 
     private Instances einkaeufe;
 

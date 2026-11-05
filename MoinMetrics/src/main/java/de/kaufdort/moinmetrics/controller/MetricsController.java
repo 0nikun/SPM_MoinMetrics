@@ -1,6 +1,5 @@
 package de.kaufdort.moinmetrics.controller;
 
-import de.kaufdort.moinmetrics.model.*;
 import de.kaufdort.moinmetrics.service.MetricsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +37,7 @@ public class MetricsController {
     @ResponseBody
     @GetMapping("/api/metrics/timeByRevenue")
     public void timeByRevenue() {
-        metricsService.getTimeRevenue();
+        metricsService.mapTimeRevenue();
     }
 
     // Stärkste Uhrzeit nach Kundenhäufigkeit
@@ -52,7 +51,7 @@ public class MetricsController {
     @ResponseBody
     @GetMapping("/api/metrics/timeByRevenueEachDay")
     public void timeByRevenueEachDay() {
-        metricsService.getTimeRevenueEachDay();
+        metricsService.mapTimeRevenueDay();
     }
 
     // Gemeinsam gekaufte Waren
@@ -66,14 +65,14 @@ public class MetricsController {
     @ResponseBody
     @GetMapping("/api/metrics/bestItemByRevenue")
     public void bestItemsByRevenue() {
-        metricsService.getItemsRevenue();
+        metricsService.getMostRevenueItem();
     }
 
     // Schwächster Artikel nach Umsatz
     @ResponseBody
     @GetMapping("/api/metrics/worstItemByRevenue")
     public void worstItemsByRevenue() {
-        metricsService.getItemsRevenue();
+        metricsService.getLeastRevenueItem();
     }
 
     // Stärkster Artikel nach Deckungsbeitrag

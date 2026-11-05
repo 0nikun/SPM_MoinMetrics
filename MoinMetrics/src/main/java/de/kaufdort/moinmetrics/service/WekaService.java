@@ -1,15 +1,15 @@
 package de.kaufdort.moinmetrics.service;
 
-import de.kaufdort.moinmetrics.repository.StorageSession;
+import de.kaufdort.moinmetrics.repository.DataStorage;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class WekaService {
 
-    private final StorageSession session;
+    private final DataStorage session;
 
-    public WekaService(StorageSession session) {
+    public WekaService(DataStorage session) {
         this.session = session;
     }
 
