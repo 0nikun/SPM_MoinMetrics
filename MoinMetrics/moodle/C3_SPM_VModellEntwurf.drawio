@@ -1,4 +1,4 @@
-<mxfile host="Electron" pages="3">
+<mxfile host="Electron" pages="4">
   <diagram name="System-Architektur" id="SpnJKLsFVVpbkqQypm65">
     <mxGraphModel dx="1030" dy="730" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -143,6 +143,62 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="j5MkCXvGRqvT3barog1a" name="Projekt-Struktutplan">
+    <mxGraphModel dx="1040" dy="737" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Moin Metrics: Warenkorbanalyse" vertex="1">
+          <mxGeometry height="60" width="660" x="35" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z1: Auswertung bereitstellen" vertex="1">
+          <mxGeometry height="60" width="120" x="35" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z2: Robuste Nutzung ermöglichen" vertex="1">
+          <mxGeometry height="60" width="120" x="170" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z3:&amp;nbsp;" vertex="1">
+          <mxGeometry height="60" width="120" x="305" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="4." vertex="1">
+          <mxGeometry height="60" width="120" x="440" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="5." vertex="1">
+          <mxGeometry height="60" width="120" x="575" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z1.1:&amp;nbsp;&lt;div&gt;CSV einlese&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="90" x="65" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z1.2:&amp;nbsp;&lt;div&gt;CSV auswerten&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="90" x="65" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z1.4:&lt;div&gt;&amp;nbsp;Marketing-maßnahmen anzeigen&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="90" x="65" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z1.5:&lt;div&gt;Top und Flop-Artikel&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="90" x="65" y="510" as="geometry" />
+        </mxCell>
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="&lt;div&gt;Z2.1/2:&lt;/div&gt;&lt;div&gt;Datensätze schnell laden&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="90" x="200" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z2.3:&amp;nbsp;&lt;div&gt;CSV Fehler anzeigen&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="90" x="200" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z1.4:&lt;div&gt;Leichte Bedingung&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="90" x="200" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="&lt;div&gt;Z2.1/2:&lt;/div&gt;&lt;div&gt;Datensätze schnell laden&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="90" x="335" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z2.3:&amp;nbsp;&lt;div&gt;CSV Fehler anzeigen&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="90" x="335" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z1.3:&amp;nbsp;&lt;div&gt;Auswertung anzeigen&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="90" x="65" y="350" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>

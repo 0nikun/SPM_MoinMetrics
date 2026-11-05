@@ -70,23 +70,17 @@ Die Planung umfasst das gesamte Projekt. Frühere Tätigkeiten erscheinen deshal
 \subsection*{Ober- und Unterziele}
 \begin{center}\begin{tabular}{P{.09\linewidth}P{.09\linewidth}P{.52\linewidth}P{.20\linewidth}}
 \toprule\textbf{Ziel} & \textbf{Art} & \textbf{Ziel und überprüfbares Ergebnis} & \textbf{Bezug}\\\midrule
-Z1 & Muss & \textbf{Verwertbare Auswertungen für die Marktleitung bereitstellen.} Bei der Abnahme ist der Ablauf vom Datenimport bis zum sichtbaren Ergebnis ausführbar. & F01, F04--F12\\\midrule
-Z1.1 & Muss & CSV-Dateien im vereinbarten Format einlesen; fehlerhafte Eingaben verständlich zurückweisen und erneuten Upload ermöglichen. & F01, F02; Q02; R08\\
-Z1.2 & Muss & Gemeinsam gekaufte Waren mit Apriori ermitteln und grafisch darstellen. Erwartete Zusammenhänge eines Referenzdatensatzes müssen im Testergebnis nachweisbar sein. & F04, F07; R02\\
-Z1.3 & Muss & Umsatz- und Häufigkeitsmaxima nach Tag und Uhrzeit sowie das Umsatzmaximum je Tag korrekt ermitteln; Ergebnisse gegen manuell berechnete Referenzwerte prüfen. & F08--F12\\
-Z1.4 & Muss & Die abgestimmte Liste allgemeiner Marketingma\ss{}nahmen anzeigen und um einen zusätzlichen Eintrag erweitern können. & F05, F06\\
-Z1.5 & Soll & Top- und Flop-Artikel nach Umsatz sowie Deckungsbeitrag anzeigen; Umfang und Rangbildung vor einer Beauftragung abstimmen. & F13, F14\\\midrule
-Z2 & Muss & \textbf{Robuste, geschützte und bedienbare Nutzung ermöglichen.} Die abgestimmten Qualitätsprüfungen sind vor der Abnahme bestanden. & Q01--Q04\\\midrule
-Z2.1 & Muss & 10.000 Datensätze innerhalb von höchstens 5 Sekunden analysieren. Messbedingungen und Testdatei werden vorab festgelegt. & Q01\\
-Z2.2 & Soll & Die Analysezeit unter denselben Messbedingungen auf den Zielbereich von 1--2 Sekunden reduzieren. & Q01\\
-Z2.3 & Muss & Bei sämtlichen vereinbarten CSV-Fehlerfällen keinen Absturz auslösen. Ohne gültiges Passwort weder Daten noch Analyseergebnisse ausliefern. & F02, F03; Q02, Q04\\
-Z2.4 & Muss & Der Marktleitung eine nachvollziehbare Bedienung ermöglichen. Quantifizierung und Testablauf werden in AP 1 mit KaufDort vereinbart. & Q03; F04\\\bottomrule\end{tabular}\end{center}
-\clearpage
-\begin{center}\begin{tabular}{P{.09\linewidth}P{.09\linewidth}P{.52\linewidth}P{.20\linewidth}}
-\toprule\textbf{Ziel} & \textbf{Art} & \textbf{Ziel und überprüfbares Ergebnis} & \textbf{Bezug}\\\midrule
-Z3 & Muss & \textbf{Eigenständigen Betrieb und Übergabe ermöglichen.} Eine getestete, dokumentierte Version ist auf dem Zielsystem installierbar. & R01--R09\\\midrule
-Z3.1 & Muss & Java und Weka einsetzen, die Weboberfläche auf Tomcat betreiben und einen Installationstest der WAR-Datei durchführen. & R01--R04\\
-Z3.2 & Muss & Quellcode, Javadoc, PDF-Dokumentation und ein Executive Abstract von höchstens einer Seite übergeben. Keine Benutzerverwaltung entwickeln. & R05--R07, R09; Aufgabenbeschreibung\\\bottomrule\end{tabular}\end{center}
+Z1 & Oberziel & \textbf{Webanwendung zur verfügung stellen, mit der eine Marketinganteilung Einkaufsdaten aus CSV-Dateien auswerten und aufbereiten lassen kann.} Bei der Abnahme ist der Ablauf vom Datenimport bis zum sichtbaren Ergebnis ausführbar. & \\\midrule
+Z1.1 & Muss & CSV Datei muss importiert werden können & F01 / F02 / Q02 / R08 \\
+Z1.2 & Muss & Der Zugriff auf Daten und Auswertungen ist passwortgeschützt & F03 / Q04 / R09 \\
+Z1.3 & Muss & Die Anwendung stellt Analyse grafisch dar und zeigt Marketingmaßnahmen in einer ToDo Liste an & F04 - F06 \\
+Z2 & Oberziel & \textbf{Verschiedene Grafen werden aus den Daten erstellt}  & - \\\midrule
+Z2.1 & Muss & Artikel verteilungen & F07 / F013 \\
+Z2.2 & Muss & Umsatz abhängig von veschieden Merkmalen & F08 - F012 \\
+Z3 & Oberziel & \textbf{Robuste und Anwender freundliche Umbegung} & - \\\midrule
+Z3.1 & Muss & 10.000 Datensätze werden werden innerhalb von 5 Sekunden analysiert  & Q01\\
+Z3.2 & Muss & Der NUtzer wird auf Fehler beim CSV-Import hingewiesen & Q02 / F02 \\
+Z3.2 & Muss & Die Anwendung kann intiutiv bedient werden ohne Benutzererkennung oder kompliziertes Manüvrieren & Q03 / R09 / \\\bottomrule\end{tabular}\end{center}
 
 
 \subsection*{Termin- und Kostenziele}
