@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - MoinMetrics</title>
+</head>
+<body>
+<h1 th:text="${message}">Willkommen bei MoinMetrics!</h1>
+<form th:action="@{/login}" method="post">
+    <p>
+        <label for="username">Username</label>
+        <input id="username" type="text" name="username" autocomplete="username">
+    </p>
+    <p>
+        <label for="password">Passwort</label>
+        <input id="password" type="password" name="password" autocomplete="current-password">
+    </p>
+    <button type="submit">Login</button>
+</form>
+</body>
+</html>

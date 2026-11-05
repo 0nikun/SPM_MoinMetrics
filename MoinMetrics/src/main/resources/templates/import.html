@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MoinMetrics</title>
+    <script th:src="@{/vendor/chart.js/chart.umd.min.js}" defer></script>
+</head>
+<body>
+<h1 th:text="${message}">Willkommen</h1>
+<form th:action="@{/api/import}"
+      method="post"
+      enctype="multipart/form-data">
+    <label for="csv">CSV-Datei auswählen</label>
+    <input id="csv"
+           type="file"
+           name="file"
+           accept=".csv"
+           required>
+    <button type="submit">CSV hochladen</button>
+</form>
+
+<p th:text="${importErgebnis}"></p>
+<p th:text="${ergebnis}"></p>
+</body>
+</html>

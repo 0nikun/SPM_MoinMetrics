@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Metrics | MoinMetrics</title>
+    <script th:src="@{/vendor/chart.js/chart.umd.min.js}" defer></script>
+    <style>
+        body { max-width: 1200px; margin: 0 auto; padding: 24px; font-family: sans-serif; background: #f5f7fa; color: #243247; }
+        .charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 24px; margin-top: 32px; }
+        .chart-card { min-width: 0; padding: 20px; background: white; border: 1px solid #dde3eb; border-radius: 12px; }
+        .chart-card h2 { margin: 0 0 16px; font-size: 18px; }
+        .chart-container { position: relative; height: 260px; }
+    </style>
+</head>
+<body>
+<h1>Metrics</h1>
+<p th:text="${importErgebnis}"></p>
+<p th:text="${ergebnis}"></p>
+
+<section class="charts" aria-label="Metrics-Diagramme">
+    <article class="chart-card" th:each="title, stat : ${ {
+        'Umsatz nach Wochentag',
+        'Kunden nach Wochentag',
+        'Umsatz nach Uhrzeit',
+        'Kunden nach Uhrzeit',
+        'Umsatz nach Uhrzeit pro Tag',
+        'Gemeinsam gekaufte Waren',
+        'Stärkste Artikel nach Umsatz',
+        'Schwächste Artikel nach Umsatz',
+        'Stärkste Artikel nach Deckungsbeitrag',
+        'Schwächste Artikel nach Deckungsbeitrag'
+    } }">
+        <h2 th:text="${title}">Diagramm</h2>
+        <div class="chart-container">
+            <canvas th:id="|chart-${stat.index}|" th:attr="aria-label=${title}" role="img">
+                Leeres Diagramm – noch keine Daten vorhanden.
+            </canvas>
+        </div>
+        <p>Noch keine Daten vorhanden.</p>
+    </article>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.charts canvas').forEach(canvas => {
+            new Chart(canvas, {
+                type: 'bar',
+                data: {
+                        labels: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag'],
+                        datasets: [{
+                        label: 'Umsatz in €',
+                        data: [1200, 950, 1400, 1100, 1800],
+                        backgroundColor: '#3498db'
+                    }] },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
