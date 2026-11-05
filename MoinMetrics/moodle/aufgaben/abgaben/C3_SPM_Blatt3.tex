@@ -37,42 +37,388 @@
 \newcommand{\offen}{\emph{noch offen}}
 
 
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage{tabularx}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcommand{\tabhead}[1]{\textbf{#1}}
+\tikzset{simplenode/.style={draw,rounded corners=1pt,fill=black!3,text width=3.7cm,align=center,minimum height=7mm,font=\small},
+normalnode/.style={draw,fill=white,inner sep=5pt,font=\footnotesize,minimum width=4.2cm},
+critical/.style={normalnode,draw=red!65!black,line width=1pt,fill=red!4},
+edge/.style={->,line width=.5pt},criticaledge/.style={->,draw=red!65!black,line width=1.15pt}}
+
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
+\captionsetup{hypcap=false}
+
+
+
 \title{Projektziele, Projektstruktur-, Ablauf-, Termin- und Kostenplan\\{\large Übungsblatt 3}}
-\author{Gruppe C3 / MoinMetrics\\{}Alexander Borrmann\\{}Lukas Pancratius\\{}Ino Wölke}
-\date{Hochschule Emden-Leer\\Software-Projektmanagement\\Wintersemester 2026/27\\Prof. Dr. Gerrit Jan Veltink\\[1em]Abgabedatum: noch offen}
+\author{Gruppe C3 / MoinMetrics\\Alexander Borrmann\\Lukas Pancratius\\Ino Wölke}
+\date{Hochschule Emden-Leer\\Software-Projektmanagement\\Wintersemester 2026/27\\Prof. Dr. Gerrit Jan Veltink\\[1em]Bearbeitungsstand: 05.11.2026}
 \begin{document}
 \maketitle
 \thispagestyle{fancy}
 \clearpage
 \section*{Aufgabe 1: Projektziele als Voraussetzung für die Planung}
-% Ober- und Unterziele formulieren, Muss- und Soll-Ziele kennzeichnen.
-% Auf die Bezeichner aus dem Anforderungsdokument verweisen.
-\offen
+\subsection*{Planungsgrundlage}
+MoinMetrics entwickelt für KaufDort eine Warenkorbanalyse, mit der die Marktleitung Einkaufsdaten selbstständig auswerten und Marketingentscheidungen vorbereiten kann. Grundlage sind die Aufgabenbeschreibung, der Anforderungskatalog aus Blatt 2 und das zugewiesene V-Modell. Die Bezeichner F01 bis F14, Q01 bis Q04 und R01 bis R09 werden unverändert übernommen. Als Muss gelten auch die in Blatt 2 ausgewählten Pflichtanforderungen. Soll-Ziele bleiben optional.
 
+Die Planung umfasst das gesamte Projekt. Frühere Tätigkeiten erscheinen deshalb ebenfalls im Terminplan. Die Datierung ist eine einheitliche Soll-Basis und kein nachträglich erfundener Ist-Nachweis. Verbindliche Praktikumstermine müssen nach Bekanntgabe mit dieser Basis abgeglichen werden.
+
+\subsection*{Ober- und Unterziele}
+\begin{center}\begin{tabular}{P{.09\linewidth}P{.09\linewidth}P{.52\linewidth}P{.20\linewidth}}
+\toprule\textbf{Ziel} & \textbf{Art} & \textbf{Ziel und überprüfbares Ergebnis} & \textbf{Bezug}\\\midrule
+Z1 & Muss & \textbf{Verwertbare Auswertungen für die Marktleitung bereitstellen.} Bei der Abnahme ist der Ablauf vom Datenimport bis zum sichtbaren Ergebnis ausführbar. & F01, F04--F12\\\midrule
+Z1.1 & Muss & CSV-Dateien im vereinbarten Format einlesen; fehlerhafte Eingaben verständlich zurückweisen und erneuten Upload ermöglichen. & F01, F02; Q02; R08\\
+Z1.2 & Muss & Gemeinsam gekaufte Waren mit Apriori ermitteln und grafisch darstellen. Erwartete Zusammenhänge eines Referenzdatensatzes müssen im Testergebnis nachweisbar sein. & F04, F07; R02\\
+Z1.3 & Muss & Umsatz- und Häufigkeitsmaxima nach Tag und Uhrzeit sowie das Umsatzmaximum je Tag korrekt ermitteln; Ergebnisse gegen manuell berechnete Referenzwerte prüfen. & F08--F12\\
+Z1.4 & Muss & Die abgestimmte Liste allgemeiner Marketingma\ss{}nahmen anzeigen und um einen zusätzlichen Eintrag erweitern können. & F05, F06\\
+Z1.5 & Soll & Top- und Flop-Artikel nach Umsatz sowie Deckungsbeitrag anzeigen; Umfang und Rangbildung vor einer Beauftragung abstimmen. & F13, F14\\\midrule
+Z2 & Muss & \textbf{Robuste, geschützte und bedienbare Nutzung ermöglichen.} Die abgestimmten Qualitätsprüfungen sind vor der Abnahme bestanden. & Q01--Q04\\\midrule
+Z2.1 & Muss & 10.000 Datensätze innerhalb von höchstens 5 Sekunden analysieren. Messbedingungen und Testdatei werden vorab festgelegt. & Q01\\
+Z2.2 & Soll & Die Analysezeit unter denselben Messbedingungen auf den Zielbereich von 1--2 Sekunden reduzieren. & Q01\\
+Z2.3 & Muss & Bei sämtlichen vereinbarten CSV-Fehlerfällen keinen Absturz auslösen. Ohne gültiges Passwort weder Daten noch Analyseergebnisse ausliefern. & F02, F03; Q02, Q04\\
+Z2.4 & Muss & Der Marktleitung eine nachvollziehbare Bedienung ermöglichen. Quantifizierung und Testablauf werden in AP 1 mit KaufDort vereinbart. & Q03; F04\\\bottomrule\end{tabular}\end{center}
+\clearpage
+\begin{center}\begin{tabular}{P{.09\linewidth}P{.09\linewidth}P{.52\linewidth}P{.20\linewidth}}
+\toprule\textbf{Ziel} & \textbf{Art} & \textbf{Ziel und überprüfbares Ergebnis} & \textbf{Bezug}\\\midrule
+Z3 & Muss & \textbf{Eigenständigen Betrieb und Übergabe ermöglichen.} Eine getestete, dokumentierte Version ist auf dem Zielsystem installierbar. & R01--R09\\\midrule
+Z3.1 & Muss & Java und Weka einsetzen, die Weboberfläche auf Tomcat betreiben und einen Installationstest der WAR-Datei durchführen. & R01--R04\\
+Z3.2 & Muss & Quellcode, Javadoc, PDF-Dokumentation und ein Executive Abstract von höchstens einer Seite übergeben. Keine Benutzerverwaltung entwickeln. & R05--R07, R09; Aufgabenbeschreibung\\\bottomrule\end{tabular}\end{center}
+
+
+\subsection*{Termin- und Kostenziele}
+\textbf{Z4 (Muss): Planmä\ss{}igen Projektabschluss sichern.} Das Oberziel wird durch zwei interne Unterziele konkretisiert: \textbf{Z4.1 (Muss)} sieht Abnahme und Produktauslieferung am 12.01.2027 vor. \textbf{Z4.2 (Muss)} sieht den Projektabschluss am 14.01.2027 mit gesonderter Terminreserve bis zum 21.01.2027 vor. Diese Daten sind vorgeschlagene Zieltermine und keine bestätigten Moodle-Fristen.
+
+\textbf{Z5 (Muss): Das vereinbarte Projektbudget einhalten.} \textbf{Z5.1 (Muss)} begrenzt den Basisaufwand auf 256 Personenstunden. \textbf{Z5.2 (Muss)} begrenzt den Aufwand einschlie\ss{}lich gerundeter Risikoreserve auf 282 Personenstunden beziehungsweise 28.200 Euro kalkulatorisches Nettobudget. Änderungen des Umfangs werden vor ihrer Umsetzung durch die Projektleitung bewertet und mit KaufDort abgestimmt. Beide Unterziele sind interne Planvorgaben.
+
+\subsection*{Offene Abstimmungspunkte und Abgrenzung}
+Die Quantifizierung aus Blatt 2 wird als Prüfvorschlag übernommen: Q01 wird je vereinbarter Analyse in zehn Testläufen geprüft; Q02 und Q04 beziehen sich auf 100\,\% des abgestimmten Testfallkatalogs. Für Q03 wird als \emph{neuer Vorschlag} angesetzt: Drei repräsentative Testpersonen führen Anmeldung, Upload, Analyse und Ergebnisabruf ohne Hilfestellung in jeweils höchstens fünf Minuten aus. Dieser Vorschlag ist vor Verwendung als Abnahmekriterium zu bestätigen.
+
+In AP 1 sind insbesondere die Bedeutung von \glqq allgemeinen Marketingma\ss{}nahmen\grqq{} (F05), Erweiterungsart (F06), Apriori-Parameter (F07), Auswertungszeitraum, Zeitintervalle, Gleichstände und Kundenhäufigkeit (F08--F12), Referenzhardware und Messgrenzen (Q01), Bedienbarkeit (Q03), Tomcat-Zielumgebung (R03) sowie Javadoc-Umfang (R06) zu klären. Die Umsetzung setzt eine freigegebene Spezifikation voraus; offene Entscheidungen werden nicht als bereits erteilte Zusagen behandelt.
+
+F13 und F14 gehören zum optionalen Folgeumfang. Sie sind nicht in den 256 Basisstunden und nicht im kritischen Pfad enthalten. Die Risikoreserve dient der Absicherung des Pflichtumfangs. Eine Umsatzsteigerung bei KaufDort ist ein angestrebter Nutzen, mangels Ausgangsdaten und Einflussmöglichkeiten aber kein messbares Abnahmekriterium dieses Projekts.
+
+\clearpage
 \section*{Aufgabe 2: Projektstrukturplan}
-% Die vom Projektteam zu erledigenden Arbeitspakete hierarchisch darstellen.
-\offen
+Der Projektstrukturplan gliedert das Projekt nach Tätigkeitsbereichen. Seine Blätter sind die einzeln planbaren Arbeitspakete (AP). Die Zahlen 1 bis 16 sind zugleich die Vorgangsnummern im Netzplan. Start und Ende sind zusätzliche Meilensteine mit Dauer und Aufwand null. Sammelvorgänge erhalten keine zusätzlichen Stunden.
 
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,>=Stealth,
+root/.style={draw,fill=black!8,text width=13.8cm,align=center,font=\bfseries,minimum height=8mm},
+branch/.style={draw,fill=black!4,text width=6.0cm,align=left,font=\small,inner sep=7pt}]
+\node[root] (r) at (0,0) {MoinMetrics: Warenkorbanalyse für KaufDort};
+\node[branch] (a) at (-3.7,-2) {\textbf{1. Spezifikation und Entwurf}\\1 Anforderungen und Planung\\2 System und Testkonzept\\3 Feinentwurf und Umgebung};
+\node[branch] (b) at (3.7,-2) {\textbf{2. Daten und Analysen}\\4 CSV-Import und Validierung\\6 Weka-Anbindung\\7 Apriori-Analyse\\8 Umsatz- und Häufigkeitsanalysen};
+\node[branch] (c) at (-3.7,-5) {\textbf{3. Weboberfläche}\\5 Weboberfläche und Passwortschutz\\9 Marketingliste\\10 Grafische Ausgaben};
+\node[branch] (d) at (3.7,-5) {\textbf{4. Integration und Qualität}\\11 Integration und Integrationstests\\12 Systemtests und Qualitätssicherung\\13 Fehlerbehebung und Regression};
+\node[branch] (e) at (-3.7,-8) {\textbf{5. Dokumentation und Übergabe}\\14 Dokumentation fertigstellen\\15 Abnahme und Auslieferung};
+\node[branch] (f) at (3.7,-8) {\textbf{6. Projektabschluss}\\16 Präsentation und Auswertung\\des Software-Projektmanagements};
+\draw (r.south) -- (0,-.7);
+\draw (0,-.7) -| (a.north);\draw (0,-.7) -| (b.north);
+\draw (0,-.7) -- (0,-4);\draw (0,-4) |- (c.east);\draw (0,-4) |- (d.west);
+\draw (0,-4) -- (0,-8);\draw (0,-8) -- (e.east);\draw (0,-8) -- (f.west);
+\end{tikzpicture}
+\captionof{figure}{Hierarchischer Projektstrukturplan des Pflichtumfangs}
+\end{center}
+
+\subsection*{Einordnung in das V-Modell}
+AP 1 legt Anforderungen und Abnahmegrundlagen fest. AP 2 beschreibt Systemarchitektur, Schnittstellen und Systemtests. AP 3 konkretisiert Komponenten und Modultests. AP 4 bis AP 10 enthalten Implementierung, entwicklungsbegleitende Modultests und Javadoc. AP 11 prüft das Zusammenspiel der Komponenten; AP 12 prüft das Gesamtsystem gegen die Anforderungen. Nach der Fehlerbehebung in AP 13 folgt die Abnahme in AP 15. Damit sind Spezifikation und zugehörige Prüfstufen aufeinander bezogen.
+
+Projektleitung ist gemä\ss{} Blatt 1 Ino Wölke. Die nachfolgende Zuständigkeitsverteilung ist ein Planungsvorschlag. A bezeichnet Alexander Borrmann, L Lukas Pancratius und I Ino Wölke. \glqq Team\grqq{} bedeutet die Beteiligung aller drei Personen. Laufende Abstimmung, Reviews und Aufwandserfassung sind in den jeweiligen Arbeitspaketstunden enthalten; sie werden nicht nochmals als pauschaler Zusatzaufwand berechnet.
+
+\subsection*{Arbeitspakete und Abschlusskriterien}
+\begin{center}\begin{tabular}{P{.05\linewidth}P{.25\linewidth}P{.51\linewidth}P{.09\linewidth}}
+\toprule\textbf{AP} & \textbf{Arbeitspaket} & \textbf{Ergebnis / Abschlusskriterium} & \textbf{Lead / Team}\\\midrule
+1 & Anforderungen und Planung abstimmen & Priorisierte Spezifikation, geklärte Begriffe, Abnahmekriterien und Planbasis liegen vor (F, Q, R). & I / Team\\\midrule
+2 & System und Testkonzept entwerfen & Architektur, Datenmodell, Schnittstellen und rückverfolgbare System- und Abnahmetests sind beschrieben. & A / Team\\\midrule
+3 & Feinentwurf und Entwicklungsumgebung erstellen & Komponentenentwurf, Testdaten, Build und Tomcat-Testbetrieb stehen bereit; Versionen und Schnittstellen sind festgelegt. & A / Team\\\bottomrule\end{tabular}\end{center}
+\clearpage
+\begin{center}\begin{tabular}{P{.05\linewidth}P{.25\linewidth}P{.51\linewidth}P{.09\linewidth}}
+\toprule\textbf{AP} & \textbf{Arbeitspaket} & \textbf{Ergebnis / Abschlusskriterium} & \textbf{Lead / Team}\\\midrule
+4 & CSV-Import und Validierung implementieren & Gültige CSV-Dateien werden eingelesen; Fehlerfälle liefern Meldungen ohne Absturz. Modultests bestanden (F01, F02, Q02, R08). & A / A\\\midrule
+5 & Weboberfläche und Passwortschutz implementieren & Navigation, Uploadmaske und Anmeldung funktionieren. UI- und Endpunktzugriffe ohne Anmeldung sind gesperrt (F03, Q03, Q04, R03, R09). & L / L\\\midrule
+6 & Weka-Anbindung erproben & Weka verarbeitet vereinbarte Beispieldaten über die Java-Anbindung; technische Risiken und Parameter sind dokumentiert (R01, R02, F07). & I / I\\\midrule
+7 & Apriori-Analyse implementieren & Echte Importdaten werden in Warenkörbe überführt; erwartete Regeln sind mit Referenzfällen nachgewiesen (F07, Q01). & I / I\\\midrule
+8 & Umsatz- und Häufigkeitsanalysen implementieren & Alle fünf Auswertungen sind mit den vereinbarten Zeit- und Häufigkeitsdefinitionen gegen Referenzwerte geprüft (F08--F12). & A / A\\\midrule
+9 & Marketingliste implementieren & Abgestimmte Ma\ss{}nahmen werden angezeigt und ergänzt; Erweiterung wird getestet (F05, F06). & L / L\\\midrule
+10 & Grafische Ausgaben implementieren & Diagramme und Beschriftungen sind gegen definierte Schnittstellen und Testdaten geprüft; endgültige Anbindung folgt in AP 11 (F04, Q03). & L / L\\\midrule
+11 & Komponenten integrieren und prüfen & Upload, Analyse und sichtbare Ausgabe funktionieren durchgängig; Integrationstests und vertikaler Prototyp sind dokumentiert. & A / Team\\\midrule
+12 & Systemtests und Qualitätssicherung durchführen & Funktions-, Fehler-, Laufzeit-, Zugriffs- und Bedienprüfungen sind protokolliert. Peer-QS und Prüfung der zugeordneten Gruppe werden nach Praktikumsvorgabe koordiniert. & A / A, L\\\midrule
+13 & Fehler beheben und Regression prüfen & Abnahmerelevante Befunde sind behoben, betroffene Tests wiederholt und der geprüfte Release-Kandidat festgehalten. & A / A, L\\\midrule
+14 & Dokumentation fertigstellen & Bedien- und Installationsanleitung, technische Beschreibung und Executive Abstract liegen als PDF vor; Javadoc ist erzeugt und geprüft (R05--R07). & I / I\\\midrule
+15 & Abnahme und Auslieferung durchführen & KaufDort prüft die vereinbarten Kriterien; WAR-Datei, Quellcode und Dokumentation sind vollständig und auf der Zielumgebung überprüft übergeben. & I / Team\\\midrule
+16 & Präsentation und Projektabschluss erstellen & Ergebnispräsentation, Qualitätsbericht und kritische Auswertung von Aufwand, Terminen und Vorgehen sind abgeschlossen. & I / Team\\\bottomrule\end{tabular}\end{center}
+
+
+\clearpage
 \section*{Aufgabe 3: Projektablaufplan}
 \subsection*{a) Vorgangsknotennetz ohne Zeitschätzungen}
-% Alle Abhängigkeiten der Arbeitspakete berücksichtigen.
-\offen
+Alle Pfeile sind Ende-Anfang-Beziehungen ohne Zeitabstand. Ein Nachfolger darf erst nach Abschluss aller seiner Vorgänger beginnen. Im folgenden Netz stehen ausschlie\ss{}lich Bezeichnungen und Abhängigkeiten.
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,>=Stealth]
+\node[simplenode] (n0) at (0,0) {\textbf{0} Start};
+\node[simplenode] (n1) at (0,-1.1) {\textbf{1} Anforderungen / Planung};
+\node[simplenode] (n2) at (0,-2.2) {\textbf{2} System / Testkonzept};
+\node[simplenode] (n3) at (0,-3.3) {\textbf{3} Feinentwurf / Umgebung};
+\node[simplenode] (n4) at (-5.1,-4.6) {\textbf{4} CSV-Import};
+\node[simplenode] (n5) at (0,-4.6) {\textbf{5} Web / Passwort};
+\node[simplenode] (n6) at (5.1,-4.6) {\textbf{6} Weka-Anbindung};
+\node[simplenode] (n8) at (-5.1,-6.3) {\textbf{8} Kennzahlen};
+\node[simplenode] (n9) at (0,-6.3) {\textbf{9} Marketingliste};
+\node[simplenode] (n7) at (5.1,-6.3) {\textbf{7} Apriori-Analyse};
+\node[simplenode] (n10) at (0,-7.5) {\textbf{10} Grafische Ausgaben};
+\node[simplenode] (n11) at (0,-8.8) {\textbf{11} Integration};
+\node[simplenode] (n12) at (-2.6,-10.1) {\textbf{12} Systemtests / QS};
+\node[simplenode] (n14) at (3.2,-10.1) {\textbf{14} Dokumentation};
+\node[simplenode] (n13) at (-2.6,-11.3) {\textbf{13} Korrektur / Regression};
+\node[simplenode] (n15) at (0,-12.7) {\textbf{15} Abnahme / Lieferung};
+\node[simplenode] (n16) at (0,-13.9) {\textbf{16} Projektabschluss};
+\node[simplenode] (n17) at (0,-15.1) {\textbf{17} Ende};
+\draw[edge] (n0) -- (n1);
+\draw[edge] (n1) -- (n2);
+\draw[edge] (n2) -- (n3);
+\draw[edge] (n3) -- (n4);
+\draw[edge] (n3) -- (n5);
+\draw[edge] (n3) -- (n6);
+\draw[edge,preaction={draw,white,line width=3pt}] (n4.south) -- ++(0,-0.35) -| (n7.north);
+\draw[edge] (n4) -- (n8);
+\draw[edge,preaction={draw,white,line width=3pt}] (n5) -- (n9);
+\draw[edge] (n6) -- (n7);
+\draw[edge] (n8.south) |- (n11.west);
+\draw[edge] (n9) -- (n10);
+\draw[edge] (n7.south) |- (n11.east);
+\draw[edge] (n10) -- (n11);
+\draw[edge] (n11) -- (n12);
+\draw[edge] (n11) -- (n14);
+\draw[edge] (n12) -- (n13);
+\draw[edge] (n14.south) |- (n15.east);
+\draw[edge] (n13) -- (n15);
+\draw[edge] (n15) -- (n16);
+\draw[edge] (n16) -- (n17);
+\end{tikzpicture}\end{center}
+\begin{center}\captionof{figure}{Einfaches Vorgangsknotennetz ohne Zeitangaben}\end{center}
 
+Die drei Entwicklungszweige beginnen nach AP 3 parallel. AP 7 benötigt sowohl die Weka-Erprobung (AP 6) als auch den CSV-Import (AP 4). AP 8 benötigt ebenfalls AP 4. Die Reihenfolge AP 5 $\rightarrow$ AP 9 $\rightarrow$ AP 10 berücksichtigt die gemeinsame Ressource L; AP 10 kann mit Schnittstellen-Testdaten arbeiten und wartet deshalb erst bei der Integration auf die fertigen Analysen. AP 11 führt sämtliche Zweige zusammen. Die Dokumentation wird parallel zu Systemtests und Korrekturen abgeschlossen. AP 15 wartet auf den geprüften Release-Kandidaten und die Dokumentation.
+
+\clearpage
 \subsection*{b) Ausführlicher Netzplan}
-% Dauer realistisch schätzen; vier Zeitangaben und vier Pufferzeiten berechnen.
-% Den kritischen Pfad markieren.
-\offen
+\subsubsection*{Aufwand, Dauer und Kapazität}
+Die 256 Personenstunden aus dem begründeten Gesamtaufwand von Blatt 2 werden auf die Arbeitspakete verteilt. Sie sind Team-Gesamtaufwand und werden nicht mit drei multipliziert. Die dortige 10\,\%-Reserve wird gesondert geführt: $256\cdot0{,}10=25{,}6$, aufgerundet 26 Personenstunden. Damit bleibt der Planungswert von 282 Personenstunden erhalten. Unterschiedliche Rundungen in der McConnell-Tabelle aus Blatt 2 ändern den auf ganze Stunden gerundeten Basiswert nicht: $17{,}5/0{,}06\approx291{,}7$ und $(220+291{,}7)/2\approx256$.
+
+Ein Projekttag (PT) ist ein verfügbarer Werktag im Kalender aus Aufgabe 4, kein achtstündiger Personentag. Für das neben dem Studium bearbeitete Projekt werden höchstens 2 Stunden je Person und Projekttag angesetzt. Der Tagesbedarf ergibt sich als $E_i/(D_i\cdot n_i)$. Die Dauern berücksichtigen konzentrierte Teilzeitarbeit, Abstimmung und Reviews. Ein Projektarbeitspaket wird zwischen seinen Arbeitstagen nicht durch andere Projektpakete derselben Person verdrängt; Wochenenden und die Winterpause bleiben arbeitsfrei.
+
+\begin{center}\captionof{table}{Aufwände, Dauern und Ressourcen des Pflichtumfangs}
+\begin{tabularx}{\linewidth}{rYrrrr}
+\toprule\textbf{AP} & \textbf{Arbeitspaket} & \textbf{E (h)} & \textbf{D (PT)} & \textbf{Personen} & \textbf{h/Person/PT}\\\midrule
+1 & Anforderungen / Planung & 24 & 10 & A,L,I & 0,80\\
+2 & System / Testkonzept & 24 & 8 & A,L,I & 1,00\\
+3 & Feinentwurf / Umgebung & 20 & 6 & A,L,I & 1,11\\
+4 & CSV-Import & 22 & 11 & A & 2,00\\
+5 & Web / Passwort & 22 & 11 & L & 2,00\\
+6 & Weka-Anbindung & 12 & 6 & I & 2,00\\
+7 & Apriori-Analyse & 16 & 8 & I & 2,00\\
+8 & Kennzahlen & 18 & 9 & A & 2,00\\
+9 & Marketingliste & 8 & 4 & L & 2,00\\
+10 & Grafische Ausgaben & 12 & 6 & L & 2,00\\
+11 & Integration & 18 & 6 & A,L,I & 1,00\\
+12 & Systemtests / QS & 20 & 5 & A,L & 2,00\\
+13 & Korrektur / Regression & 16 & 4 & A,L & 2,00\\
+14 & Dokumentation & 14 & 7 & I & 2,00\\
+15 & Abnahme / Lieferung & 6 & 2 & A,L,I & 1,00\\
+16 & Projektabschluss & 4 & 2 & A,L,I & 0,67\\
+\midrule\multicolumn{2}{l}{\textbf{Basisaufwand}} & \textbf{256} & & &\\
+\bottomrule\end{tabularx}\end{center}
+
+Bei Teamarbeit wird der Aufwand für die Kapazitätsrechnung gleich verteilt. AP 12 und AP 13 belegen ausschlie\ss{}lich A und L, während I AP 14 bearbeitet. In frühester Lage ergeben sich für A 90, für L 92 und für I 74 Personenstunden; keine Person überschreitet 2 Stunden pro Projekttag. Der Höchstwert von 10 Stunden pro voller Arbeitswoche ist eine Verfügbarkeitsannahme. Die Basistermine benötigen im Mittel etwa $256/(64/5)/3\approx6{,}7$ Stunden je Person und aktiver Fünftagewoche.
+
+\clearpage
+\subsubsection*{Netzplan: Spezifikation, Entwicklung und Integration}
+Die Knoten enthalten Dauer, vier Zeitpunkte und vier Pufferzeiten nach dem Foliensatz 04 (Folien 294 sowie 297--308). Alle Zahlen sind Projekttage ab Zeitpunkt 0. Rot umrandete Knoten und rote Pfeile markieren den kritischen Pfad; er ist zusätzlich im Text angegeben.
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,>=Stealth]
+\node[critical] (n0) at (-5.1,0) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{0 Start}}\\FAZ 0 & FEZ 0\\SAZ 0 & SEZ 0\\\multicolumn{2}{@{}c@{}}{D=0; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
+\node[critical] (n1) at (0,0) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{1 Anforderungen / Planung}}\\FAZ 0 & FEZ 10\\SAZ 0 & SEZ 10\\\multicolumn{2}{@{}c@{}}{D=10; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
+\node[critical] (n2) at (5.1,0) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{2 System / Testkonzept}}\\FAZ 10 & FEZ 18\\SAZ 10 & SEZ 18\\\multicolumn{2}{@{}c@{}}{D=8; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
+\node[critical] (n3) at (0,-2.6) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{3 Feinentwurf / Umgebung}}\\FAZ 18 & FEZ 24\\SAZ 18 & SEZ 24\\\multicolumn{2}{@{}c@{}}{D=6; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
+\node[normalnode] (n4) at (-5.1,-5.2) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{4 CSV-Import}}\\FAZ 24 & FEZ 35\\SAZ 25 & SEZ 36\\\multicolumn{2}{@{}c@{}}{D=11; GP=1; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=1; UP=0}\end{tabular}};
+\node[critical] (n5) at (0,-5.2) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{5 Web / Passwort}}\\FAZ 24 & FEZ 35\\SAZ 24 & SEZ 35\\\multicolumn{2}{@{}c@{}}{D=11; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
+\node[normalnode] (n6) at (5.1,-5.2) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{6 Weka-Anbindung}}\\FAZ 24 & FEZ 30\\SAZ 31 & SEZ 37\\\multicolumn{2}{@{}c@{}}{D=6; GP=7; FP=5}\\\multicolumn{2}{@{}c@{}}{FRP=7; UP=5}\end{tabular}};
+\node[normalnode] (n8) at (-5.1,-8.1) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{8 Kennzahlen}}\\FAZ 35 & FEZ 44\\SAZ 36 & SEZ 45\\\multicolumn{2}{@{}c@{}}{D=9; GP=1; FP=1}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
+\node[critical] (n9) at (0,-8.1) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{9 Marketingliste}}\\FAZ 35 & FEZ 39\\SAZ 35 & SEZ 39\\\multicolumn{2}{@{}c@{}}{D=4; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
+\node[normalnode] (n7) at (5.1,-8.1) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{7 Apriori-Analyse}}\\FAZ 35 & FEZ 43\\SAZ 37 & SEZ 45\\\multicolumn{2}{@{}c@{}}{D=8; GP=2; FP=2}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
+\node[critical] (n10) at (0,-10.7) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{10 Grafische Ausgaben}}\\FAZ 39 & FEZ 45\\SAZ 39 & SEZ 45\\\multicolumn{2}{@{}c@{}}{D=6; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
+\node[critical] (n11) at (0,-13.3) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{11 Integration}}\\FAZ 45 & FEZ 51\\SAZ 45 & SEZ 51\\\multicolumn{2}{@{}c@{}}{D=6; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
+\draw[criticaledge] (n0) -- (n1);
+\draw[criticaledge] (n1) -- (n2);
+\draw[criticaledge] (n2) -- (n3);
+\draw[edge] (n3) -- (n4);
+\draw[criticaledge] (n3) -- (n5);
+\draw[edge] (n3) -- (n6);
+\draw[edge,preaction={draw,white,line width=3pt}] (n4.south) -- ++(0,-0.35) -| (n7.north);
+\draw[edge] (n4) -- (n8);
+\draw[criticaledge,preaction={draw,white,line width=3pt}] (n5) -- (n9);
+\draw[edge] (n6) -- (n7);
+\draw[edge] (n8.south) |- (n11.west);
+\draw[criticaledge] (n9) -- (n10);
+\draw[edge] (n7.south) |- (n11.east);
+\draw[criticaledge] (n10) -- (n11);
+\end{tikzpicture}\end{center}
+\begin{center}\captionof{figure}{Ausführlicher Netzplan, Teil 1 (Fortsetzung ab Vorgang 11)}\end{center}
+Die Knotenüberschrift nennt Nummer und Kurzbezeichnung. FAZ/FEZ stehen für frühesten Anfang und frühestes Ende, SAZ/SEZ für spätesten Anfang und spätestes Ende. GP, FP, FRP und UP bezeichnen Gesamtpuffer, freien Puffer, freien Rückwärtspuffer und unabhängigen Puffer.
+
+\clearpage
+\subsubsection*{Netzplan: Prüfung, Übergabe und Abschluss}
+Vorgang 11 wird als Anschlussknoten wiederholt. Er ist ein einziges Arbeitspaket und wird in Aufwand und Projektdauer nur einmal berücksichtigt.
+\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,>=Stealth]
+\node[critical] (n11) at (0,0) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{11 Integration}}\\FAZ 45 & FEZ 51\\SAZ 45 & SEZ 51\\\multicolumn{2}{@{}c@{}}{D=6; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
+\node[critical] (n12) at (-3,-2.8) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{12 Systemtests / QS}}\\FAZ 51 & FEZ 56\\SAZ 51 & SEZ 56\\\multicolumn{2}{@{}c@{}}{D=5; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
+\node[normalnode] (n14) at (3,-2.8) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{14 Dokumentation}}\\FAZ 51 & FEZ 58\\SAZ 53 & SEZ 60\\\multicolumn{2}{@{}c@{}}{D=7; GP=2; FP=2}\\\multicolumn{2}{@{}c@{}}{FRP=2; UP=2}\end{tabular}};
+\node[critical] (n13) at (-3,-5.6) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{13 Korrektur / Regression}}\\FAZ 56 & FEZ 60\\SAZ 56 & SEZ 60\\\multicolumn{2}{@{}c@{}}{D=4; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
+\node[critical] (n15) at (0,-8.4) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{15 Abnahme / Lieferung}}\\FAZ 60 & FEZ 62\\SAZ 60 & SEZ 62\\\multicolumn{2}{@{}c@{}}{D=2; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
+\node[critical] (n16) at (0,-11.2) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{16 Projektabschluss}}\\FAZ 62 & FEZ 64\\SAZ 62 & SEZ 64\\\multicolumn{2}{@{}c@{}}{D=2; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
+\node[critical] (n17) at (0,-14) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{17 Ende}}\\FAZ 64 & FEZ 64\\SAZ 64 & SEZ 64\\\multicolumn{2}{@{}c@{}}{D=0; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
+\draw[criticaledge] (n11) -- (n12);
+\draw[edge] (n11) -- (n14);
+\draw[criticaledge] (n12) -- (n13);
+\draw[edge] (n14.south) |- (n15.east);
+\draw[criticaledge] (n13) -- (n15);
+\draw[criticaledge] (n15) -- (n16);
+\draw[criticaledge] (n16) -- (n17);
+\end{tikzpicture}\end{center}
+\begin{center}\captionof{figure}{Ausführlicher Netzplan, Teil 2}\end{center}
+
+Der kritische Pfad lautet
+\[
+0\rightarrow1\rightarrow2\rightarrow3\rightarrow5\rightarrow9\rightarrow10
+\rightarrow11\rightarrow12\rightarrow13\rightarrow15\rightarrow16\rightarrow17.
+\]
+Seine Länge beträgt $10+8+6+11+4+6+6+5+4+2+2=\mathbf{64}$ Projekttage. Jede Verzögerung auf diesem Pfad verschiebt ohne Gegenma\ss{}nahmen den Basisendtermin. Die Summe aller Vorgangsdauern ist wegen der parallelen Zweige nicht die Projektdauer.
+
+\clearpage
+\subsubsection*{Berechnung der Zeitpunkte und Puffer}
+Für Vorgang $i$ mit Dauer $D_i$, Vorgängermenge $V_i$ und Nachfolgermenge $N_i$ erfolgt die Vorwärts- und Rückwärtsrechnung nach folgenden Regeln:
+\begin{align*}
+FAZ_i&=\max_{v\in V_i}(FEZ_v), & FEZ_i&=FAZ_i+D_i,\\
+SEZ_i&=\min_{n\in N_i}(SAZ_n), & SAZ_i&=SEZ_i-D_i.
+\end{align*}
+Start liegt bei 0; für Ende wird $SEZ=FEZ=64$ gesetzt. Die Puffer sind:
+\begin{align*}
+GP_i&=SAZ_i-FAZ_i=SEZ_i-FEZ_i,\\
+FP_i&=\min_{n\in N_i}(FAZ_n)-FEZ_i,\\
+FRP_i&=SAZ_i-\max_{v\in V_i}(SEZ_v),\\
+UP_i&=\max\!\left(0,\min_{n\in N_i}(FAZ_n)-\max_{v\in V_i}(SEZ_v)-D_i\right).
+\end{align*}
+Bei Start wird für die leere Vorgängermenge der Randwert 0, bei Ende für die leere Nachfolgermenge der Randwert 64 eingesetzt. Beide Meilensteine haben alle Puffer null.
+
+\begin{center}\renewcommand{\arraystretch}{1.02}\captionof{table}{Vollständige Zeit- und Pufferwerte (in Projekttagen)}
+\begin{tabular}{rrrrrrrrrrc}
+\toprule\textbf{Nr.}&\textbf{D}&\textbf{FAZ}&\textbf{FEZ}&\textbf{SAZ}&\textbf{SEZ}&\textbf{GP}&\textbf{FP}&\textbf{FRP}&\textbf{UP}&\textbf{Krit.}\\\midrule
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & x\\
+1 & 10 & 0 & 10 & 0 & 10 & 0 & 0 & 0 & 0 & x\\
+2 & 8 & 10 & 18 & 10 & 18 & 0 & 0 & 0 & 0 & x\\
+3 & 6 & 18 & 24 & 18 & 24 & 0 & 0 & 0 & 0 & x\\
+4 & 11 & 24 & 35 & 25 & 36 & 1 & 0 & 1 & 0 & \\
+5 & 11 & 24 & 35 & 24 & 35 & 0 & 0 & 0 & 0 & x\\
+6 & 6 & 24 & 30 & 31 & 37 & 7 & 5 & 7 & 5 & \\
+7 & 8 & 35 & 43 & 37 & 45 & 2 & 2 & 0 & 0 & \\
+8 & 9 & 35 & 44 & 36 & 45 & 1 & 1 & 0 & 0 & \\
+9 & 4 & 35 & 39 & 35 & 39 & 0 & 0 & 0 & 0 & x\\
+10 & 6 & 39 & 45 & 39 & 45 & 0 & 0 & 0 & 0 & x\\
+11 & 6 & 45 & 51 & 45 & 51 & 0 & 0 & 0 & 0 & x\\
+12 & 5 & 51 & 56 & 51 & 56 & 0 & 0 & 0 & 0 & x\\
+13 & 4 & 56 & 60 & 56 & 60 & 0 & 0 & 0 & 0 & x\\
+14 & 7 & 51 & 58 & 53 & 60 & 2 & 2 & 2 & 2 & \\
+15 & 2 & 60 & 62 & 60 & 62 & 0 & 0 & 0 & 0 & x\\
+16 & 2 & 62 & 64 & 62 & 64 & 0 & 0 & 0 & 0 & x\\
+17 & 0 & 64 & 64 & 64 & 64 & 0 & 0 & 0 & 0 & x\\
+\bottomrule\end{tabular}\end{center}
+
+\textbf{Beispiel AP 6:} Der früheste Zeitraum ist $[24,30]$, der späteste $[31,37]$. AP 7 beginnt frühestens bei 35; der Vorgänger AP 3 endet spätestens bei 24. Somit gelten $GP=31-24=7$, $FP=35-30=5$, $FRP=31-24=7$ und $UP=\max(0,35-24-6)=5$. Bei AP 7 ergibt die unabhängige Differenz $45-37-8=0$.
+
+Die Puffer sind keine addierbaren Zeitreserven je Pfad. Werden sie genutzt, sind Folgeabhängigkeiten und Ressourcen neu zu prüfen. Die fünf Projekttage Terminreserve aus Aufgabe 4 gehören nicht zur Rückwärtsrechnung des 64-Tage-Basisnetzes.
 
 \subsection*{c) Excel-Datei zum Netzplan}
-% netzplan.xlsx als Vorlage nutzen; sämtliche Spalten mit Werten, ohne Formeln.
-% Datei netzplan_C3.xlsx nennen und mit netzplan_check.py prüfen.
-\offen
+Die Datei \texttt{netzplan\_C3.xlsx} übernimmt \texttt{Sheet1}, Spaltennamen und Spaltenreihenfolge der Vorlage unverändert. Sie enthält alle 18 Vorgänge mit festen Werten, ohne Excel-Formeln. Vorgänger und Nachfolger stehen als Listen (z.\,B. \texttt{[4, 6]} bzw. \texttt{[]}); \texttt{CT} enthält für kritische Vorgänge \texttt{x}, sonst eine leere Zelle.
 
+\texttt{python netzplan\_check.py netzplan\_C3.xlsx} wurde erfolgreich ausgeführt. Das Skript prüft die Einlesbarkeit, nicht die Netzplanrechnung. Zusätzlich wurden alle Pfade, Zeit- und Pufferwerte, Gegenbeziehungen und die Übereinstimmung mit der PDF rechnerisch geprüft.
+
+\clearpage
 \section*{Aufgabe 4: Terminplan}
-% Anfangs- und Endzeitpunkte datieren; Wochenenden, Feiertage und Ferien beachten.
-\offen
+\subsection*{Kalender und Terminannahmen}
+Als Planbeginn wird Montag, der 05.10.2026, angesetzt. Gearbeitet wird montags bis freitags. Samstage und Sonntage sowie gesetzliche Feiertage in Niedersachsen sind arbeitsfrei. Der Reformationstag am 31.10.2026 fällt auf einen Samstag. Der 25.12.2026, der 26.12.2026 und der 01.01.2027 liegen innerhalb der vorgesehenen Winterpause.
 
+Für den Zeitraum 21.12.2026 bis einschlie\ss{}lich 03.01.2027 wird ausdrücklich eine \emph{angenommene gemeinsame Projektpause} vorgesehen. Dies ist keine Behauptung über die offiziellen Hochschulferien. Schulferien im Oktober werden nicht automatisch als Hochschulferien übernommen. Zusätzliche Abwesenheiten und verbindliche Praktikums- oder Peer-QS-Termine sind vor Freigabe des Plans abzugleichen.
+
+Ein Zeitraum $[FAZ,FEZ]$ umfasst die Arbeitstage mit Indizes $FAZ$ bis $FEZ-1$. Beispielsweise beginnt AP 1 bei 0 am Morgen des 05.10. und endet bei 10 nach dem Arbeitseinsatz am 16.10. AP 2 startet am folgenden Projekttag, dem 19.10. Dadurch wird ein arbeitsfreies Wochenende weder als Arbeitstag gezählt noch doppelt belegt.
+
+\begin{center}\captionof{table}{Terminplan in frühester Lage (Soll-Termine)}
+\begin{tabularx}{\linewidth}{rYrrr}
+\toprule\textbf{Nr.}&\textbf{Vorgang}&\textbf{D (PT)}&\textbf{Beginn}&\textbf{Ende}\\\midrule
+0 & Start & 0 & 05.10.2026 & 05.10.2026\\
+1 & Anforderungen / Planung & 10 & 05.10.2026 & 16.10.2026\\
+2 & System / Testkonzept & 8 & 19.10.2026 & 28.10.2026\\
+3 & Feinentwurf / Umgebung & 6 & 29.10.2026 & 05.11.2026\\
+4 & CSV-Import & 11 & 06.11.2026 & 20.11.2026\\
+5 & Web / Passwort & 11 & 06.11.2026 & 20.11.2026\\
+6 & Weka-Anbindung & 6 & 06.11.2026 & 13.11.2026\\
+7 & Apriori-Analyse & 8 & 23.11.2026 & 02.12.2026\\
+8 & Kennzahlen & 9 & 23.11.2026 & 03.12.2026\\
+9 & Marketingliste & 4 & 23.11.2026 & 26.11.2026\\
+10 & Grafische Ausgaben & 6 & 27.11.2026 & 04.12.2026\\
+11 & Integration & 6 & 07.12.2026 & 14.12.2026\\
+12 & Systemtests / QS & 5 & 15.12.2026 & 04.01.2027\\
+13 & Korrektur / Regression & 4 & 05.01.2027 & 08.01.2027\\
+14 & Dokumentation & 7 & 15.12.2026 & 06.01.2027\\
+15 & Abnahme / Lieferung & 2 & 11.01.2027 & 12.01.2027\\
+16 & Projektabschluss & 2 & 13.01.2027 & 14.01.2027\\
+17 & Ende & 0 & 14.01.2027 & 14.01.2027\\
+\bottomrule\end{tabularx}\end{center}
+
+\subsection*{Meilensteine und Terminreserve}
+Mit Abschluss von AP 1 ist am 16.10.2026 die Planbasis vorgesehen, nach AP 3 am 05.11.2026 der Feinentwurf. Der integrierte vertikale Prototyp steht nach AP 11 am 14.12.2026 bereit. Die Produktauslieferung folgt nach bestandener Abnahme am 12.01.2027, der Projektabschluss am 14.01.2027. Diese Meilensteine entstehen aus den Arbeitspaketen und erzeugen keine zusätzlichen Aufwände.
+
+Vom 15.01. bis zum 21.01.2027 werden fünf weitere Projekttage als \textbf{Terminreserve} freigehalten. Bei unveränderter Verfügbarkeit ergeben sich $5\cdot3\cdot2=30$ Personenstunden Kapazität. Damit können die 26 reservierten Personenstunden grundsätzlich untergebracht werden. Diese Reserve ist keine Garantie, dass beliebige Verzögerungen auffangbar sind: Bei Spezialaufgaben oder fehlender Kundenverfügbarkeit muss umgeplant werden. Externe Abnahmen und Peer-QS sind frühzeitig zu terminieren.
+
+\clearpage
 \section*{Aufgabe 5: Kostenplan}
-% Projektstunden aus der Aufwandsschätzung mit realistischem Stundensatz bewerten.
-\offen
+\subsection*{Kalkulationsgrundlage}
+Als externes Softwarehaus kalkuliert MoinMetrics mit \textbf{100 Euro je Personenstunde netto}. Der Freelancer-Kompass 2026 nennt zum Vergleich durchschnittlich 103 Euro. Die gerundeten 100 Euro sind eine Planannahme; sie enthalten Personal, vorhandene Arbeitsplätze und Werkzeuge sowie Gemeinkosten. Diese Anteile werden nicht nochmals berechnet.
+
+\begin{center}\captionof{table}{Personalkosten nach Arbeitspaketen}
+\begin{tabularx}{\linewidth}{lYrr}
+\toprule\textbf{AP}&\textbf{Kostenbereich}&\textbf{Aufwand (h)}&\textbf{Kosten (Euro)}\\\midrule
+1--3 & Anforderungen, Planung und Entwurf & 68 & 6.800\\
+4--10 & Implementierung einschlie\ss{}lich Modultests und Javadoc & 110 & 11.000\\
+11 & Integration und Integrationstests & 18 & 1.800\\
+12--13 & Systemtests, Qualitätssicherung und Korrekturen & 36 & 3.600\\
+14 & Dokumentation & 14 & 1.400\\
+15--16 & Abnahme, Auslieferung und Projektabschluss & 10 & 1.000\\\midrule
+ & \textbf{Basisaufwand / Basiskosten} & \textbf{256} & \textbf{25.600}\\
+ & Risikoreserve (10\,\%, auf volle Stunden aufgerundet) & 26 & 2.600\\\midrule
+ & \textbf{Planungsbudget einschlie\ss{}lich Reserve} & \textbf{282} & \textbf{28.200}\\
+\bottomrule\end{tabularx}\end{center}
+
+\subsection*{Sachkosten und Bereitstellung}
+Hardwarebeschaffungen, Reisen, externes Hosting und zusätzliche Softwarelizenzen werden mit jeweils 0 Euro angesetzt. Voraussetzung ist die Nutzung vorhandener Arbeitsplätze, Werkzeuge und des firmeninternen Tomcat-Webservers. Betrieb und Wartung nach Übergabe gehören nicht zum Projektbudget. Zusätzliche Beschaffungen erfordern eine neue Kalkulation.
+
+Die Gesamtkosten betragen $282\cdot100+0=\mathbf{28.200}$ Euro netto. Gegenüber dem exakten 10\,\%-Aufschlag von 28.160 Euro entstehen durch das Aufrunden der Reserve 40 Euro zusätzlich. Ein weiterer Risikozuschlag entfällt.
+
+\subsection*{Optionale Ziele und Kostensteuerung}
+Als erste, noch zu bestätigende Schätzung für einen Folgeauftrag werden für F13 acht Stunden, für F14 zehn Stunden und für gemeinsame Tests und Dokumentationsanpassungen sechs Stunden angesetzt. Dies ergibt \textbf{24 zusätzliche Personenstunden beziehungsweise 2.400 Euro netto}, ohne eigene Risikoreserve. Ein Gesamtumfang einschlie\ss{}lich dieser Optionen läge damit bei 30.600 Euro. Die Optionen benötigen einen eigenen freigegebenen Terminplan; sie werden nicht stillschweigend aus der Pflichtumfangsreserve finanziert.
+
+Die Projektleitung vergleicht wöchentlich je AP den Planaufwand, den erfassten Ist-Aufwand und die Restschätzung. Ma\ss{}geblich ist die Prognose \glqq Ist plus Rest\grqq{}. Bei drohender Überschreitung des Basisbudgets oder Verzögerung eines kritischen Vorgangs werden Ursache, Reservebedarf und Gegenma\ss{}nahme dokumentiert. Änderungen der Anforderungen erfordern eine erneute Bewertung von Aufwand, Terminen und Kosten.
+
+\par\noindent\begin{minipage}{\linewidth}
+\small
+\subsection*{Verwendete Grundlagen}
+\begin{enumerate}[label={[\arabic*]}]
+\item Prof. Dr. G. J. Veltink: \emph{SPM, Übungsblatt 3: Projektziele, Termin-, Netz- und Kostenplan}, 2026; Aufgaben 1--5 sowie \texttt{netzplan.xlsx} und \texttt{netzplan\_check.py}, Version 1.10.
+\item Gruppe C3 / MoinMetrics: \emph{Anforderungsanalyse und Aufwandsschätzung, Übungsblatt 2}, Stand 24.10.2026; Anforderungskatalog und begründeter Gesamtaufwand. Ergänzend Blatt 1 zum V-Modell und zur Projektleitung.
+\item Prof. Dr. G. J. Veltink: \emph{SPM -- 26WS, 04. Planung und Aufwandsschätzung}; insbesondere Folien 206--212 (PSP), 261--262 (Aufwand und Kosten), 278--290 (Vorgänge und Abhängigkeiten), 294--308 (Netzplantechnik) und 315 (Kalendrierung). Die Nummern beziehen sich auf die gedruckten Foliennummern.
+\item \emph{SPM-Aufgabenbeschreibung 2026} und \emph{Anforderungen aus Sicht des Unternehmens KaufDort}, jeweils S. 1; \emph{Dokumentenregeln für MoinMetrics}, Stand 24.10.2026.
+\item Niedersächsisches Ministerium für Inneres, Sport und Digitalisierung: \href{https://www.mi.niedersachsen.de/themen/allgemeine_angelegenheiten_inneren/feiertagsrecht/feiertagsrecht-60368.html}{\emph{Feiertagsrecht}}; Feiertage in Niedersachsen, abgerufen am 05.11.2026.
+\item freelancermap: \href{https://www.freelancermap.de/freelancer-kompass}{\emph{Freelancer-Kompass 2026}}; durchschnittlicher Stundensatz 103 Euro, abgerufen am 05.11.2026. Der Vergleichswert dient ausschlie\ss{}lich zur Plausibilisierung des gewählten Verrechnungssatzes.
+\end{enumerate}
+\end{minipage}
 \end{document}
