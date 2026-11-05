@@ -1,0 +1,29 @@
+package de.kaufdort.moinmetrics.model;
+
+public record EinkaufDTO(
+        String geschlecht,
+        String alter,
+        String kinder,
+        String familienstand,
+        String berufstaetig,
+        String einkaufstag,
+        String einkaufsuhrzeit,
+        String wohnort,
+        String haushaltsnettoeinkommen,
+        String einkaufssumme,
+        String fertiggerichte,
+        String tiefkuehlware,
+        String milchprodukte,
+        String backwaren,
+        String obstGemuese,
+        String spirituosen,
+        String tiernahrung,
+        String bier,
+        String frischfleisch,
+        String drogerieartikel,
+        String konserven,
+        String kaffeeTee,
+        String suessigkeiten,
+        String wurstwaren,
+        String schreibwaren
+) {}

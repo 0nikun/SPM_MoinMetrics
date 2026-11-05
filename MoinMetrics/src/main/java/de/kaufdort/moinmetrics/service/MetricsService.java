@@ -8,36 +8,30 @@ public class MetricsService {
 
     public MetricsService() {    }
 
-    public DayRevenueDTO getDayRevenue() {
-        return null;
+    public void getDayRevenue() {
+
     }
 
-    public DayCustomerDTO getDayCustomer() {
-        return null;
+    public void getDayCustomer() {
+
     }
 
-    public TimeRevenueDTO getTimeRevenue() {
-        return null;
+    public void getTimeRevenue() {
     }
 
-    public TimeCustomerDTO getTimeCustomer() {
-        return null;
+    public void getTimeCustomer() {
     }
 
-    public TimeRevenueDayDTO getTimeRevenueEachDay() {
-        return null;
+    public void getTimeRevenueEachDay() {
     }
 
-    public ItemsBoughtTogetherDTO getItemsBoughtTogether() {
-        return null;
+    public void getItemsBoughtTogether() {
     }
 
-    public ItemsRevenueDTO getItemsRevenue() {
-        return null;
+    public void getItemsRevenue() {
     }
 
-    public ItemsMarginDTO getItemsMargin() {
-        return null;
+    public void getItemsMargin() {
     }
 
 }
