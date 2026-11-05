@@ -147,57 +147,78 @@
     </mxGraphModel>
   </diagram>
   <diagram id="j5MkCXvGRqvT3barog1a" name="Projekt-Struktutplan">
-    <mxGraphModel dx="1040" dy="737" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1241" dy="880" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="5bIGMdLjUV8WffjfFrzI-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Moin Metrics: Warenkorbanalyse" vertex="1">
-          <mxGeometry height="60" width="660" x="35" y="40" as="geometry" />
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-9" edge="1" parent="1" source="5bIGMdLjUV8WffjfFrzI-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="XX7vaJeEEsrkWrABfPqL-1" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="5bIGMdLjUV8WffjfFrzI-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z1: Auswertung bereitstellen" vertex="1">
-          <mxGeometry height="60" width="120" x="35" y="120" as="geometry" />
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-10" edge="1" parent="1" source="5bIGMdLjUV8WffjfFrzI-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;defaultLabelBackgroundColor=page;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="5bIGMdLjUV8WffjfFrzI-3" value="">
+          <mxGeometry relative="1" x="0.535" as="geometry" />
         </mxCell>
-        <mxCell id="5bIGMdLjUV8WffjfFrzI-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z2: Robuste Nutzung ermöglichen" vertex="1">
-          <mxGeometry height="60" width="120" x="170" y="120" as="geometry" />
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-11" edge="1" parent="1" source="5bIGMdLjUV8WffjfFrzI-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" target="XX7vaJeEEsrkWrABfPqL-2">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="5bIGMdLjUV8WffjfFrzI-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z3:&amp;nbsp;" vertex="1">
-          <mxGeometry height="60" width="120" x="305" y="120" as="geometry" />
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#76608a;fontColor=#ffffff;strokeColor=#432D57;" value="Moin Metrics: Warenkorbanalyse" vertex="1">
+          <mxGeometry height="60" width="660" x="35" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="5bIGMdLjUV8WffjfFrzI-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="4." vertex="1">
-          <mxGeometry height="60" width="120" x="440" y="120" as="geometry" />
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-12" edge="1" parent="1" source="5bIGMdLjUV8WffjfFrzI-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;exitX=0.25;exitY=1;exitDx=0;exitDy=0;fillColor=#0050ef;strokeColor=#001DBC;" target="5bIGMdLjUV8WffjfFrzI-8">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="5bIGMdLjUV8WffjfFrzI-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="5." vertex="1">
-          <mxGeometry height="60" width="120" x="575" y="120" as="geometry" />
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-13" edge="1" parent="1" source="5bIGMdLjUV8WffjfFrzI-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;exitX=0.25;exitY=1;exitDx=0;exitDy=0;fillColor=#0050ef;strokeColor=#001DBC;" target="5bIGMdLjUV8WffjfFrzI-9">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="5bIGMdLjUV8WffjfFrzI-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z1.1:&amp;nbsp;&lt;div&gt;CSV einlese&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="90" x="65" y="190" as="geometry" />
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-14" edge="1" parent="1" source="5bIGMdLjUV8WffjfFrzI-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;exitX=0.25;exitY=1;exitDx=0;exitDy=0;fillColor=#0050ef;strokeColor=#001DBC;" target="5bIGMdLjUV8WffjfFrzI-19">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="5bIGMdLjUV8WffjfFrzI-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z1.2:&amp;nbsp;&lt;div&gt;CSV auswerten&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="90" x="65" y="270" as="geometry" />
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" value="Z1: Webanwendung/Oberfläsche" vertex="1">
+          <mxGeometry height="60" width="205" x="35" y="130" as="geometry" />
         </mxCell>
-        <mxCell id="5bIGMdLjUV8WffjfFrzI-11" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z1.4:&lt;div&gt;&amp;nbsp;Marketing-maßnahmen anzeigen&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="90" x="65" y="430" as="geometry" />
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" value="Z1.1:&lt;div&gt;CSV IMport&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="110" y="200" as="geometry" />
         </mxCell>
-        <mxCell id="5bIGMdLjUV8WffjfFrzI-12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z1.5:&lt;div&gt;Top und Flop-Artikel&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="90" x="65" y="510" as="geometry" />
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-9" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" value="Z1.2:&amp;nbsp;&lt;div&gt;Zugriffsschutz&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="110" y="280" as="geometry" />
         </mxCell>
-        <mxCell id="5bIGMdLjUV8WffjfFrzI-13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="&lt;div&gt;Z2.1/2:&lt;/div&gt;&lt;div&gt;Datensätze schnell laden&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="90" x="200" y="190" as="geometry" />
+        <mxCell id="5bIGMdLjUV8WffjfFrzI-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#0050ef;fontColor=#ffffff;strokeColor=#001DBC;" value="Z1.3:&amp;nbsp;&lt;div&gt;Graphen &amp;amp; Marketing anzeigen&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="110" y="360" as="geometry" />
         </mxCell>
-        <mxCell id="5bIGMdLjUV8WffjfFrzI-14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z2.3:&amp;nbsp;&lt;div&gt;CSV Fehler anzeigen&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="90" x="200" y="270" as="geometry" />
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-18" edge="1" parent="1" source="XX7vaJeEEsrkWrABfPqL-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;exitX=0.25;exitY=1;exitDx=0;exitDy=0;fillColor=#d80073;strokeColor=#A50040;" target="XX7vaJeEEsrkWrABfPqL-3">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="5bIGMdLjUV8WffjfFrzI-15" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z1.4:&lt;div&gt;Leichte Bedingung&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="90" x="200" y="350" as="geometry" />
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-19" edge="1" parent="1" source="XX7vaJeEEsrkWrABfPqL-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;exitX=0.25;exitY=1;exitDx=0;exitDy=0;fillColor=#d80073;strokeColor=#A50040;" target="XX7vaJeEEsrkWrABfPqL-4">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="5bIGMdLjUV8WffjfFrzI-17" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="&lt;div&gt;Z2.1/2:&lt;/div&gt;&lt;div&gt;Datensätze schnell laden&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="90" x="335" y="190" as="geometry" />
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#d80073;fontColor=#ffffff;strokeColor=#A50040;" value="Z2: Daten auswertung" vertex="1">
+          <mxGeometry height="60" width="205" x="262.5" y="130" as="geometry" />
         </mxCell>
-        <mxCell id="5bIGMdLjUV8WffjfFrzI-18" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z2.3:&amp;nbsp;&lt;div&gt;CSV Fehler anzeigen&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="90" x="335" y="270" as="geometry" />
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-20" edge="1" parent="1" source="XX7vaJeEEsrkWrABfPqL-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;exitX=0.25;exitY=1;exitDx=0;exitDy=0;fillColor=#008a00;strokeColor=#005700;" target="XX7vaJeEEsrkWrABfPqL-6">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="5bIGMdLjUV8WffjfFrzI-19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;" value="Z1.3:&amp;nbsp;&lt;div&gt;Auswertung anzeigen&lt;/div&gt;" vertex="1">
-          <mxGeometry height="60" width="90" x="65" y="350" as="geometry" />
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-21" edge="1" parent="1" source="XX7vaJeEEsrkWrABfPqL-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;exitX=0.25;exitY=1;exitDx=0;exitDy=0;fillColor=#008a00;strokeColor=#005700;" target="XX7vaJeEEsrkWrABfPqL-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-22" edge="1" parent="1" source="XX7vaJeEEsrkWrABfPqL-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;defaultLabelBackgroundColor=page;exitX=0.25;exitY=1;exitDx=0;exitDy=0;fillColor=#008a00;strokeColor=#005700;" target="XX7vaJeEEsrkWrABfPqL-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" value="Z3: Robustheit der Anwendung" vertex="1">
+          <mxGeometry height="60" width="205" x="490" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#d80073;fontColor=#ffffff;strokeColor=#A50040;" value="&lt;div&gt;Z2.1:&lt;/div&gt;&lt;div&gt;Artiekl Verteilung&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="347.5" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#d80073;fontColor=#ffffff;strokeColor=#A50040;" value="Z2.2:&amp;nbsp;&lt;div&gt;Umsatz auswertung&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="347.5" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" value="Z3.1:&lt;div&gt;Schnelles laden&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="575" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" value="&lt;div&gt;Z3.2:&lt;/div&gt;&lt;div&gt;Fehler bei CSV&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="575" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="XX7vaJeEEsrkWrABfPqL-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;roundedPerimeter=1;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" value="Z3.3:&lt;div&gt;Bedinbarkeit&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="575" y="360" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
