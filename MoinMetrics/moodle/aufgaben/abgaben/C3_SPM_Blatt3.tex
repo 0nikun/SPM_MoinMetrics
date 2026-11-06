@@ -9,6 +9,7 @@
 \usepackage{enumitem}
 \usepackage{microtype}
 \usepackage{fancyhdr}
+\usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage[font=small,skip=5pt]{caption}
 \pagestyle{fancy}
@@ -49,6 +50,17 @@ normalnode/.style={draw,fill=white,inner sep=5pt,font=\footnotesize,minimum widt
 critical/.style={normalnode,draw=red!65!black,line width=1pt,fill=red!4},
 edge/.style={->,line width=.5pt},criticaledge/.style={->,draw=red!65!black,line width=1.15pt}}
 
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows.meta}
+\usepackage{caption}
+
+\colorlet{criticalPathColor}{red!20}
+\colorlet{casualPathColor}{green!20}
+
+\newcommand{\dx}{5.4} % horizontaler Abstand (Teil 1)
+\newcommand{\dy}{3.6} % vertikaler Abstand
+
+
 \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
 \captionsetup{hypcap=false}
 
@@ -61,13 +73,14 @@ edge/.style={->,line width=.5pt},criticaledge/.style={->,draw=red!65!black,line 
 \maketitle
 \thispagestyle{fancy}
 \clearpage
-\section*{Aufgabe 1: Projektziele als Voraussetzung für die Planung}
+\section*{Projektziele als Voraussetzung für die Planung}
 \subsection*{Planungsgrundlage}
 MoinMetrics entwickelt für KaufDort eine Warenkorbanalyse, mit der die Marktleitung Einkaufsdaten selbstständig auswerten und Marketingentscheidungen vorbereiten kann. Grundlage sind die Aufgabenbeschreibung, der Anforderungskatalog aus Blatt 2 und das zugewiesene V-Modell. Die Bezeichner F01 bis F14, Q01 bis Q04 und R01 bis R09 werden unverändert übernommen. Als Muss gelten auch die in Blatt 2 ausgewählten Pflichtanforderungen. Soll-Ziele bleiben optional.
 
 Die Planung umfasst das gesamte Projekt. Frühere Tätigkeiten erscheinen deshalb ebenfalls im Terminplan. Die Datierung ist eine einheitliche Soll-Basis und kein nachträglich erfundener Ist-Nachweis. Verbindliche Praktikumstermine müssen nach Bekanntgabe mit dieser Basis abgeglichen werden.
 
 \subsection*{Ober- und Unterziele}
+In der folgenden Tabelle werden die Ober und Unterziele geordnet darsgestellt.
 \begin{center}\begin{tabular}{P{.09\linewidth}P{.09\linewidth}P{.52\linewidth}P{.20\linewidth}}
 \toprule\textbf{Ziel} & \textbf{Art} & \textbf{Ziel und überprüfbares Ergebnis} & \textbf{Bezug}\\\midrule
 Z1 & Oberziel & \textbf{Webanwendung zur verfügung stellen, mit der eine Marketinganteilung Einkaufsdaten aus CSV-Dateien auswerten und aufbereiten lassen kann.} Bei der Abnahme ist der Ablauf vom Datenimport bis zum sichtbaren Ergebnis ausführbar. & \\\midrule
@@ -79,7 +92,7 @@ Z2.1 & Muss & Artikel verteilungen & F07 / F013 \\
 Z2.2 & Muss & Umsatz abhängig von veschieden Merkmalen & F08 - F012 \\
 Z3 & Oberziel & \textbf{Robuste und Anwender freundliche Umbegung} & - \\\midrule
 Z3.1 & Muss & 10.000 Datensätze werden werden innerhalb von 5 Sekunden analysiert  & Q01\\
-Z3.2 & Muss & Der NUtzer wird auf Fehler beim CSV-Import hingewiesen & Q02 / F02 \\
+Z3.2 & Muss & Der Nutzer wird auf Fehler beim CSV-Import hingewiesen & Q02 / F02 \\
 Z3.3 & Muss & Die Anwendung kann intiutiv bedient werden ohne Benutzererkennung oder kompliziertes Manüvrieren & Q03 / R09 / \\\bottomrule\end{tabular}\end{center}
 
 
@@ -96,7 +109,7 @@ In AP 1 sind insbesondere die Bedeutung von \glqq allgemeinen Marketingma\ss{}na
 F13 und F14 gehören zum optionalen Folgeumfang. Sie sind nicht in den 256 Basisstunden und nicht im kritischen Pfad enthalten. Die Risikoreserve dient der Absicherung des Pflichtumfangs. Eine Umsatzsteigerung bei KaufDort ist ein angestrebter Nutzen, mangels Ausgangsdaten und Einflussmöglichkeiten aber kein messbares Abnahmekriterium dieses Projekts.
 
 \clearpage
-\section*{Aufgabe 2: Projektstrukturplan}
+\section*{Projektstrukturplan}
 Der Projektstrukturplan gliedert das Projekt nach Tätigkeitsbereichen. Seine Blätter sind die einzeln planbaren Arbeitspakete (AP). Die Zahlen 1 bis 16 sind zugleich die Vorgangsnummern im Netzplan. Start und Ende sind zusätzliche Meilensteine mit Dauer und Aufwand null. Sammelvorgänge erhalten keine zusätzlichen Stunden.
 
 \begin{center}
@@ -124,6 +137,7 @@ AP 1 legt Anforderungen und Abnahmegrundlagen fest. AP 2 beschreibt Systemarchit
 Projektleitung ist gemä\ss{} Blatt 1 Ino Wölke. Die nachfolgende Zuständigkeitsverteilung ist ein Planungsvorschlag. A bezeichnet Alexander Borrmann, L Lukas Pancratius und I Ino Wölke. \glqq Team\grqq{} bedeutet die Beteiligung aller drei Personen. Laufende Abstimmung, Reviews und Aufwandserfassung sind in den jeweiligen Arbeitspaketstunden enthalten; sie werden nicht nochmals als pauschaler Zusatzaufwand berechnet.
 
 \subsection*{Arbeitspakete und Abschlusskriterien}
+Die Folgende Tabelle zeig mögliche Arbeitspakete.
 \begin{center}\begin{tabular}{P{.05\linewidth}P{.25\linewidth}P{.51\linewidth}P{.09\linewidth}}
 \toprule\textbf{AP} & \textbf{Arbeitspaket} & \textbf{Ergebnis / Abschlusskriterium} & \textbf{Lead / Team}\\\midrule
 1 & Anforderungen und Planung abstimmen & Priorisierte Spezifikation, geklärte Begriffe, Abnahmekriterien und Planbasis liegen vor (F, Q, R). & I / Team\\\midrule
@@ -148,9 +162,12 @@ Projektleitung ist gemä\ss{} Blatt 1 Ino Wölke. Die nachfolgende Zuständigkei
 
 
 \clearpage
-\section*{Aufgabe 3: Projektablaufplan}
-\subsection*{a) Vorgangsknotennetz ohne Zeitschätzungen}
-Alle Pfeile sind Ende-Anfang-Beziehungen ohne Zeitabstand. Ein Nachfolger darf erst nach Abschluss aller seiner Vorgänger beginnen. Im folgenden Netz stehen ausschlie\ss{}lich Bezeichnungen und Abhängigkeiten.
+\section*{Projektablaufplan}
+Im folgenden wird der Entwurf eines Projektablaufplans dokumentiert.
+\subsection*{Vorgangsknotennetz ohne Zeitschätzungen}
+Die gezeigte Darstellung Präsentiert den Projektablaufplan, als Vorgangsknotennetz in einem Top-Down-Design damit man die einzelnen Vorgänge noch gut lesen kann.
+\tikzset{
+    simplenode/.append style={rounded corners=10pt}}
 \begin{center}\begin{tikzpicture}[x=1cm,y=1cm,>=Stealth]
 \node[simplenode] (n0) at (0,0) {\textbf{0} Start};
 \node[simplenode] (n1) at (0,-1.1) {\textbf{1} Anforderungen / Planung};
@@ -194,14 +211,16 @@ Alle Pfeile sind Ende-Anfang-Beziehungen ohne Zeitabstand. Ein Nachfolger darf e
 \end{tikzpicture}\end{center}
 \begin{center}\captionof{figure}{Einfaches Vorgangsknotennetz ohne Zeitangaben}\end{center}
 
+
 Die drei Entwicklungszweige beginnen nach AP 3 parallel. AP 7 benötigt sowohl die Weka-Erprobung (AP 6) als auch den CSV-Import (AP 4). AP 8 benötigt ebenfalls AP 4. Die Reihenfolge AP 5 $\rightarrow$ AP 9 $\rightarrow$ AP 10 berücksichtigt die gemeinsame Ressource L; AP 10 kann mit Schnittstellen-Testdaten arbeiten und wartet deshalb erst bei der Integration auf die fertigen Analysen. AP 11 führt sämtliche Zweige zusammen. Die Dokumentation wird parallel zu Systemtests und Korrekturen abgeschlossen. AP 15 wartet auf den geprüften Release-Kandidaten und die Dokumentation.
 
 \clearpage
-\subsection*{b) Ausführlicher Netzplan}
+\subsection*{Ausführlicher Netzplan}
+Da das Grundgerüst jetzt steht, wird ausführlicher auf die Netzstruktur eingegangen.
 \subsubsection*{Aufwand, Dauer und Kapazität}
-Die 256 Personenstunden aus dem begründeten Gesamtaufwand von Blatt 2 werden auf die Arbeitspakete verteilt. Sie sind Team-Gesamtaufwand und werden nicht mit drei multipliziert. Die dortige 10\,\%-Reserve wird gesondert geführt: $256\cdot0{,}10=25{,}6$, aufgerundet 26 Personenstunden. Damit bleibt der Planungswert von 282 Personenstunden erhalten. Unterschiedliche Rundungen in der McConnell-Tabelle aus Blatt 2 ändern den auf ganze Stunden gerundeten Basiswert nicht: $17{,}5/0{,}06\approx291{,}7$ und $(220+291{,}7)/2\approx256$.
+Die 256 Personenstunden aus dem begründeten Gesamtaufwand von Blatt 2 werden auf die Arbeitspakete verteilt. Die dortige 10\,\%-Reserve wird gesondert geführt: $256\cdot0{,}10=25{,}6$, aufgerundet 26 Personenstunden. Damit bleibt der Planungswert von 282 Personenstunden erhalten.
 
-Ein Projekttag (PT) ist ein verfügbarer Werktag im Kalender aus Aufgabe 4, kein achtstündiger Personentag. Für das neben dem Studium bearbeitete Projekt werden höchstens 2 Stunden je Person und Projekttag angesetzt. Der Tagesbedarf ergibt sich als $E_i/(D_i\cdot n_i)$. Die Dauern berücksichtigen konzentrierte Teilzeitarbeit, Abstimmung und Reviews. Ein Projektarbeitspaket wird zwischen seinen Arbeitstagen nicht durch andere Projektpakete derselben Person verdrängt; Wochenenden und die Winterpause bleiben arbeitsfrei.
+Ein Projekttag (PT) ist kein achtstündiger Arbeitstag, sondern ein verfügbarer Werktag im Kalender. Für das neben dem Studium bearbeitete Projekt werden höchstens 2 Stunden je Person und Projekttag angesetzt. Der Tagesbedarf ergibt sich als $E_i/(D_i\cdot n_i)$. Die Dauern berücksichtigen konzentrierte Teilzeitarbeit, Abstimmung und Reviews. Ein Projektarbeitspaket wird zwischen seinen Arbeitstagen nicht durch andere Projektpakete derselben Person verdrängt; Wochenenden und die Winterpause bleiben arbeitsfrei.
 
 \begin{center}\captionof{table}{Aufwände, Dauern und Ressourcen des Pflichtumfangs}
 \begin{tabularx}{\linewidth}{rYrrrr}
@@ -225,62 +244,16 @@ Ein Projekttag (PT) ist ein verfügbarer Werktag im Kalender aus Aufgabe 4, kein
 \midrule\multicolumn{2}{l}{\textbf{Basisaufwand}} & \textbf{256} & & &\\
 \bottomrule\end{tabularx}\end{center}
 
-Bei Teamarbeit wird der Aufwand für die Kapazitätsrechnung gleich verteilt. AP 12 und AP 13 belegen ausschlie\ss{}lich A und L, während I AP 14 bearbeitet. In frühester Lage ergeben sich für A 90, für L 92 und für I 74 Personenstunden; keine Person überschreitet 2 Stunden pro Projekttag. Der Höchstwert von 10 Stunden pro voller Arbeitswoche ist eine Verfügbarkeitsannahme. Die Basistermine benötigen im Mittel etwa $256/(64/5)/3\approx6{,}7$ Stunden je Person und aktiver Fünftagewoche.
+ Der Aufwand wird für die Kapazitätsrechnung auf jedes Teammitglied gleich verteilt. AP 12 und AP 13 belegen ausschlie\ss{}lich A und L, während I AP 14 bearbeitet. In frühester Lage ergeben sich für A 90, für L 92 und für I 74 Personenstunden. Der Höchstwert von 10 Stunden pro voller Arbeitswoche ist eine Verfügbarkeitsannahme. Die Basistermine benötigen im Mittel etwa $256/(64/5)/3\approx6{,}7$ Stunden je Person und aktiver Fünftagewoche.
 
 \clearpage
-\subsubsection*{Netzplan: Spezifikation, Entwicklung und Integration}
-Die Knoten enthalten Dauer, vier Zeitpunkte und vier Pufferzeiten nach dem Foliensatz 04 (Folien 294 sowie 297--308). Alle Zahlen sind Projekttage ab Zeitpunkt 0. Rot umrandete Knoten und rote Pfeile markieren den kritischen Pfad; er ist zusätzlich im Text angegeben.
-\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,>=Stealth]
-\node[critical] (n0) at (-5.1,0) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{0 Start}}\\FAZ 0 & FEZ 0\\SAZ 0 & SEZ 0\\\multicolumn{2}{@{}c@{}}{D=0; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
-\node[critical] (n1) at (0,0) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{1 Anforderungen / Planung}}\\FAZ 0 & FEZ 10\\SAZ 0 & SEZ 10\\\multicolumn{2}{@{}c@{}}{D=10; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
-\node[critical] (n2) at (5.1,0) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{2 System / Testkonzept}}\\FAZ 10 & FEZ 18\\SAZ 10 & SEZ 18\\\multicolumn{2}{@{}c@{}}{D=8; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
-\node[critical] (n3) at (0,-2.6) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{3 Feinentwurf / Umgebung}}\\FAZ 18 & FEZ 24\\SAZ 18 & SEZ 24\\\multicolumn{2}{@{}c@{}}{D=6; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
-\node[normalnode] (n4) at (-5.1,-5.2) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{4 CSV-Import}}\\FAZ 24 & FEZ 35\\SAZ 25 & SEZ 36\\\multicolumn{2}{@{}c@{}}{D=11; GP=1; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=1; UP=0}\end{tabular}};
-\node[critical] (n5) at (0,-5.2) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{5 Web / Passwort}}\\FAZ 24 & FEZ 35\\SAZ 24 & SEZ 35\\\multicolumn{2}{@{}c@{}}{D=11; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
-\node[normalnode] (n6) at (5.1,-5.2) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{6 Weka-Anbindung}}\\FAZ 24 & FEZ 30\\SAZ 31 & SEZ 37\\\multicolumn{2}{@{}c@{}}{D=6; GP=7; FP=5}\\\multicolumn{2}{@{}c@{}}{FRP=7; UP=5}\end{tabular}};
-\node[normalnode] (n8) at (-5.1,-8.1) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{8 Kennzahlen}}\\FAZ 35 & FEZ 44\\SAZ 36 & SEZ 45\\\multicolumn{2}{@{}c@{}}{D=9; GP=1; FP=1}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
-\node[critical] (n9) at (0,-8.1) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{9 Marketingliste}}\\FAZ 35 & FEZ 39\\SAZ 35 & SEZ 39\\\multicolumn{2}{@{}c@{}}{D=4; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
-\node[normalnode] (n7) at (5.1,-8.1) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{7 Apriori-Analyse}}\\FAZ 35 & FEZ 43\\SAZ 37 & SEZ 45\\\multicolumn{2}{@{}c@{}}{D=8; GP=2; FP=2}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
-\node[critical] (n10) at (0,-10.7) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{10 Grafische Ausgaben}}\\FAZ 39 & FEZ 45\\SAZ 39 & SEZ 45\\\multicolumn{2}{@{}c@{}}{D=6; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
-\node[critical] (n11) at (0,-13.3) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{11 Integration}}\\FAZ 45 & FEZ 51\\SAZ 45 & SEZ 51\\\multicolumn{2}{@{}c@{}}{D=6; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
-\draw[criticaledge] (n0) -- (n1);
-\draw[criticaledge] (n1) -- (n2);
-\draw[criticaledge] (n2) -- (n3);
-\draw[edge] (n3) -- (n4);
-\draw[criticaledge] (n3) -- (n5);
-\draw[edge] (n3) -- (n6);
-\draw[edge,preaction={draw,white,line width=3pt}] (n4.south) -- ++(0,-0.35) -| (n7.north);
-\draw[edge] (n4) -- (n8);
-\draw[criticaledge,preaction={draw,white,line width=3pt}] (n5) -- (n9);
-\draw[edge] (n6) -- (n7);
-\draw[edge] (n8.south) |- (n11.west);
-\draw[criticaledge] (n9) -- (n10);
-\draw[edge] (n7.south) |- (n11.east);
-\draw[criticaledge] (n10) -- (n11);
-\end{tikzpicture}\end{center}
-\begin{center}\captionof{figure}{Ausführlicher Netzplan, Teil 1 (Fortsetzung ab Vorgang 11)}\end{center}
+\subsubsection*{Ausführlicher Netzplan}
+Nun wird den Knoten Dauer und Pufferzeiten hinzugefügt.Orange umrandete Knoten und orange Pfeile markieren den kritischen Pfad.
+\begin{center}
+  \includegraphics[width=0.95\textwidth]{Netzplan.png}
+\end{center}
+
 Die Knotenüberschrift nennt Nummer und Kurzbezeichnung. FAZ/FEZ stehen für frühesten Anfang und frühestes Ende, SAZ/SEZ für spätesten Anfang und spätestes Ende. GP, FP, FRP und UP bezeichnen Gesamtpuffer, freien Puffer, freien Rückwärtspuffer und unabhängigen Puffer.
-
-\clearpage
-\subsubsection*{Netzplan: Prüfung, Übergabe und Abschluss}
-Vorgang 11 wird als Anschlussknoten wiederholt. Er ist ein einziges Arbeitspaket und wird in Aufwand und Projektdauer nur einmal berücksichtigt.
-\begin{center}\begin{tikzpicture}[x=1cm,y=1cm,>=Stealth]
-\node[critical] (n11) at (0,0) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{11 Integration}}\\FAZ 45 & FEZ 51\\SAZ 45 & SEZ 51\\\multicolumn{2}{@{}c@{}}{D=6; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
-\node[critical] (n12) at (-3,-2.8) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{12 Systemtests / QS}}\\FAZ 51 & FEZ 56\\SAZ 51 & SEZ 56\\\multicolumn{2}{@{}c@{}}{D=5; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
-\node[normalnode] (n14) at (3,-2.8) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{14 Dokumentation}}\\FAZ 51 & FEZ 58\\SAZ 53 & SEZ 60\\\multicolumn{2}{@{}c@{}}{D=7; GP=2; FP=2}\\\multicolumn{2}{@{}c@{}}{FRP=2; UP=2}\end{tabular}};
-\node[critical] (n13) at (-3,-5.6) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{13 Korrektur / Regression}}\\FAZ 56 & FEZ 60\\SAZ 56 & SEZ 60\\\multicolumn{2}{@{}c@{}}{D=4; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
-\node[critical] (n15) at (0,-8.4) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{15 Abnahme / Lieferung}}\\FAZ 60 & FEZ 62\\SAZ 60 & SEZ 62\\\multicolumn{2}{@{}c@{}}{D=2; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
-\node[critical] (n16) at (0,-11.2) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{16 Projektabschluss}}\\FAZ 62 & FEZ 64\\SAZ 62 & SEZ 64\\\multicolumn{2}{@{}c@{}}{D=2; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
-\node[critical] (n17) at (0,-14) {\begin{tabular}{@{}l@{\quad}r@{}}\multicolumn{2}{@{}c@{}}{\textbf{17 Ende}}\\FAZ 64 & FEZ 64\\SAZ 64 & SEZ 64\\\multicolumn{2}{@{}c@{}}{D=0; GP=0; FP=0}\\\multicolumn{2}{@{}c@{}}{FRP=0; UP=0}\end{tabular}};
-\draw[criticaledge] (n11) -- (n12);
-\draw[edge] (n11) -- (n14);
-\draw[criticaledge] (n12) -- (n13);
-\draw[edge] (n14.south) |- (n15.east);
-\draw[criticaledge] (n13) -- (n15);
-\draw[criticaledge] (n15) -- (n16);
-\draw[criticaledge] (n16) -- (n17);
-\end{tikzpicture}\end{center}
-\begin{center}\captionof{figure}{Ausführlicher Netzplan, Teil 2}\end{center}
 
 Der kritische Pfad lautet
 \[
@@ -289,56 +262,8 @@ Der kritische Pfad lautet
 \]
 Seine Länge beträgt $10+8+6+11+4+6+6+5+4+2+2=\mathbf{64}$ Projekttage. Jede Verzögerung auf diesem Pfad verschiebt ohne Gegenma\ss{}nahmen den Basisendtermin. Die Summe aller Vorgangsdauern ist wegen der parallelen Zweige nicht die Projektdauer.
 
-\clearpage
-\subsubsection*{Berechnung der Zeitpunkte und Puffer}
-Für Vorgang $i$ mit Dauer $D_i$, Vorgängermenge $V_i$ und Nachfolgermenge $N_i$ erfolgt die Vorwärts- und Rückwärtsrechnung nach folgenden Regeln:
-\begin{align*}
-FAZ_i&=\max_{v\in V_i}(FEZ_v), & FEZ_i&=FAZ_i+D_i,\\
-SEZ_i&=\min_{n\in N_i}(SAZ_n), & SAZ_i&=SEZ_i-D_i.
-\end{align*}
-Start liegt bei 0; für Ende wird $SEZ=FEZ=64$ gesetzt. Die Puffer sind:
-\begin{align*}
-GP_i&=SAZ_i-FAZ_i=SEZ_i-FEZ_i,\\
-FP_i&=\min_{n\in N_i}(FAZ_n)-FEZ_i,\\
-FRP_i&=SAZ_i-\max_{v\in V_i}(SEZ_v),\\
-UP_i&=\max\!\left(0,\min_{n\in N_i}(FAZ_n)-\max_{v\in V_i}(SEZ_v)-D_i\right).
-\end{align*}
-Bei Start wird für die leere Vorgängermenge der Randwert 0, bei Ende für die leere Nachfolgermenge der Randwert 64 eingesetzt. Beide Meilensteine haben alle Puffer null.
-
-\begin{center}\renewcommand{\arraystretch}{1.02}\captionof{table}{Vollständige Zeit- und Pufferwerte (in Projekttagen)}
-\begin{tabular}{rrrrrrrrrrc}
-\toprule\textbf{Nr.}&\textbf{D}&\textbf{FAZ}&\textbf{FEZ}&\textbf{SAZ}&\textbf{SEZ}&\textbf{GP}&\textbf{FP}&\textbf{FRP}&\textbf{UP}&\textbf{Krit.}\\\midrule
-0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & x\\
-1 & 10 & 0 & 10 & 0 & 10 & 0 & 0 & 0 & 0 & x\\
-2 & 8 & 10 & 18 & 10 & 18 & 0 & 0 & 0 & 0 & x\\
-3 & 6 & 18 & 24 & 18 & 24 & 0 & 0 & 0 & 0 & x\\
-4 & 11 & 24 & 35 & 25 & 36 & 1 & 0 & 1 & 0 & \\
-5 & 11 & 24 & 35 & 24 & 35 & 0 & 0 & 0 & 0 & x\\
-6 & 6 & 24 & 30 & 31 & 37 & 7 & 5 & 7 & 5 & \\
-7 & 8 & 35 & 43 & 37 & 45 & 2 & 2 & 0 & 0 & \\
-8 & 9 & 35 & 44 & 36 & 45 & 1 & 1 & 0 & 0 & \\
-9 & 4 & 35 & 39 & 35 & 39 & 0 & 0 & 0 & 0 & x\\
-10 & 6 & 39 & 45 & 39 & 45 & 0 & 0 & 0 & 0 & x\\
-11 & 6 & 45 & 51 & 45 & 51 & 0 & 0 & 0 & 0 & x\\
-12 & 5 & 51 & 56 & 51 & 56 & 0 & 0 & 0 & 0 & x\\
-13 & 4 & 56 & 60 & 56 & 60 & 0 & 0 & 0 & 0 & x\\
-14 & 7 & 51 & 58 & 53 & 60 & 2 & 2 & 2 & 2 & \\
-15 & 2 & 60 & 62 & 60 & 62 & 0 & 0 & 0 & 0 & x\\
-16 & 2 & 62 & 64 & 62 & 64 & 0 & 0 & 0 & 0 & x\\
-17 & 0 & 64 & 64 & 64 & 64 & 0 & 0 & 0 & 0 & x\\
-\bottomrule\end{tabular}\end{center}
-
-\textbf{Beispiel AP 6:} Der früheste Zeitraum ist $[24,30]$, der späteste $[31,37]$. AP 7 beginnt frühestens bei 35; der Vorgänger AP 3 endet spätestens bei 24. Somit gelten $GP=31-24=7$, $FP=35-30=5$, $FRP=31-24=7$ und $UP=\max(0,35-24-6)=5$. Bei AP 7 ergibt die unabhängige Differenz $45-37-8=0$.
-
-Die Puffer sind keine addierbaren Zeitreserven je Pfad. Werden sie genutzt, sind Folgeabhängigkeiten und Ressourcen neu zu prüfen. Die fünf Projekttage Terminreserve aus Aufgabe 4 gehören nicht zur Rückwärtsrechnung des 64-Tage-Basisnetzes.
-
-\subsection*{c) Excel-Datei zum Netzplan}
-Die Datei \texttt{netzplan\_C3.xlsx} übernimmt \texttt{Sheet1}, Spaltennamen und Spaltenreihenfolge der Vorlage unverändert. Sie enthält alle 18 Vorgänge mit festen Werten, ohne Excel-Formeln. Vorgänger und Nachfolger stehen als Listen (z.\,B. \texttt{[4, 6]} bzw. \texttt{[]}); \texttt{CT} enthält für kritische Vorgänge \texttt{x}, sonst eine leere Zelle.
-
-\texttt{python netzplan\_check.py netzplan\_C3.xlsx} wurde erfolgreich ausgeführt. Das Skript prüft die Einlesbarkeit, nicht die Netzplanrechnung. Zusätzlich wurden alle Pfade, Zeit- und Pufferwerte, Gegenbeziehungen und die Übereinstimmung mit der PDF rechnerisch geprüft.
-
-\clearpage
-\section*{Aufgabe 4: Terminplan}
+\section*{Terminplan}
+Nun werden die Anfangs und Endzeitpunkte mit einem Datum versehen und somit kalendarisch festgelegt.
 \subsection*{Kalender und Terminannahmen}
 Als Planbeginn wird Montag, der 05.10.2026, angesetzt. Gearbeitet wird montags bis freitags. Samstage und Sonntage sowie gesetzliche Feiertage in Niedersachsen sind arbeitsfrei. Der Reformationstag am 31.10.2026 fällt auf einen Samstag. Der 25.12.2026, der 26.12.2026 und der 01.01.2027 liegen innerhalb der vorgesehenen Winterpause.
 
@@ -375,7 +300,8 @@ Mit Abschluss von AP 1 ist am 16.10.2026 die Planbasis vorgesehen, nach AP 3 am 
 Vom 15.01. bis zum 21.01.2027 werden fünf weitere Projekttage als \textbf{Terminreserve} freigehalten. Bei unveränderter Verfügbarkeit ergeben sich $5\cdot3\cdot2=30$ Personenstunden Kapazität. Damit können die 26 reservierten Personenstunden grundsätzlich untergebracht werden. Diese Reserve ist keine Garantie, dass beliebige Verzögerungen auffangbar sind: Bei Spezialaufgaben oder fehlender Kundenverfügbarkeit muss umgeplant werden. Externe Abnahmen und Peer-QS sind frühzeitig zu terminieren.
 
 \clearpage
-\section*{Aufgabe 5: Kostenplan}
+\section*{Kostenplan}
+Mit den Informationen zu dem Aufwand und der Zeitgestaltung können nun die Kosten mit einem Kostenplan dargestellt.
 \subsection*{Kalkulationsgrundlage}
 Als externes Softwarehaus kalkuliert MoinMetrics mit \textbf{100 Euro je Personenstunde netto}. Der Freelancer-Kompass 2026 nennt zum Vergleich durchschnittlich 103 Euro. Die gerundeten 100 Euro sind eine Planannahme; sie enthalten Personal, vorhandene Arbeitsplätze und Werkzeuge sowie Gemeinkosten. Diese Anteile werden nicht nochmals berechnet.
 
@@ -406,6 +332,7 @@ Die Projektleitung vergleicht wöchentlich je AP den Planaufwand, den erfassten 
 \par\noindent\begin{minipage}{\linewidth}
 \small
 \subsection*{Verwendete Grundlagen}
+Als Grundlage für die Pläne wurden die im folgenden aufgelisteten Quellen verwendet.
 \begin{enumerate}[label={[\arabic*]}]
 \item Prof. Dr. G. J. Veltink: \emph{SPM, Übungsblatt 3: Projektziele, Termin-, Netz- und Kostenplan}, 2026; Aufgaben 1--5 sowie \texttt{netzplan.xlsx} und \texttt{netzplan\_check.py}, Version 1.10.
 \item Gruppe C3 / MoinMetrics: \emph{Anforderungsanalyse und Aufwandsschätzung, Übungsblatt 2}, Stand 24.10.2026; Anforderungskatalog und begründeter Gesamtaufwand. Ergänzend Blatt 1 zum V-Modell und zur Projektleitung.
