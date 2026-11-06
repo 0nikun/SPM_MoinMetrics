@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Map;
+
 @Controller()
 public class MetricsController {
 
@@ -22,36 +24,36 @@ public class MetricsController {
     // Stärkster Tag nach Umsatz
     @ResponseBody
     @GetMapping("/api/metrics/dayByRevenue")
-    public void dayByRevenue() {
-        metricsService.getDayRevenue();
+    public Map<String, Integer> dayByRevenue() {
+        return metricsService.getDayRevenue();
     }
 
     // Stärkster Tag nach Kundenhäufigkeit
     @ResponseBody
     @GetMapping("/api/metrics/dayByCustomers")
-    public void dayByCustomers() {
-        metricsService.getDayCustomer();
+    public Map<String, Integer> dayByCustomers() {
+        return metricsService.mapDayCustomer();
     }
 
     // Stärkste Uhrzeit nach Umsatz
     @ResponseBody
     @GetMapping("/api/metrics/timeByRevenue")
-    public void timeByRevenue() {
-        metricsService.mapTimeRevenue();
+    public Map<String, Integer> timeByRevenue() {
+        return metricsService.mapTimeRevenue();
     }
 
     // Stärkste Uhrzeit nach Kundenhäufigkeit
     @ResponseBody
     @GetMapping("/api/metrics/timeByCustomers")
-    public void timeByCustomers() {
-        metricsService.getTimeCustomer();
+    public Map<String, Integer> timeByCustomers() {
+        return metricsService.getTimeCustomer();
     }
 
     // Stärkste Uhrzeit nach Umsatz pro Tag
     @ResponseBody
     @GetMapping("/api/metrics/timeByRevenueEachDay")
-    public void timeByRevenueEachDay() {
-        metricsService.mapTimeRevenueDay();
+    public Map<String, Map<String, Integer>> timeByRevenueEachDay() {
+        return metricsService.mapTimeRevenueDay();
     }
 
     // Gemeinsam gekaufte Waren
@@ -61,18 +63,33 @@ public class MetricsController {
         metricsService.getItemsBoughtTogether();
     }
 
+
+    // Artikel nach Umsatz
+    @ResponseBody
+    @GetMapping("/api/metrics/itemByRevenue")
+    public Map<String, Integer> itemByRevenue() {
+        return metricsService.mapItemRevenue();
+    }
+
     // Stärkster Artikel nach Umsatz
     @ResponseBody
     @GetMapping("/api/metrics/bestItemByRevenue")
-    public void bestItemsByRevenue() {
-        metricsService.getMostRevenueItem();
+    public Map.Entry<String, Integer> bestItemsByRevenue() {
+        return metricsService.getMostRevenueItem();
     }
 
     // Schwächster Artikel nach Umsatz
     @ResponseBody
     @GetMapping("/api/metrics/worstItemByRevenue")
-    public void worstItemsByRevenue() {
-        metricsService.getLeastRevenueItem();
+    public Map.Entry<String, Integer> worstItemsByRevenue() {
+        return metricsService.getLeastRevenueItem();
+    }
+
+    // Artikel nach Deckungsbeitrag
+    @ResponseBody
+    @GetMapping("/api/metrics/itemByMargin")
+    public Map<String, Double> itemByMargin() {
+        return metricsService.mapItemMargin();
     }
 
     // Stärkster Artikel nach Deckungsbeitrag

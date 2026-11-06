@@ -11,7 +11,7 @@ import java.util.*;
 @Service
 public class MetricsService {
 
-    private final DataStorage session;
+    private final DataStorage storage;
 
     private final List<String> attributes = List.of(
             "Geschlecht",
@@ -59,10 +59,28 @@ public class MetricsService {
             "Schreibwaren"
     );
 
+    private final Map<String, Integer> deckungsbeitraege = Map.ofEntries(
+            Map.entry("Fertiggerichte", 25),
+            Map.entry("Tiefkuehlware", 28),
+            Map.entry("Milchprodukte", 18),
+            Map.entry("Backwaren", 30),
+            Map.entry("Obst/Gemuese", 40),
+            Map.entry("Spirituosen", 75),
+            Map.entry("Tiernahrung", 23),
+            Map.entry("Bier", 37),
+            Map.entry("Frischfleisch", 24),
+            Map.entry("Drogerieartikel", 95),
+            Map.entry("Konserven", 33),
+            Map.entry("Kaffee/Tee", 56),
+            Map.entry("Suessigkeiten", 67),
+            Map.entry("Wurstwaren", 38),
+            Map.entry("Schreibwaren", 73)
+    );
+
     private Set<String> times = new TreeSet<>();
 
     public MetricsService(DataStorage session) {
-        this.session = session;
+        this.storage = session;
     }
 
     public void init() {
@@ -71,18 +89,28 @@ public class MetricsService {
 
 
     public Map<String, Integer> getDayRevenue() {
-        Instances data = session.getInstances();
+        Instances data = storage.getInstances();
 
         return mapAttributeRevenue(data,"Einkaufstag");
     }
 
-    public void getDayCustomer() {
+    // Kundenzahl pro Tag
+    public Map<String, Integer> mapDayCustomer() {
+        Instances data = storage.getInstances();
 
+        return mapAttributeCustomer(data, "Einkaufstag");
+    }
+
+    // Stärkster Tag nach Kundenhäufigkeit
+    public Map.Entry<String, Integer> getBestDayCustomer() {
+        return mapDayCustomer().entrySet().stream()
+                .max(Comparator.comparing(Map.Entry::getValue))
+                .orElseThrow();
     }
 
     // liefert für jeden Tag für jeden Zeitraum den Umsatz
     public Map<String, Map<String, Integer>> mapTimeRevenueDay() {
-        Instances data = session.getInstances();
+        Instances data = storage.getInstances();
 
         Map<String, Map<String, Integer>> result = new HashMap<>();
 
@@ -97,10 +125,10 @@ public class MetricsService {
             result.get(row.stringValue(dayAttribute)).merge(row.stringValue(timeAttribute), (int) row.value(revenueAttribute), Integer::sum);
         }
 
-        System.out.println(result);
         return result;
     }
 
+    // Mapped den Umsatz für ein beliebiges Attribut
     private Map<String, Integer> mapAttributeRevenue(Instances data, String attribute) {
         Map<String, Integer> result = new HashMap<>();
 
@@ -111,19 +139,18 @@ public class MetricsService {
             result.merge(row.stringValue(attributeToMap), (int) row.value(revenueAttribute), Integer::sum);
         }
 
-        System.out.println(result);
         return result;
     }
 
     // liefert für jeden Zeitraum den Umsatz
     public Map<String, Integer> mapTimeRevenue() {
-        Instances data = session.getInstances();
+        Instances data = storage.getInstances();
 
         return mapAttributeRevenue(data, "Einkaufsuhrzeit");
     }
 
     public void setTimes() {
-        Instances data = session.getInstances();
+        Instances data = storage.getInstances();
 
         Attribute attr = data.attribute("Einkaufsuhrzeit");
 
@@ -133,7 +160,22 @@ public class MetricsService {
         }
     }
 
-    public void getTimeCustomer() {
+    private Map<String, Integer> mapAttributeCustomer(Instances data, String attribute) {
+        Map<String, Integer> result = new HashMap<>();
+
+        Attribute attributeToMap = data.attribute(attribute);
+
+        for (Instance row : data) {
+            result.merge(row.stringValue(attributeToMap), 1, Integer::sum);
+        }
+
+        return result;
+    }
+
+    public Map<String, Integer> getTimeCustomer() {
+        Instances data = storage.getInstances();
+
+        return mapAttributeCustomer(data, "Einkaufsuhrzeit");
     }
 
     public void getItemsBoughtTogether() {
@@ -141,7 +183,7 @@ public class MetricsService {
 
     // Umsatz pro Artikel
     public Map<String, Integer> mapItemRevenue() {
-        Instances data = session.getInstances();
+        Instances data = storage.getInstances();
 
         Map<String, Integer> result = new HashMap<>();
 
@@ -153,6 +195,7 @@ public class MetricsService {
             }
             result.put(article, sum);
         }
+
         return result;
     }
 
@@ -166,6 +209,19 @@ public class MetricsService {
         Map<String, Integer> result = mapItemRevenue();
         return result.entrySet().stream()
                 .min(Map.Entry.comparingByValue()).get();
+    }
+
+    // Deckungsbeiträge für jeden Artikel
+    public Map<String, Double> mapItemMargin () {
+        Instances data = storage.getInstances();
+
+        Map<String, Double> margins = new HashMap<>();
+
+        mapItemRevenue().forEach((article, revenue) -> {
+            margins.put(article, revenue * deckungsbeitraege.get(article) / 100.0);
+        });
+
+        return margins;
     }
 
     public void getItemsMargin() {

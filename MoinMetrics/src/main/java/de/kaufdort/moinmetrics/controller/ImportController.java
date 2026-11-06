@@ -3,6 +3,7 @@ package de.kaufdort.moinmetrics.controller;
 import de.kaufdort.moinmetrics.repository.DataStorage;
 import de.kaufdort.moinmetrics.service.ImportService;
 import de.kaufdort.moinmetrics.service.MetricsService;
+import de.kaufdort.moinmetrics.service.TimerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +21,14 @@ public class ImportController {
 
     private final ImportService importService;
     private final MetricsService metricsService;
+    private final TimerService timerService;
     private final DataStorage session;
 
-    public ImportController(ImportService importService, MetricsService metricsService, DataStorage session) {
+    public ImportController(ImportService importService, MetricsService metricsService, DataStorage session, TimerService timerService) {
         this.importService = importService;
         this.metricsService = metricsService;
         this.session = session;
+        this.timerService = timerService;
     }
 
     @GetMapping("/import")
@@ -38,7 +41,7 @@ public class ImportController {
     public String importCSV(
             @RequestParam("file") MultipartFile file,
             RedirectAttributes redirectAttributes) {
-        long start = System.nanoTime();
+        timerService.startTimer();
 
         if (file.isEmpty()) {
             redirectAttributes.addFlashAttribute(
@@ -55,12 +58,12 @@ public class ImportController {
                     "importErgebnis", "Fehler beim Importieren der Datei.");
             return "redirect:/import";
         }
-        long end = System.nanoTime();
-        long duration = (end - start) / 1_0_0_0_0_0_0; // Dauer in Millisekunden
+
+        long duration = timerService.getElapsedTime();
 
         redirectAttributes.addFlashAttribute(
                 "importErgebnis",
-                "Datei empfangen: " + file.getOriginalFilename() + " (" + duration + "ms) (" + session.getEinkaeufeSize() + " Einkäufe geladen)");
+                "Datei geladen: " + file.getOriginalFilename() + " (" + duration + "ms) (" + session.getEinkaeufeSize() + " Einkäufe geladen)");
 
 
         return "redirect:/metrics";

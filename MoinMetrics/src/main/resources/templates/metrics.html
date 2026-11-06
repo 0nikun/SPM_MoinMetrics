@@ -16,20 +16,14 @@
 <body>
 <h1>Metrics</h1>
 <p th:text="${importErgebnis}"></p>
-<p th:text="${ergebnis}"></p>
+<p id="renderZeit" aria-live="polite">Diagramme werden geladen …</p>
 
 <section class="charts" aria-label="Metrics-Diagramme">
     <article class="chart-card" th:each="title, stat : ${ {
         'Umsatz nach Wochentag',
         'Kunden nach Wochentag',
         'Umsatz nach Uhrzeit',
-        'Kunden nach Uhrzeit',
-        'Umsatz nach Uhrzeit pro Tag',
-        'Gemeinsam gekaufte Waren',
-        'Stärkste Artikel nach Umsatz',
-        'Schwächste Artikel nach Umsatz',
-        'Stärkste Artikel nach Deckungsbeitrag',
-        'Schwächste Artikel nach Deckungsbeitrag'
+        'Kunden nach Uhrzeit'
     } }">
         <h2 th:text="${title}">Diagramm</h2>
         <div class="chart-container">
@@ -39,28 +33,408 @@
         </div>
         <p>Noch keine Daten vorhanden.</p>
     </article>
+    <article class="chart-card">
+        <h2>Artikel nach Umsatz</h2>
+        <div class="chart-container">
+            <canvas id="chart-item-revenue" aria-label="Artikel nach Umsatz" role="img">
+                Leeres Diagramm – noch keine Daten vorhanden.
+            </canvas>
+        </div>
+        <p>Noch keine Daten vorhanden.</p>
+    </article>
+    <article class="chart-card">
+        <h2>Artikel nach Deckungsbeitrag</h2>
+        <div class="chart-container">
+            <canvas id="chart-item-margin" aria-label="Artikel nach Deckungsbeitrag" role="img">
+                Leeres Diagramm – noch keine Daten vorhanden.
+            </canvas>
+        </div>
+        <p>Noch keine Daten vorhanden.</p>
+    </article>
+    <article class="chart-card" th:each="title, stat : ${ {
+        'Umsatz nach Uhrzeit pro Tag',
+        'Gemeinsam gekaufte Waren',
+        'Stärkste Artikel nach Umsatz',
+        'Schwächste Artikel nach Umsatz',
+        'Stärkste Artikel nach Deckungsbeitrag',
+        'Schwächste Artikel nach Deckungsbeitrag'
+    } }">
+        <h2 th:text="${title}">Diagramm</h2>
+        <div class="chart-container">
+            <canvas th:id="|chart-${stat.index + 4}|" th:attr="aria-label=${title}" role="img">
+                Leeres Diagramm – noch keine Daten vorhanden.
+            </canvas>
+        </div>
+        <p>Noch keine Daten vorhanden.</p>
+    </article>
 </section>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.charts canvas').forEach(canvas => {
+<script th:inline="javascript">
+    const startzeit = performance.now();
+    const ausstehendeDiagramme = new Set([
+        'chart-0', 'chart-1', 'chart-2', 'chart-3',
+        'chart-item-revenue', 'chart-item-margin'
+    ]);
+    let diagrammFehler = false;
+    let leereDiagramme = false;
+
+    function diagrammAbgeschlossen(canvas, zustand = 'fertig') {
+        // Spätere Animationen, etwa beim Ändern der Fenstergröße, ignorieren.
+        if (!ausstehendeDiagramme.delete(canvas.id)) return;
+
+        diagrammFehler ||= zustand === 'fehler';
+        leereDiagramme ||= zustand === 'leer';
+
+        if (ausstehendeDiagramme.size === 0) {
+            const dauer = Math.round(performance.now() - startzeit);
+            const ausgabe = document.getElementById('renderZeit');
+            if (diagrammFehler) {
+                ausgabe.textContent = `Diagramme teilweise nicht geladen (${dauer} ms)`;
+            } else if (leereDiagramme) {
+                ausgabe.textContent = `Diagramme geladen ${dauer} ms – teilweise keine Daten vorhanden.`;
+            } else {
+                ausgabe.textContent = `Diagramme geladen ${dauer} ms`;
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        const canvas = document.getElementById('chart-0');
+        const status = canvas.closest('.chart-card').querySelector('p');
+        const url = /*[[@{/api/metrics/dayByRevenue}]]*/ '/api/metrics/dayByRevenue';
+
+        try {
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            const umsatzProTag = await response.json();
+
+            // HashMaps haben keine garantierte Wochentagsreihenfolge.
+            const tage = [
+                'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag',
+                'Freitag', 'Samstag', 'Sonntag'
+            ];
+
+            const labels = tage.filter(tag => tag in umsatzProTag);
+            const werte = labels.map(tag => umsatzProTag[tag]);
+
+            if (labels.length === 0) {
+                status.textContent = 'Noch keine Daten vorhanden.';
+                diagrammAbgeschlossen(canvas, 'leer');
+                return;
+            }
+
             new Chart(canvas, {
                 type: 'bar',
                 data: {
-                        labels: ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag'],
-                        datasets: [{
+                    labels: labels,
+                    datasets: [{
                         label: 'Umsatz in €',
-                        data: [1200, 950, 1400, 1100, 1800],
+                        data: werte,
                         backgroundColor: '#3498db'
-                    }] },
+                    }]
+                },
                 options: {
+                    animation: {
+                        onComplete: context => diagrammAbgeschlossen(context.chart.canvas)
+                    },
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
                     scales: { y: { beginAtZero: true } }
                 }
             });
-        });
+
+            status.hidden = true;
+        } catch (error) {
+            status.textContent = 'Die Daten konnten nicht geladen werden.';
+            console.error(error);
+            diagrammAbgeschlossen(canvas, 'fehler');
+        }
+    });
+    document.addEventListener('DOMContentLoaded', async () => {
+        const canvas = document.getElementById('chart-1');
+        const status = canvas.closest('.chart-card').querySelector('p');
+        const url = /*[[@{/api/metrics/dayByCustomers}]]*/ '/api/metrics/dayByCustomers';
+
+        try {
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            const kundenProTag = await response.json();
+            const tage = [
+                'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag',
+                'Freitag', 'Samstag', 'Sonntag'
+            ];
+            const labels = tage.filter(tag => tag in kundenProTag);
+            const werte = labels.map(tag => kundenProTag[tag]);
+
+            if (labels.length === 0) {
+                status.textContent = 'Noch keine Daten vorhanden.';
+                diagrammAbgeschlossen(canvas, 'leer');
+                return;
+            }
+
+            new Chart(canvas, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Anzahl Kunden',
+                        data: werte,
+                        backgroundColor: '#27ae60'
+                    }]
+                },
+                options: {
+                    animation: {
+                        onComplete: context => diagrammAbgeschlossen(context.chart.canvas)
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, ticks: { precision: 0 } }
+                    }
+                }
+            });
+
+            status.hidden = true;
+        } catch (error) {
+            status.textContent = 'Die Daten konnten nicht geladen werden.';
+            console.error(error);
+            diagrammAbgeschlossen(canvas, 'fehler');
+        }
+    });
+    document.addEventListener('DOMContentLoaded', async () => {
+        const canvas = document.getElementById('chart-2');
+        const status = canvas.closest('.chart-card').querySelector('p');
+        const url = /*[[@{/api/metrics/timeByRevenue}]]*/ '/api/metrics/timeByRevenue';
+
+        try {
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            const umsatzProUhrzeit = await response.json();
+            const zeiten = ['<10 Uhr', '10-12 Uhr', '12-14 Uhr', '14-17 Uhr', '>17 Uhr'];
+            const labels = zeiten.filter(zeit => zeit in umsatzProUhrzeit);
+            const werte = labels.map(zeit => umsatzProUhrzeit[zeit]);
+
+            if (labels.length === 0) {
+                status.textContent = 'Noch keine Daten vorhanden.';
+                diagrammAbgeschlossen(canvas, 'leer');
+                return;
+            }
+
+            new Chart(canvas, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Umsatz in €',
+                        data: werte,
+                        backgroundColor: '#3498db'
+                    }]
+                },
+                options: {
+                    animation: {
+                        onComplete: context => diagrammAbgeschlossen(context.chart.canvas)
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+
+            status.hidden = true;
+        } catch (error) {
+            status.textContent = 'Die Daten konnten nicht geladen werden.';
+            console.error(error);
+            diagrammAbgeschlossen(canvas, 'fehler');
+        }
+    });
+    document.addEventListener('DOMContentLoaded', async () => {
+        const canvas = document.getElementById('chart-3');
+        const status = canvas.closest('.chart-card').querySelector('p');
+        const url = /*[[@{/api/metrics/timeByCustomers}]]*/ '/api/metrics/timeByCustomers';
+
+        try {
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            const kundenProUhrzeit = await response.json();
+            const zeiten = ['<10 Uhr', '10-12 Uhr', '12-14 Uhr', '14-17 Uhr', '>17 Uhr'];
+            const labels = zeiten.filter(zeit => zeit in kundenProUhrzeit);
+            const werte = labels.map(zeit => kundenProUhrzeit[zeit]);
+
+            if (labels.length === 0) {
+                status.textContent = 'Noch keine Daten vorhanden.';
+                diagrammAbgeschlossen(canvas, 'leer');
+                return;
+            }
+
+            new Chart(canvas, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Anzahl Kunden',
+                        data: werte,
+                        backgroundColor: '#27ae60'
+                    }]
+                },
+                options: {
+                    animation: {
+                        onComplete: context => diagrammAbgeschlossen(context.chart.canvas)
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, ticks: { precision: 0 } }
+                    }
+                }
+            });
+
+            status.hidden = true;
+        } catch (error) {
+            status.textContent = 'Die Daten konnten nicht geladen werden.';
+            console.error(error);
+            diagrammAbgeschlossen(canvas, 'fehler');
+        }
+    });
+    document.addEventListener('DOMContentLoaded', async () => {
+        const canvas = document.getElementById('chart-item-revenue');
+        const status = canvas.closest('.chart-card').querySelector('p');
+        const url = /*[[@{/api/metrics/itemByRevenue}]]*/ '/api/metrics/itemByRevenue';
+
+        try {
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            const umsatzProArtikel = await response.json();
+            const artikel = Object.entries(umsatzProArtikel)
+                .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'de'));
+
+            if (artikel.length === 0) {
+                status.textContent = 'Noch keine Daten vorhanden.';
+                diagrammAbgeschlossen(canvas, 'leer');
+                return;
+            }
+
+            // Genug Platz für alle Artikelnamen auf der vertikalen Achse.
+            canvas.parentElement.style.height = `${Math.max(260, artikel.length * 30 + 60)}px`;
+
+            new Chart(canvas, {
+                type: 'bar',
+                data: {
+                    labels: artikel.map(([name]) => name),
+                    datasets: [{
+                        label: 'Umsatz in €',
+                        data: artikel.map(([, umsatz]) => umsatz),
+                        backgroundColor: '#3498db'
+                    }]
+                },
+                options: {
+                    animation: {
+                        onComplete: context => diagrammAbgeschlossen(context.chart.canvas)
+                    },
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { beginAtZero: true, title: { display: true, text: 'Umsatz in €' } },
+                        y: { ticks: { autoSkip: false } }
+                    }
+                }
+            });
+
+            status.hidden = true;
+        } catch (error) {
+            status.textContent = 'Die Daten konnten nicht geladen werden.';
+            console.error(error);
+            diagrammAbgeschlossen(canvas, 'fehler');
+        }
+    });
+    document.addEventListener('DOMContentLoaded', async () => {
+        const canvas = document.getElementById('chart-item-margin');
+        const status = canvas.closest('.chart-card').querySelector('p');
+        const url = /*[[@{/api/metrics/itemByMargin}]]*/ '/api/metrics/itemByMargin';
+
+        try {
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            const deckungsbeitragProArtikel = await response.json();
+            const artikel = Object.entries(deckungsbeitragProArtikel)
+                .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'de'));
+
+            if (artikel.length === 0) {
+                status.textContent = 'Noch keine Daten vorhanden.';
+                diagrammAbgeschlossen(canvas, 'leer');
+                return;
+            }
+
+            canvas.parentElement.style.height = `${Math.max(260, artikel.length * 30 + 60)}px`;
+            const euro = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
+
+            new Chart(canvas, {
+                type: 'bar',
+                data: {
+                    labels: artikel.map(([name]) => name),
+                    datasets: [{
+                        label: 'Deckungsbeitrag in €',
+                        data: artikel.map(([, deckungsbeitrag]) => deckungsbeitrag),
+                        backgroundColor: '#9b59b6'
+                    }]
+                },
+                options: {
+                    animation: {
+                        onComplete: context => diagrammAbgeschlossen(context.chart.canvas)
+                    },
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: context => `Deckungsbeitrag: ${euro.format(context.parsed.x)}`
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { beginAtZero: true, title: { display: true, text: 'Deckungsbeitrag in €' } },
+                        y: { ticks: { autoSkip: false } }
+                    }
+                }
+            });
+
+            status.hidden = true;
+        } catch (error) {
+            status.textContent = 'Die Daten konnten nicht geladen werden.';
+            console.error(error);
+            diagrammAbgeschlossen(canvas, 'fehler');
+        }
     });
 </script>
 </body>
