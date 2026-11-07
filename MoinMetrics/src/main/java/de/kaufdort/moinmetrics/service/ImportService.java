@@ -18,6 +18,8 @@ public class ImportService {
     }
 
     public void loadCSV(@NonNull MultipartFile file) throws IOException {
+        // TODO: Pflichtspalten, Datentypen und erlaubte Werte vor dem Speichern validieren
+        // und Validierungsfehler als verständliche Fehlermeldung beim Import anzeigen.
         CSVLoader loader = new CSVLoader();
         loader.setSource(file.getInputStream());
         session.setInstances(loader.getDataSet());

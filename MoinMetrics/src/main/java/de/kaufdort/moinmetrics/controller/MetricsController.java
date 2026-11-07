@@ -65,6 +65,18 @@ public class MetricsController {
         return metricsService.getItemsBoughtTogether();
     }
 
+    @ResponseBody
+    @GetMapping("/api/metrics/itemsSupportHeatmap")
+    public Map<String, Map<String, Double>> itemsSupportHeatmap() {
+        return metricsService.getItemsSupportMatrix();
+    }
+
+    @ResponseBody
+    @GetMapping("/api/metrics/itemsConfidenceHeatmap")
+    public Map<String, Map<String, Double>> itemsConfidenceHeatmap() {
+        return metricsService.getItemsConfidenceMatrix();
+    }
+
 
     // Artikel nach Umsatz
     @ResponseBody

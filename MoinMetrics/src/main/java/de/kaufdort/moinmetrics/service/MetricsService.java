@@ -293,4 +293,69 @@ public class MetricsService {
     public void getItemsMargin() {
     }
 
+    public Map<String, Map<String, Double>> getItemsSupportMatrix() {
+        Instances data = storage.getInstances();
+
+        Map<String, Map<String, Double>> result = new HashMap<>();
+
+        for (Instance row : data) {
+            for (String attr : artikel) {
+                for (String attr2 : artikel) {
+                    if (!attr.equals(attr2) && row.value(data.attribute(attr)) > 0 && row.value(data.attribute(attr2)) > 0) {
+                        result.computeIfAbsent(attr, k -> new HashMap<>()).merge(attr2, 1.0, Double::sum);
+                    }
+                }
+            }
+        }
+
+        // Support: Anteil aller Einkaeufe, die beide Warengruppen enthalten (0 bis 1).
+        if (data.numInstances() > 0) {
+            result.values().forEach(paare ->
+                    paare.replaceAll((artikelName, anzahl) -> anzahl / data.numInstances()));
+        }
+        return result;
+    }
+
+    public Map<String, Map<String, Double>> getItemsConfidenceMatrix() {
+        Instances data = storage.getInstances();
+
+        Map<String, Map<String, Double>> result = new HashMap<>();
+
+        for (Instance row : data) {
+            for (String attr : artikel) {
+                for (String attr2 : artikel) {
+                    if (!attr.equals(attr2) && row.value(data.attribute(attr)) > 0 && row.value(data.attribute(attr2)) > 0) {
+                        result.computeIfAbsent(attr, k -> new HashMap<>()).merge(attr2, 1.0, Double::sum);
+                    }
+                }
+            }
+        }
+
+        Map<String, Integer> counts = new HashMap<>();
+
+        for (String article : artikel) {
+            Attribute attribute = data.attribute(article);
+            int sum = 0;
+            for (Instance row : data) {
+                if (row.value(attribute) > 0) {
+                    sum += 1;
+                }
+            }
+            counts.put(article, sum);
+        }
+
+        // Zeile = Praemisse A, Spalte = Folge B: Anzahl(A und B) / Anzahl(A).
+        // Ohne Kauf von A ist die Confidence nicht definiert (null).
+        for (String premise : artikel) {
+            Map<String, Double> paare = result.computeIfAbsent(premise, k -> new HashMap<>());
+            int premiseCount = counts.get(premise);
+            for (String conclusion : artikel) {
+                if (!premise.equals(conclusion)) {
+                    double gemeinsam = paare.getOrDefault(conclusion, 0.0);
+                    paare.put(conclusion, premiseCount == 0 ? null : gemeinsam / premiseCount);
+                }
+            }
+        }
+        return result;
+    }
 }

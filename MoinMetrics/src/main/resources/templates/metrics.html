@@ -24,6 +24,21 @@
         .rules-table th, .rules-table td { padding: 12px; border-bottom: 1px solid #dde3eb; text-align: left; vertical-align: top; }
         .rules-table th { background: #f5f7fa; }
         .rules-table .numeric { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+        .heatmap-card { grid-column: 1 / -1; }
+        .heatmap-scroll { overflow-x: auto; }
+        .heatmap { border-collapse: separate; border-spacing: 2px; font-size: 12px; width: 100%; }
+        .heatmap caption { text-align: left; margin: 12px 0; color: #536176; }
+        .heatmap th { padding: 8px; background: #f5f7fa; }
+        .heatmap thead th span { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; }
+        .heatmap tbody th { position: sticky; left: 0; z-index: 1; text-align: left; white-space: nowrap; }
+        .heatmap td { min-width: 44px; height: 36px; text-align: center; font-variant-numeric: tabular-nums; }
+        .heatmap .diagonal { background: #edf0f4; color: #536176; }
+        .heatmap-legend { display: flex; align-items: center; gap: 12px; margin: 12px 0; font-size: 14px; }
+        .heatmap-gradient { width: 180px; max-width: 35vw; height: 16px; background: linear-gradient(to right, hsl(210, 70%, 97%), hsl(210, 70%, 35%)); }
+        .heatmap .axis-corner { white-space: pre-line; }
+        #confidence-content .heatmap-gradient { background: linear-gradient(to right, hsl(275, 70%, 97%), hsl(275, 70%, 35%)); }
+        .heatmap-tooltip { position: fixed; z-index: 1000; max-width: min(320px, calc(100vw - 24px)); padding: 10px 14px; border-radius: 8px; background: #243247; color: white; box-shadow: 0 4px 16px #0003; font-size: 14px; line-height: 1.5; pointer-events: none; }
+        .heatmap td:focus-visible { outline: 2px solid #243247; outline-offset: 1px; }
     </style>
 </head>
 <body>
@@ -92,6 +107,40 @@
                 </thead>
                 <tbody id="rules-body"></tbody>
             </table>
+        </div>
+    </article>
+    <article class="chart-card heatmap-card">
+        <h2 id="heatmap-heading">Gemeinsame Warengruppen: Support</h2>
+        <p id="heatmap-status" role="status">Heatmap wird geladen ...</p>
+        <div id="heatmap-content" hidden>
+            <p class="chart-scale-note">Anteil aller Einkäufe mit beiden Warengruppen (Support). Die Matrix ist gespiegelt; Selbstvergleiche sind ausgeblendet.</p>
+            <div class="heatmap-legend" aria-label="Farbskala">
+                <span>0 %</span><span class="heatmap-gradient" aria-hidden="true"></span><span id="heatmap-max"></span>
+            </div>
+            <div class="heatmap-scroll" tabindex="0" role="region" aria-labelledby="heatmap-heading">
+                <table class="heatmap" aria-labelledby="heatmap-heading">
+                    <caption>Beide Warengruppen wurden im selben Einkauf gekauft. 0 % = kein gemeinsamer Einkauf.</caption>
+                    <thead id="heatmap-head"></thead>
+                    <tbody id="heatmap-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </article>
+    <article class="chart-card heatmap-card">
+        <h2 id="confidence-heading">Warengruppen: Confidence</h2>
+        <p id="confidence-status" role="status">Heatmap wird geladen ...</p>
+        <div id="confidence-content" hidden>
+            <p class="chart-scale-note">Zeile = Prämisse, Spalte = Folge. Beispiel: 60 % bei Bier → Backwaren bedeutet, dass 60 % der Einkäufe mit Bier auch Backwaren enthalten. Die Richtung ist entscheidend.</p>
+            <div class="heatmap-legend" aria-label="Farbskala">
+                <span>0 %</span><span class="heatmap-gradient" aria-hidden="true"></span><span id="confidence-max"></span>
+            </div>
+            <div class="heatmap-scroll" tabindex="0" role="region" aria-labelledby="confidence-heading">
+                <table class="heatmap" aria-labelledby="confidence-heading">
+                    <caption>Confidence = gemeinsame Einkäufe / Einkäufe mit der Zeilenwarengruppe. n. b. = Ausgangswarengruppe nie gekauft; 0 % = nie gemeinsam gekauft.</caption>
+                    <thead id="confidence-head"></thead>
+                    <tbody id="confidence-body"></tbody>
+                </table>
+            </div>
         </div>
     </article>
 </section>
@@ -622,6 +671,127 @@
             status.textContent = 'Die Kaufregeln konnten nicht geladen werden.';
             console.error(error);
         }
+    });
+
+    function heatmapTooltip(cell, tooltip) {
+        const description = cell.title;
+        cell.removeAttribute('title');
+        cell.tabIndex = 0;
+        cell.setAttribute('aria-label', description);
+        const hide = () => { tooltip.hidden = true; cell.removeAttribute('aria-describedby'); };
+        const show = () => {
+            tooltip.textContent = description;
+            tooltip.hidden = false;
+            cell.setAttribute('aria-describedby', tooltip.id);
+            const rect = cell.getBoundingClientRect();
+            tooltip.style.left = Math.max(12, Math.min(rect.left, window.innerWidth - tooltip.offsetWidth - 12)) + 'px';
+            const below = rect.bottom + 8;
+            tooltip.style.top = Math.max(12, below + tooltip.offsetHeight <= window.innerHeight - 12
+                ? below : rect.top - tooltip.offsetHeight - 8) + 'px';
+        };
+        cell.addEventListener('mouseenter', show);
+        cell.addEventListener('mouseleave', hide);
+        cell.addEventListener('focus', show);
+        cell.addEventListener('blur', hide);
+        cell.addEventListener('keydown', event => { if (event.key === 'Escape') hide(); });
+    }
+
+    async function ladeHeatmap(prefix, url, confidence = false) {
+        const status = document.getElementById(prefix + '-status');
+        const content = document.getElementById(prefix + '-content');
+        const tooltip = document.createElement('div');
+        tooltip.id = prefix + '-tooltip';
+        tooltip.className = 'heatmap-tooltip';
+        tooltip.setAttribute('role', 'tooltip');
+        tooltip.hidden = true;
+        document.body.append(tooltip);
+        window.addEventListener('scroll', () => { tooltip.hidden = true; }, true);
+        window.addEventListener('resize', () => { tooltip.hidden = true; });
+        // Die API liefert nur positive Paare; alle Warengruppen bleiben auf den Achsen sichtbar.
+        const warengruppen = ['Fertiggerichte', 'Tiefkuehlware', 'Milchprodukte', 'Backwaren',
+            'Obst/Gemuese', 'Spirituosen', 'Tiernahrung', 'Bier', 'Frischfleisch',
+            'Drogerieartikel', 'Konserven', 'Kaffee/Tee', 'Suessigkeiten', 'Wurstwaren', 'Schreibwaren'];
+        const percent = new Intl.NumberFormat('de-DE', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 });
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+            const matrix = await response.json();
+            if (!matrix || typeof matrix !== 'object' || Array.isArray(matrix)) {
+                throw new Error('Ungueltiges Matrixformat');
+            }
+            const labels = [...new Set([...warengruppen, ...Object.keys(matrix),
+                ...Object.values(matrix).flatMap(row => Object.keys(row ?? {}))])];
+            const values = labels.map(a => labels.map(b => {
+                const value = matrix[a]?.[b] ?? (confidence ? null : 0);
+                if (value === null) return null;
+                if (typeof value !== 'number' || !Number.isFinite(value) || value < 0 || value > 1) {
+                    throw new Error('Ungueltige Haeufigkeit');
+                }
+                return a === b ? 0 : value;
+            }));
+            const max = Math.max(0, ...values.flat().filter(value => value !== null));
+            if (Object.keys(matrix).length === 0 || (!confidence && max === 0)) {
+                status.textContent = 'Keine gemeinsamen Einkäufe gefunden (oder noch keine Daten vorhanden).';
+                return;
+            }
+            const header = document.createElement('tr');
+            const corner = document.createElement('th');
+            corner.scope = 'col';
+            corner.className = 'axis-corner';
+            corner.textContent = confidence ? 'Zeile: Voraussetzung /\nSpalte: Folge' : 'Warengruppe';
+            header.append(corner);
+            labels.forEach(label => {
+                const cell = document.createElement('th');
+                cell.scope = 'col';
+                const name = document.createElement('span');
+                name.textContent = label;
+                cell.append(name);
+                header.append(cell);
+            });
+            const rows = document.createDocumentFragment();
+            labels.forEach((a, i) => {
+                const row = document.createElement('tr');
+                const heading = document.createElement('th');
+                heading.scope = 'row';
+                heading.textContent = a;
+                row.append(heading);
+                labels.forEach((b, j) => {
+                    const cell = document.createElement('td');
+                    if (i === j) {
+                        cell.textContent = '\u2014';
+                        cell.className = 'diagonal';
+                        cell.title = 'Selbstvergleich ausgeblendet';
+                    } else if (values[i][j] === null) {
+                        cell.textContent = 'n. b.';
+                        cell.className = 'diagonal';
+                        cell.title = a + ': keine Einkaeufe, Confidence nicht berechenbar';
+                    } else {
+                        const value = values[i][j];
+                        const intensity = max > 0 ? value / max : 0;
+                        cell.textContent = percent.format(value);
+                        cell.style.backgroundColor = 'hsl(' + (confidence ? 275 : 210) + ', 70%, ' + (97 - 62 * intensity) + '%)';
+                        cell.style.color = intensity > 0.6 ? '#fff' : '#243247';
+                        cell.title = a + ' → ' + b;
+                    }
+                    heatmapTooltip(cell, tooltip);
+                    row.append(cell);
+                });
+                rows.append(row);
+            });
+            document.getElementById(prefix + '-head').replaceChildren(header);
+            document.getElementById(prefix + '-body').replaceChildren(rows);
+            document.getElementById(prefix + '-max').textContent = percent.format(max);
+            content.hidden = false;
+            status.hidden = true;
+        } catch (error) {
+            status.textContent = 'Die Heatmap konnte nicht geladen werden.';
+            console.error(error);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        ladeHeatmap('heatmap', /*[[@{/api/metrics/itemsSupportHeatmap}]]*/ '/api/metrics/itemsSupportHeatmap');
+        ladeHeatmap('confidence', /*[[@{/api/metrics/itemsConfidenceHeatmap}]]*/ '/api/metrics/itemsConfidenceHeatmap', true);
     });
 </script>
 </body>
