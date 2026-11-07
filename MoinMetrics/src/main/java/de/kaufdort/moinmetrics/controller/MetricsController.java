@@ -1,10 +1,12 @@
 package de.kaufdort.moinmetrics.controller;
 
+import de.kaufdort.moinmetrics.model.AprioriRuleDTO;
 import de.kaufdort.moinmetrics.service.MetricsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller()
@@ -59,8 +61,8 @@ public class MetricsController {
     // Gemeinsam gekaufte Waren
     @ResponseBody
     @GetMapping("/api/metrics/itemsBoughtTogether")
-    public void itemsBoughtTogether() {
-        metricsService.getItemsBoughtTogether();
+    public List<AprioriRuleDTO> itemsBoughtTogether() {
+        return metricsService.getItemsBoughtTogether();
     }
 
 

@@ -1,10 +1,16 @@
 package de.kaufdort.moinmetrics.service;
 
+import de.kaufdort.moinmetrics.model.AprioriRuleDTO;
 import de.kaufdort.moinmetrics.repository.DataStorage;
 import org.springframework.stereotype.Service;
+import weka.associations.Apriori;
+import weka.associations.AssociationRule;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.NumericCleaner;
+import weka.filters.unsupervised.attribute.NumericToNominal;
 
 import java.util.*;
 
@@ -91,7 +97,7 @@ public class MetricsService {
     public Map<String, Integer> getDayRevenue() {
         Instances data = storage.getInstances();
 
-        return mapAttributeRevenue(data,"Einkaufstag");
+        return mapAttributeRevenue(data, "Einkaufstag");
     }
 
     // Kundenzahl pro Tag
@@ -178,7 +184,67 @@ public class MetricsService {
         return mapAttributeCustomer(data, "Einkaufsuhrzeit");
     }
 
-    public void getItemsBoughtTogether() {
+    public List<AprioriRuleDTO> getItemsBoughtTogether() {
+        // Arbeiten auf einer Kopie um Storagedaten nicht zu verändern
+        Instances data = new Instances(storage.getInstances());
+
+        // Attribute die keine Artikel sind löschen
+        for (int i = 0; i < 10; i++) {
+            data.deleteAttributeAt(0);
+        }
+
+        // umwandeln in gekauft / nicht gekauft (0/1)
+        NumericCleaner nc = new NumericCleaner();
+        nc.setMaxThreshold(1.0); // Schwellwert auf 1 setzen
+        nc.setMaxDefault(1.0); // alles ueber Schwellwert durch 1 ersetzen
+        try {
+            nc.setInputFormat(data);
+            data = Filter.useFilter(data, nc); // Filter anwenden.
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        // nicht gekaufte Artikel aus Analyse rausnehmen
+        for (Instance row : data) {
+            for (int i = 0; i < data.numAttributes(); i++) {
+                if (row.value(i) == 0) {
+                    row.setMissing(i);
+                }
+            }
+        }
+
+        // Die Daten als nominale und nicht als numerische Daten setzen
+        NumericToNominal num2nom = new NumericToNominal();
+        num2nom.setAttributeIndices("first-last");
+        try {
+            num2nom.setInputFormat(data);
+            data = Filter.useFilter(data, num2nom);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        Apriori apriori = new Apriori();
+        List<AprioriRuleDTO> aprioriRules = new ArrayList<>();
+        try {
+            apriori.buildAssociations(data);
+
+            List<AssociationRule> rules = apriori.getAssociationRules().getRules();
+
+            for (AssociationRule rule : rules) {
+                aprioriRules.add(
+                        new AprioriRuleDTO(
+                                rule.getPremise().toString(),
+                                rule.getConsequence().toString(),
+                                rule.getNamedMetricValue("Confidence"),
+                                (double) rule.getTotalSupport() / rule.getTotalTransactions(),
+                                rule.getNamedMetricValue("Lift")
+                        )
+                );
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return aprioriRules;
     }
 
     // Umsatz pro Artikel
@@ -212,7 +278,7 @@ public class MetricsService {
     }
 
     // Deckungsbeiträge für jeden Artikel
-    public Map<String, Double> mapItemMargin () {
+    public Map<String, Double> mapItemMargin() {
         Instances data = storage.getInstances();
 
         Map<String, Double> margins = new HashMap<>();

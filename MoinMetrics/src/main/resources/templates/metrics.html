@@ -11,6 +11,19 @@
         .chart-card { min-width: 0; padding: 20px; background: white; border: 1px solid #dde3eb; border-radius: 12px; }
         .chart-card h2 { margin: 0 0 16px; font-size: 18px; }
         .chart-container { position: relative; height: 260px; }
+        .chart-card-days { grid-column: 1 / -1; }
+        .day-charts { height: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 24px; }
+        .day-chart { min-width: 0; }
+        .day-chart h3 { margin: 0 0 8px; font-size: 16px; }
+        .day-chart-canvas { position: relative; height: 240px; }
+        .chart-scale-note { color: #536176; font-size: 14px; }
+        .rules-card { grid-column: 1 / -1; }
+        .rules-scroll { overflow-x: auto; }
+        .rules-table { width: 100%; border-collapse: collapse; }
+        .rules-table caption { text-align: left; color: #536176; margin-bottom: 16px; font-size: 14px; }
+        .rules-table th, .rules-table td { padding: 12px; border-bottom: 1px solid #dde3eb; text-align: left; vertical-align: top; }
+        .rules-table th { background: #f5f7fa; }
+        .rules-table .numeric { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
     </style>
 </head>
 <body>
@@ -52,12 +65,7 @@
         <p>Noch keine Daten vorhanden.</p>
     </article>
     <article class="chart-card" th:each="title, stat : ${ {
-        'Umsatz nach Uhrzeit pro Tag',
-        'Gemeinsam gekaufte Waren',
-        'Stärkste Artikel nach Umsatz',
-        'Schwächste Artikel nach Umsatz',
-        'Stärkste Artikel nach Deckungsbeitrag',
-        'Schwächste Artikel nach Deckungsbeitrag'
+        'Umsatz nach Uhrzeit pro Tag'
     } }">
         <h2 th:text="${title}">Diagramm</h2>
         <div class="chart-container">
@@ -67,12 +75,31 @@
         </div>
         <p>Noch keine Daten vorhanden.</p>
     </article>
+    <article class="chart-card rules-card">
+        <h2 id="rules-heading">Gemeinsam gekaufte Waren</h2>
+        <p id="rules-status" role="status">Regeln werden geladen ...</p>
+        <div id="rules-content" class="rules-scroll" hidden>
+            <table class="rules-table" aria-labelledby="rules-heading">
+                <caption>Support: Anteil aller Einkäufe, die Prämisse und Folge gemeinsam enthalten.</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Prämisse</th>
+                        <th scope="col">Folge</th>
+                        <th scope="col" class="numeric">Confidence</th>
+                        <th scope="col" class="numeric">Lift</th>
+                        <th scope="col" class="numeric">Support</th>
+                    </tr>
+                </thead>
+                <tbody id="rules-body"></tbody>
+            </table>
+        </div>
+    </article>
 </section>
 
 <script th:inline="javascript">
     const startzeit = performance.now();
     const ausstehendeDiagramme = new Set([
-        'chart-0', 'chart-1', 'chart-2', 'chart-3',
+        'chart-0', 'chart-1', 'chart-2', 'chart-3', 'chart-4',
         'chart-item-revenue', 'chart-item-margin'
     ]);
     let diagrammFehler = false;
@@ -155,6 +182,127 @@
             diagrammAbgeschlossen(canvas, 'fehler');
         }
     });
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        const canvas = document.getElementById('chart-4');
+        const status = canvas.closest('.chart-card').querySelector('p');
+        const url = /*[[@{/api/metrics/timeByRevenueEachDay}]]*/ '/api/metrics/timeByRevenueEachDay';
+
+        try {
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            const umsatzProTag = await response.json();
+
+            // HashMaps haben keine garantierte Wochentagsreihenfolge.
+            const tage = [
+                'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag',
+                'Freitag', 'Samstag', 'Sonntag'
+            ];
+
+            const zeiten = ['<10 Uhr', '10-12 Uhr', '12-14 Uhr', '14-17 Uhr', '>17 Uhr'];
+            const farben = ['#0072b2', '#d55e00', '#009e73', '#cc79a7', '#8c6d00', '#56b4e9', '#555555'];
+            const vorhandeneTage = tage.filter(tag =>
+                zeiten.some(zeit => typeof umsatzProTag[tag]?.[zeit] === 'number'));
+            const euro = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
+
+            if (vorhandeneTage.length === 0) {
+                status.textContent = 'Noch keine Daten vorhanden.';
+                diagrammAbgeschlossen(canvas, 'leer');
+                return;
+            }
+
+            // Gemeinsame Grenzen aus allen Tagen; nur positive Werte sind logarithmisch darstellbar.
+            const positiveWerte = vorhandeneTage.flatMap(tag =>
+                zeiten.map(zeit => umsatzProTag[tag][zeit] ?? 0)).filter(wert => wert > 0);
+            const skalaMin = positiveWerte.length
+                ? 10 ** (Math.ceil(Math.log10(Math.min(...positiveWerte))) - 1) : 1;
+            const skalaMax = positiveWerte.length
+                ? Math.max(skalaMin * 10, 10 ** Math.ceil(Math.log10(Math.max(...positiveWerte)))) : 10;
+
+            const card = canvas.closest('.chart-card');
+            const container = canvas.parentElement;
+            card.classList.add('chart-card-days');
+            container.classList.add('day-charts');
+            const hinweis = document.createElement('p');
+            hinweis.className = 'chart-scale-note';
+            hinweis.textContent = 'Einheitliche logarithmische Umsatzskala: Gleiche Abstaende entsprechen gleichen Faktoren (z. B. 10, 100, 1.000 EUR). Nullwerte und negative Werte werden unter dem jeweiligen Diagramm aufgefuehrt.';
+            card.insertBefore(hinweis, container);
+            container.replaceChildren();
+
+            vorhandeneTage.forEach(tag => {
+                const panel = document.createElement('section');
+                panel.className = 'day-chart';
+                const heading = document.createElement('h3');
+                heading.textContent = tag;
+                const plot = document.createElement('div');
+                plot.className = 'day-chart-canvas';
+                const dayCanvas = document.createElement('canvas');
+                dayCanvas.setAttribute('role', 'img');
+                dayCanvas.setAttribute('aria-label', 'Umsatz nach Zeitfenster am ' + tag);
+                dayCanvas.textContent = zeiten.map(zeit => zeit + ': ' + euro.format(umsatzProTag[tag][zeit] ?? 0)).join(', ');
+                plot.append(dayCanvas);
+                panel.append(heading, plot);
+                const nichtDarstellbar = zeiten.filter(zeit => (umsatzProTag[tag][zeit] ?? 0) <= 0);
+                if (nichtDarstellbar.length > 0) {
+                    const notiz = document.createElement('p');
+                    notiz.className = 'chart-scale-note';
+                    notiz.textContent = 'Ohne Balken: ' + nichtDarstellbar.map(zeit =>
+                        zeit + ': ' + euro.format(umsatzProTag[tag][zeit] ?? 0)).join('; ');
+                    panel.append(notiz);
+                }
+                container.append(panel);
+
+                new Chart(dayCanvas, {
+                    type: 'bar',
+                    data: {
+                        labels: zeiten,
+                        datasets: [{
+                            label: tag,
+                            // Keine kuenstlichen Ersatzwerte auf der logarithmischen Achse.
+                            data: zeiten.map(zeit => umsatzProTag[tag][zeit] > 0 ? umsatzProTag[tag][zeit] : null),
+                            base: skalaMin,
+                            backgroundColor: farben[tage.indexOf(tag)],
+                            borderRadius: 3
+                        }]
+                    },
+                    options: {
+                        animation: false,
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: context => euro.format(context.parsed.y)
+                                }
+                            }
+                        },
+                        scales: {
+                            x: { ticks: { autoSkip: false, maxRotation: 0 } },
+                            y: {
+                                type: 'logarithmic',
+                                min: skalaMin,
+                                max: skalaMax,
+                                title: { display: true, text: 'Umsatz in EUR (logarithmisch)' }
+                            }
+                        }
+                    }
+                });
+            });
+            diagrammAbgeschlossen(canvas);
+
+            status.hidden = true;
+        } catch (error) {
+            status.textContent = 'Die Daten konnten nicht geladen werden.';
+            console.error(error);
+            diagrammAbgeschlossen(canvas, 'fehler');
+        }
+    });
+
     document.addEventListener('DOMContentLoaded', async () => {
         const canvas = document.getElementById('chart-1');
         const status = canvas.closest('.chart-card').querySelector('p');
@@ -434,6 +582,45 @@
             status.textContent = 'Die Daten konnten nicht geladen werden.';
             console.error(error);
             diagrammAbgeschlossen(canvas, 'fehler');
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        const status = document.getElementById('rules-status');
+        const content = document.getElementById('rules-content');
+        const body = document.getElementById('rules-body');
+        const url = /*[[@{/api/metrics/itemsBoughtTogether}]]*/ '/api/metrics/itemsBoughtTogether';
+        const percent = new Intl.NumberFormat('de-DE', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 });
+        const number = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const artikelNamen = value => value.replace(/^\[|\]$/g, '').replace(/=1(?=,|$)/g, '').split(', ').join(' + ');
+
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('HTTP ' + response.status);
+            const rules = await response.json();
+            if (rules.length === 0) {
+                status.textContent = 'Keine gemeinsamen Kaufregeln gefunden.';
+                return;
+            }
+            const rows = document.createDocumentFragment();
+            for (const rule of rules) {
+                const row = document.createElement('tr');
+                const values = [artikelNamen(rule.premise), artikelNamen(rule.conclusion),
+                    percent.format(rule.confidence), number.format(rule.lift), percent.format(rule.support)];
+                values.forEach((value, index) => {
+                    const cell = document.createElement('td');
+                    cell.textContent = value;
+                    if (index >= 2) cell.className = 'numeric';
+                    row.append(cell);
+                });
+                rows.append(row);
+            }
+            body.replaceChildren(rows);
+            content.hidden = false;
+            status.hidden = true;
+        } catch (error) {
+            status.textContent = 'Die Kaufregeln konnten nicht geladen werden.';
+            console.error(error);
         }
     });
 </script>
