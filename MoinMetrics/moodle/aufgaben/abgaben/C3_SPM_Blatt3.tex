@@ -10,7 +10,9 @@
 \usepackage{microtype}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage{amsmath}
+\usepackage{svg}
 \usepackage[font=small,skip=5pt]{caption}
 \pagestyle{fancy}
 \fancyhf{}
@@ -97,7 +99,7 @@ Z3.3 & Muss & Die Anwendung kann intiutiv bedient werden ohne Benutzererkennung 
 
 
 \subsection*{Termin- und Kostenziele}
-\textbf{Z4 (Muss): Planmä\ss{}igen Projektabschluss sichern.} Das Oberziel wird durch zwei interne Unterziele konkretisiert: \textbf{Z4.1 (Muss)} sieht Abnahme und Produktauslieferung am 12.01.2027 vor. \textbf{Z4.2 (Muss)} sieht den Projektabschluss am 14.01.2027 mit gesonderter Terminreserve bis zum 21.01.2027 vor. Diese Daten sind vorgeschlagene Zieltermine und keine bestätigten Moodle-Fristen.
+\textbf{Z4 (Muss): Planmä\ss{}igen Projektabschluss sichern.} Das Oberziel wird durch zwei interne Unterziele konkretisiert: \textbf{Z4.1 (Muss)} sieht die Übergabe des Produkts an die anderen Gruppen bis zum 13.12.2026 vor. \textbf{Z4.2 (Muss)} sieht Projektabnahme und -abschluss am 14.12.2026 vor. Diese Daten sind vorgeschlagene Zieltermine und keine bestätigten Moodle-Fristen.
 
 \textbf{Z5 (Muss): Das vereinbarte Projektbudget einhalten.} \textbf{Z5.1 (Muss)} begrenzt den Basisaufwand auf 256 Personenstunden. \textbf{Z5.2 (Muss)} begrenzt den Aufwand einschlie\ss{}lich gerundeter Risikoreserve auf 282 Personenstunden beziehungsweise 28.200 Euro kalkulatorisches Nettobudget. Änderungen des Umfangs werden vor ihrer Umsetzung durch die Projektleitung bewertet und mit KaufDort abgestimmt. Beide Unterziele sind interne Planvorgaben.
 
@@ -112,24 +114,11 @@ F13 und F14 gehören zum optionalen Folgeumfang. Sie sind nicht in den 256 Basis
 \section*{Projektstrukturplan}
 Der Projektstrukturplan gliedert das Projekt nach Tätigkeitsbereichen. Seine Blätter sind die einzeln planbaren Arbeitspakete (AP). Die Zahlen 1 bis 16 sind zugleich die Vorgangsnummern im Netzplan. Start und Ende sind zusätzliche Meilensteine mit Dauer und Aufwand null. Sammelvorgänge erhalten keine zusätzlichen Stunden.
 
-\begin{center}
-\begin{tikzpicture}[x=1cm,y=1cm,>=Stealth,
-root/.style={draw,fill=black!8,text width=13.8cm,align=center,font=\bfseries,minimum height=8mm},
-branch/.style={draw,fill=black!4,text width=6.0cm,align=left,font=\small,inner sep=7pt}]
-\node[root] (r) at (0,0) {MoinMetrics: Warenkorbanalyse für KaufDort};
-\node[branch] (a) at (-3.7,-2) {\textbf{1. Spezifikation und Entwurf}\\1 Anforderungen und Planung\\2 System und Testkonzept\\3 Feinentwurf und Umgebung};
-\node[branch] (b) at (3.7,-2) {\textbf{2. Daten und Analysen}\\4 CSV-Import und Validierung\\6 Weka-Anbindung\\7 Apriori-Analyse\\8 Umsatz- und Häufigkeitsanalysen};
-\node[branch] (c) at (-3.7,-5) {\textbf{3. Weboberfläche}\\5 Weboberfläche und Passwortschutz\\9 Marketingliste\\10 Grafische Ausgaben};
-\node[branch] (d) at (3.7,-5) {\textbf{4. Integration und Qualität}\\11 Integration und Integrationstests\\12 Systemtests und Qualitätssicherung\\13 Fehlerbehebung und Regression};
-\node[branch] (e) at (-3.7,-8) {\textbf{5. Dokumentation und Übergabe}\\14 Dokumentation fertigstellen\\15 Abnahme und Auslieferung};
-\node[branch] (f) at (3.7,-8) {\textbf{6. Projektabschluss}\\16 Präsentation und Auswertung\\des Software-Projektmanagements};
-\draw (r.south) -- (0,-.7);
-\draw (0,-.7) -| (a.north);\draw (0,-.7) -| (b.north);
-\draw (0,-.7) -- (0,-4);\draw (0,-4) |- (c.east);\draw (0,-4) |- (d.west);
-\draw (0,-4) -- (0,-8);\draw (0,-8) -- (e.east);\draw (0,-8) -- (f.west);
-\end{tikzpicture}
-\captionof{figure}{Hierarchischer Projektstrukturplan des Pflichtumfangs}
-\end{center}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{../../Entwurf-Projekt-Struktutplan.drawio}
+    \caption{Projekt Strukturplan MoinMetrics}
+\end{figure}
 
 \subsection*{Einordnung in das V-Modell}
 AP 1 legt Anforderungen und Abnahmegrundlagen fest. AP 2 beschreibt Systemarchitektur, Schnittstellen und Systemtests. AP 3 konkretisiert Komponenten und Modultests. AP 4 bis AP 10 enthalten Implementierung, entwicklungsbegleitende Modultests und Javadoc. AP 11 prüft das Zusammenspiel der Komponenten; AP 12 prüft das Gesamtsystem gegen die Anforderungen. Nach der Fehlerbehebung in AP 13 folgt die Abnahme in AP 15. Damit sind Spezifikation und zugehörige Prüfstufen aufeinander bezogen.
@@ -220,7 +209,7 @@ Da das Grundgerüst jetzt steht, wird ausführlicher auf die Netzstruktur eingeg
 \subsubsection*{Aufwand, Dauer und Kapazität}
 Die 256 Personenstunden aus dem begründeten Gesamtaufwand von Blatt 2 werden auf die Arbeitspakete verteilt. Die dortige 10\,\%-Reserve wird gesondert geführt: $256\cdot0{,}10=25{,}6$, aufgerundet 26 Personenstunden. Damit bleibt der Planungswert von 282 Personenstunden erhalten.
 
-Ein Projekttag (PT) ist kein achtstündiger Arbeitstag, sondern ein verfügbarer Werktag im Kalender. Für das neben dem Studium bearbeitete Projekt werden höchstens 2 Stunden je Person und Projekttag angesetzt. Der Tagesbedarf ergibt sich als $E_i/(D_i\cdot n_i)$. Die Dauern berücksichtigen konzentrierte Teilzeitarbeit, Abstimmung und Reviews. Ein Projektarbeitspaket wird zwischen seinen Arbeitstagen nicht durch andere Projektpakete derselben Person verdrängt; Wochenenden und die Winterpause bleiben arbeitsfrei.
+Ein Projekttag (PT) ist kein achtstündiger Arbeitstag, sondern ein verfügbarer Werktag im Kalender. Für das neben dem Studium bearbeitete Projekt werden höchstens 2 Stunden je Person und Projekttag angesetzt. Der Tagesbedarf ergibt sich als $E_i/(D_i\cdot n_i)$. Die Dauern berücksichtigen konzentrierte Teilzeitarbeit, Abstimmung und Reviews. Ein Projektarbeitspaket wird zwischen seinen Arbeitstagen nicht durch andere Projektpakete derselben Person verdrängt; Wochenenden und gesetzliche Feiertage bleiben arbeitsfrei.
 
 \begin{center}\captionof{table}{Aufwände, Dauern und Ressourcen des Pflichtumfangs}
 \begin{tabularx}{\linewidth}{rYrrrr}
@@ -265,39 +254,39 @@ Seine Länge beträgt $10+8+6+11+4+6+6+5+4+2+2=\mathbf{64}$ Projekttage. Jede Ve
 \section*{Terminplan}
 Nun werden die Anfangs und Endzeitpunkte mit einem Datum versehen und somit kalendarisch festgelegt.
 \subsection*{Kalender und Terminannahmen}
-Als Planbeginn wird Montag, der 05.10.2026, angesetzt. Gearbeitet wird montags bis freitags. Samstage und Sonntage sowie gesetzliche Feiertage in Niedersachsen sind arbeitsfrei. Der Reformationstag am 31.10.2026 fällt auf einen Samstag. Der 25.12.2026, der 26.12.2026 und der 01.01.2027 liegen innerhalb der vorgesehenen Winterpause.
+Planungsstichtag ist Sonntag, der 08.11.2026. AP 1 bis AP 3 gelten als abgeschlossen; konkrete Ist-Abschlussdaten sind nicht dokumentiert. Die Implementierung beginnt am nächsten Arbeitstag, Montag, dem 09.11.2026. Der Semesterplan sieht die Produktübergabe bis zum 13.12.2026 sowie Projektabnahme und -abschluss am 14.12.2026 vor. Gearbeitet wird montags bis freitags. Samstage und Sonntage sowie gesetzliche Feiertage in Niedersachsen sind arbeitsfrei. Der Reformationstag am 31.10.2026 fällt auf einen Samstag. 
 
-Für den Zeitraum 21.12.2026 bis einschlie\ss{}lich 03.01.2027 wird ausdrücklich eine \emph{angenommene gemeinsame Projektpause} vorgesehen. Dies ist keine Behauptung über die offiziellen Hochschulferien. Schulferien im Oktober werden nicht automatisch als Hochschulferien übernommen. Zusätzliche Abwesenheiten und verbindliche Praktikums- oder Peer-QS-Termine sind vor Freigabe des Plans abzugleichen.
+Die Semesterplanung setzt die Abgabe von Blatt 3 auf den 08.11.2026, von Blatt 4 auf den 22.11.2026 und von Blatt 5 auf den 03.01.2027. Die Produktübergabe an die anderen Gruppen ist bis zum 13.12.2026 vorgesehen; Projektabnahme und -abschluss finden am 14.12.2026 statt. Die Präsentationen sind für den 05.01. und 07.01.2027 angesetzt. Da die Implementierung erst am 09.11. beginnt, ergibt die aktualisierte Vorschau bei unveränderten Dauern den Projektabschluss am 05.01.2027. Die Semestertermine für Produktübergabe und Projektabschluss sind damit nicht erreichbar und müssen mit der Projektgruppe neu abgestimmt werden.
 
-Ein Zeitraum $[FAZ,FEZ]$ umfasst die Arbeitstage mit Indizes $FAZ$ bis $FEZ-1$. Beispielsweise beginnt AP 1 bei 0 am Morgen des 05.10. und endet bei 10 nach dem Arbeitseinsatz am 16.10. AP 2 startet am folgenden Projekttag, dem 19.10. Dadurch wird ein arbeitsfreies Wochenende weder als Arbeitstag gezählt noch doppelt belegt.
+Ein Zeitraum $[FAZ,FEZ]$ umfasst die Arbeitstage mit Indizes $FAZ$ bis $FEZ-1$. Beispielsweise beginnt AP 1 bei 0 am Morgen des 16.09. und endet bei 10 nach dem Arbeitseinsatz am 29.09. AP 2 startet am folgenden Projekttag, dem 30.09. Dadurch wird ein arbeitsfreies Wochenende weder als Arbeitstag gezählt noch doppelt belegt.
 
-\begin{center}\captionof{table}{Terminplan in frühester Lage (Soll-Termine)}
+\begin{center}\captionof{table}{Aktualisierte Terminprognose (Stand 08.11.2026)}
 \begin{tabularx}{\linewidth}{rYrrr}
 \toprule\textbf{Nr.}&\textbf{Vorgang}&\textbf{D (PT)}&\textbf{Beginn}&\textbf{Ende}\\\midrule
-0 & Start & 0 & 05.10.2026 & 05.10.2026\\
-1 & Anforderungen / Planung & 10 & 05.10.2026 & 16.10.2026\\
-2 & System / Testkonzept & 8 & 19.10.2026 & 28.10.2026\\
-3 & Feinentwurf / Umgebung & 6 & 29.10.2026 & 05.11.2026\\
-4 & CSV-Import & 11 & 06.11.2026 & 20.11.2026\\
-5 & Web / Passwort & 11 & 06.11.2026 & 20.11.2026\\
-6 & Weka-Anbindung & 6 & 06.11.2026 & 13.11.2026\\
-7 & Apriori-Analyse & 8 & 23.11.2026 & 02.12.2026\\
-8 & Kennzahlen & 9 & 23.11.2026 & 03.12.2026\\
-9 & Marketingliste & 4 & 23.11.2026 & 26.11.2026\\
-10 & Grafische Ausgaben & 6 & 27.11.2026 & 04.12.2026\\
-11 & Integration & 6 & 07.12.2026 & 14.12.2026\\
-12 & Systemtests / QS & 5 & 15.12.2026 & 04.01.2027\\
-13 & Korrektur / Regression & 4 & 05.01.2027 & 08.01.2027\\
-14 & Dokumentation & 7 & 15.12.2026 & 06.01.2027\\
-15 & Abnahme / Lieferung & 2 & 11.01.2027 & 12.01.2027\\
-16 & Projektabschluss & 2 & 13.01.2027 & 14.01.2027\\
-17 & Ende & 0 & 14.01.2027 & 14.01.2027\\
+0 & Start & 0 & 16.09.2026 & 16.09.2026\\
+1 & Anforderungen / Planung & 10 & 16.09.2026 & 29.09.2026\\
+2 & System / Testkonzept & 8 & 30.09.2026 & 09.10.2026\\
+3 & Feinentwurf / Umgebung & 6 & 12.10.2026 & 19.10.2026\\
+4 & CSV-Import & 11 & 09.11.2026 & 23.11.2026\\
+5 & Web / Passwort & 11 & 09.11.2026 & 23.11.2026\\
+6 & Weka-Anbindung & 6 & 09.11.2026 & 16.11.2026\\
+7 & Apriori-Analyse & 8 & 24.11.2026 & 03.12.2026\\
+8 & Kennzahlen & 9 & 24.11.2026 & 04.12.2026\\
+9 & Marketingliste & 4 & 24.11.2026 & 27.11.2026\\
+10 & Grafische Ausgaben & 6 & 30.11.2026 & 07.12.2026\\
+11 & Integration & 6 & 08.12.2026 & 15.12.2026\\
+12 & Systemtests / QS & 5 & 16.12.2026 & 22.12.2026\\
+13 & Korrektur / Regression & 4 & 23.12.2026 & 29.12.2026\\
+14 & Dokumentation & 7 & 16.12.2026 & 24.12.2026\\
+15 & Abnahme / Lieferung & 2 & 30.12.2026 & 31.12.2026\\
+16 & Projektabschluss & 2 & 04.01.2027 & 05.01.2027\\
+17 & Ende & 0 & 05.01.2027 & 05.01.2027\\
 \bottomrule\end{tabularx}\end{center}
 
 \subsection*{Meilensteine und Terminreserve}
-Mit Abschluss von AP 1 ist am 16.10.2026 die Planbasis vorgesehen, nach AP 3 am 05.11.2026 der Feinentwurf. Der integrierte vertikale Prototyp steht nach AP 11 am 14.12.2026 bereit. Die Produktauslieferung folgt nach bestandener Abnahme am 12.01.2027, der Projektabschluss am 14.01.2027. Diese Meilensteine entstehen aus den Arbeitspaketen und erzeugen keine zusätzlichen Aufwände.
+AP 1 bis AP 3 sind zum Stichtag als abgeschlossen angesetzt. Die Implementierung beginnt am 09.11.2026; der integrierte vertikale Prototyp wird nach AP 11 am 15.12.2026 erwartet. Die aktualisierte Terminprognose sieht Abnahme und Lieferung am 30. und 31.12.2026 sowie Projektabschluss am 05.01.2027 vor. Damit wird die Semesterplanung (Übergabe bis 13.12. und Projektabschluss am 14.12.) verfehlt. Die Präsentationen sind laut Semesterplan am 05.01. und 07.01.2027 angesetzt.
 
-Vom 15.01. bis zum 21.01.2027 werden fünf weitere Projekttage als \textbf{Terminreserve} freigehalten. Bei unveränderter Verfügbarkeit ergeben sich $5\cdot3\cdot2=30$ Personenstunden Kapazität. Damit können die 26 reservierten Personenstunden grundsätzlich untergebracht werden. Diese Reserve ist keine Garantie, dass beliebige Verzögerungen auffangbar sind: Bei Spezialaufgaben oder fehlender Kundenverfügbarkeit muss umgeplant werden. Externe Abnahmen und Peer-QS sind frühzeitig zu terminieren.
+Im aktualisierten Ablauf ist keine belastbare Terminreserve vor dem Semesterabschluss vorhanden. Die bisherige Reserve kann nicht angesetzt werden, weil die Prognose bereits über die vorgesehenen Produkt- und Projekttermine hinausgeht. Für die Einhaltung des 13./14.12. wären eine Neuverteilung der Arbeit, zusätzliche Kapazität oder eine Anpassung des Umfangs erforderlich.
 
 \clearpage
 \section*{Kostenplan}
