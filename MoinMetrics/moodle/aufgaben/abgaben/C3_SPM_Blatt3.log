@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.10.22)  8 NOV 2026 21:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.10.22)  8 NOV 2026 21:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1090,7 +1090,7 @@ Package pdftex.def Info: Netzplan.png  used on input line 242.
 
  <./Netzplan.png>] [9] [10] [11
 
-] [12] (C3_SPM_Blatt3.aux)
+] (C3_SPM_Blatt3.aux)
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-09-09>
@@ -1099,11 +1099,11 @@ Package rerunfilecheck Info: File `C3_SPM_Blatt3.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 28172 strings out of 467392
- 538163 string characters out of 5405638
+ 28135 strings out of 467392
+ 537669 string characters out of 5405638
  1009053 words of memory out of 5000000
- 56874 multiletter control sequences out of 15000+600000
- 691889 words of font info for 142 fonts, out of 8000000 for 9000
+ 56864 multiletter control sequences out of 15000+600000
+ 686520 words of font info for 132 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  94i,12n,94p,1012b,807s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/oniku/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pf
@@ -1116,12 +1116,11 @@ C:/Users/oniku/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C
 :/Users/oniku/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:
 /Users/oniku/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/U
 sers/oniku/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/U
-sers/oniku/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri9.pfb><C:/Us
-ers/oniku/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Us
-ers/oniku/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt9.pfb>
-Output written on C3_SPM_Blatt3.pdf (12 pages, 469844 bytes).
+sers/oniku/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/U
+sers/oniku/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt9.pfb>
+Output written on C3_SPM_Blatt3.pdf (11 pages, 438546 bytes).
 PDF statistics:
- 183 PDF objects out of 1000 (max. 8388607)
- 44 named destinations out of 1000 (max. 500000)
- 35351 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 161 PDF objects out of 1000 (max. 8388607)
+ 36 named destinations out of 1000 (max. 500000)
+ 33303 words of extra memory for PDF output out of 35830 (max. 10000000)
 
