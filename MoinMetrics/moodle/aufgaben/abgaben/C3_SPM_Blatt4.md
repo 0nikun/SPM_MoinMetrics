@@ -20,3 +20,7 @@ dem tatsächlichem verglichen. Sowie ein Druchschnitt des Produkts gezeigt.
     *mindestens* die Funktionen „Upload“, „Analyse ausführen“ und „Analyseergebnis auf der
     Webseite ausgeben“ beinhalten. Fügen Sie mindestens von diesen drei Funktionen einen
     Screenshot in das abzugebende Dokument ein.
+![screenshot_csvImport.png](../../screenshot_csvImport.png)
+![screenshot_analyse.png](../../screenshot_analyse.png)
+![screenshot_metricAusgabe.png](../../screenshot_metricAusgabe.png)
+
