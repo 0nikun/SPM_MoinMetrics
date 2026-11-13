@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>MoinMetrics</title>
+    <link rel="stylesheet" th:href="@{/css/fehler.css}">
     <script th:src="@{/vendor/chart.js/chart.umd.min.js}" defer></script>
 </head>
 <body>
 <h1 th:text="${message}">Willkommen</h1>
+<div th:replace="~{fragments/fehler :: anzeige}"></div>
 <form th:action="@{/api/import}"
       method="post"
       enctype="multipart/form-data">

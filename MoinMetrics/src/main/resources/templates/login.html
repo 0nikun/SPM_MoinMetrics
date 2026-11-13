@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login - MoinMetrics</title>
+    <link rel="stylesheet" th:href="@{/css/fehler.css}">
 </head>
 <body>
 <h1 th:text="${message}">Willkommen bei MoinMetrics!</h1>
+<div th:replace="~{fragments/fehler :: anzeige}"></div>
 <form th:action="@{/login}" method="post">
     <p>
         <label for="username">Username</label>

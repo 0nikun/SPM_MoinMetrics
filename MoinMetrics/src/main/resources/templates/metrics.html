@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Metrics | MoinMetrics</title>
+    <link rel="stylesheet" th:href="@{/css/fehler.css}">
     <script th:src="@{/vendor/chart.js/chart.umd.min.js}" defer></script>
     <style>
         body { max-width: 1200px; margin: 0 auto; padding: 24px; font-family: sans-serif; background: #f5f7fa; color: #243247; }
@@ -43,6 +44,7 @@
 </head>
 <body>
 <h1>Metrics</h1>
+<div th:replace="~{fragments/fehler :: anzeige}"></div>
 <p th:text="${importErgebnis}"></p>
 <p id="renderZeit" aria-live="polite">Diagramme werden geladen …</p>
 

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- fehler: String; fehlerListe: Liste von Strings. Ohne Meldungen bleibt der Bereich ausgeblendet. -->
+<section th:fragment="anzeige"
+         th:if="${!#strings.isEmpty(fehler) or !#lists.isEmpty(fehlerListe)}"
+         class="fehler-anzeige" role="alert" aria-labelledby="fehler-titel">
+    <h2 id="fehler-titel">Fehler</h2>
+    <p th:if="${!#strings.isEmpty(fehler)}" th:text="${fehler}"></p>
+    <ul th:if="${!#lists.isEmpty(fehlerListe)}">
+        <li th:each="meldung : ${fehlerListe}" th:text="${meldung}"></li>
+    </ul>
+</section>
+</body>
+</html>
