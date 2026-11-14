@@ -1,5 +1,6 @@
 package de.kaufdort.moinmetrics.controller;
 
+import de.kaufdort.moinmetrics.InvalidCSVException;
 import de.kaufdort.moinmetrics.repository.DataStorage;
 import de.kaufdort.moinmetrics.service.ImportService;
 import de.kaufdort.moinmetrics.service.MetricsService;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.Locale;
 
 @Controller
 @SessionScope
@@ -43,19 +45,24 @@ public class ImportController {
             RedirectAttributes redirectAttributes) {
         timerService.startTimer();
 
-        if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute(
-                    "importErgebnis", "Bitte eine nicht leere Datei auswählen.");
-            return "redirect:/import";
-        }
-
-
         try {
+            String fileName = file.getOriginalFilename();
+
+            if (fileName == null || fileName.isEmpty() || file.isEmpty()) {
+                throw new InvalidCSVException("Fehler: Bitte eine nicht leere Datei auswählen.");
+            } else if (!fileName.toLowerCase(Locale.ROOT).endsWith(".csv")) {
+                throw new InvalidCSVException("Fehler: Ungültiger Dateityp, bitte eine CSV-Datei (.csv) auswählen.");
+            }
+
             importService.loadCSV(file);
             metricsService.init();
+        } catch (InvalidCSVException e) {
+            redirectAttributes.addFlashAttribute(
+                    "importErgebnis", e.getMessage());
+            return "redirect:/import";
         } catch (IOException e) {
             redirectAttributes.addFlashAttribute(
-                    "importErgebnis", "Fehler beim Importieren der Datei.");
+                    "importErgebnis", "Fehler beim Laden der Datei.");
             return "redirect:/import";
         }
 

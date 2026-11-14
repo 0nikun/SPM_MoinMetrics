@@ -1,5 +1,6 @@
 package de.kaufdort.moinmetrics.service;
 
+import de.kaufdort.moinmetrics.InvalidCSVException;
 import de.kaufdort.moinmetrics.repository.DataStorage;
 import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Service;
@@ -8,10 +9,39 @@ import weka.core.Instances;
 import weka.core.converters.CSVLoader;
 
 import java.io.IOException;
-import java.util.Locale;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class ImportService {
+
+    private final Set<String> EXPECTED_ATTRIBUTES = Set.of(
+            "Geschlecht",
+            "Alter",
+            "Kinder",
+            "Familienstand",
+            "Berufstaetig",
+            "Einkaufstag",
+            "Einkaufsuhrzeit",
+            "Wohnort",
+            "Haushaltsnettoeinkommen",
+            "Einkaufssumme",
+            "Fertiggerichte",
+            "Tiefkuehlware",
+            "Milchprodukte",
+            "Backwaren",
+            "Obst/Gemuese",
+            "Spirituosen",
+            "Tiernahrung",
+            "Bier",
+            "Frischfleisch",
+            "Drogerieartikel",
+            "Konserven",
+            "Kaffee/Tee",
+            "Suessigkeiten",
+            "Wurstwaren",
+            "Schreibwaren"
+    );
 
     private final DataStorage session;
 
@@ -19,41 +49,41 @@ public class ImportService {
         this.session = session;
     }
 
-    public void loadCSV(@NonNull MultipartFile file) throws IOException {
+    public void loadCSV(@NonNull MultipartFile file) throws IOException, InvalidCSVException {
         // TODO: Pflichtspalten, Datentypen und erlaubte Werte vor dem Speichern validieren
         // und Validierungsfehler als verständliche Fehlermeldung beim Import anzeigen.
-        validateFileFormat(file);
-        validateFileContent(file);
+        validateCSV(file);
 
         CSVLoader loader = new CSVLoader();
         loader.setSource(file.getInputStream());
         session.setInstances(loader.getDataSet());
     }
 
-    public void validateCSVFile(@NonNull MultipartFile file) {
-
-    }
-
-    private void validateFileFormat(@NonNull MultipartFile file) {
-        if (file.isEmpty()) {
-            throw new IllegalArgumentException("File is empty");
-        } else if (!file.getOriginalFilename().toLowerCase(Locale.ROOT).endsWith(".csv")) {
-            throw new IllegalArgumentException("File format is not supported");
-        } else if (!file.getContentType().equals("text/csv")) {
-            throw new IllegalArgumentException("File format is not supported");
-        }
-    }
-
-    private void validateFileContent(@NonNull MultipartFile file) {
+    // prüft bisher Header auf vorhandensein und erwartete Attribute TODO: Typen
+    private void validateCSV(@NonNull MultipartFile file) throws IOException, InvalidCSVException {
         CSVLoader loader = new CSVLoader();
+        loader.setSource(file.getInputStream());
+
+        Instances structure;
         try {
-            loader.setSource(file.getInputStream());
-            System.out.println("HEADER?: " + loader.getNoHeaderRowPresent());
-            Instances instances = loader.getStructure();
-            System.out.println("VALIDATION: " + instances + "||");
+            structure = loader.getStructure();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new InvalidCSVException("Ungültige CSV-Struktur, Datei konnte nicht geladen werden.");
+        } catch (IllegalArgumentException e) {
+            throw new InvalidCSVException("Ungültige CSV-Struktur, prüfe bitte auf doppelte Attributsnamen oder eine fehlende Attributszeile.");
         }
+        Set<String> attributes = new HashSet<>();
+        Set<String> missing = new HashSet<>(EXPECTED_ATTRIBUTES);
+
+        for (int i = 0; i < structure.numAttributes(); i++) {
+            attributes.add(structure.attribute(i).name());
+        }
+
+        if (!attributes.equals(EXPECTED_ATTRIBUTES)) {
+            missing.removeAll(attributes);
+            throw new InvalidCSVException("Datei enthält nicht die erwarteten Attribute: " + missing);
+        }
+
     }
 
     /*
