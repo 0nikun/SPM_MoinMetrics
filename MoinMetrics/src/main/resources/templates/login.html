@@ -12,13 +12,14 @@
 <form th:action="@{/login}" method="post">
     <p>
         <label for="username">Username</label>
-        <input id="username" type="text" name="username" autocomplete="username">
+        <input id="username" type="text" name="username" autocomplete="username" required>
     </p>
     <p>
         <label for="password">Passwort</label>
-        <input id="password" type="password" name="password" autocomplete="current-password">
+        <input id="password" type="password" name="password" autocomplete="current-password" required>
     </p>
     <button type="submit">Login</button>
 </form>
+<p th:text="${loginErgebnis}"></p>
 </body>
 </html>
