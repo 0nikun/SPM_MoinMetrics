@@ -62,7 +62,7 @@ public class ImportController {
             return "redirect:/import";
         } catch (IOException e) {
             redirectAttributes.addFlashAttribute(
-                    "importErgebnis", "Fehler beim Laden der Datei.");
+                    "importErgebnis", "Fehler beim Laden der Datei." + e.getMessage());
             return "redirect:/import";
         }
 
