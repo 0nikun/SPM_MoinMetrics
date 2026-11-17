@@ -11,9 +11,9 @@
 <body>
 <main class="login-layout import-layout">
     <header class="import-topbar">
-    <div class="brand" aria-label="MoinMetrics">
-        <span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span>MoinMetrics<span class="brand-dot">.</span></span>
+    <div class="brand brand-full">
+        <img th:src="@{/css/images/MoinMetrics_full_transparent.png}"
+             alt="MoinMetrics – Datenanalyse aus Norddeutschland" width="1448" height="1086">
     </div>
     <form th:action="@{/logout}" method="post" class="logout-form">
         <button type="submit" class="logout-button">Abmelden</button>

@@ -7,16 +7,18 @@
 
 .metrics-topbar {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
     gap: 24px;
     padding: 28px 0;
+    min-height: 160px;
     border-bottom: 1px solid #dce5e1;
 }
 
 .metrics-topbar .brand { margin: 0; }
+.metrics-topbar .brand-full { width: min(100%, 220px); flex-shrink: 0; }
 
-.metrics-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.metrics-actions { display: flex; align-items: flex-end; align-self: flex-end; flex-wrap: wrap; gap: 12px; margin-left: auto; }
 
 .import-link {
     display: inline-flex;

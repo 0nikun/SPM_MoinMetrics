@@ -5,16 +5,19 @@
 
 .import-topbar {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 18px;
     width: 100%;
     max-width: 660px;
-    margin-bottom: 28px;
+    min-height: 128px;
+    margin-bottom: 10px;
 }
 
 .import-topbar .brand { margin: 0; }
+.import-topbar .logout-form { align-self: flex-end; margin-left: auto; }
+.import-topbar .brand-full { width: min(100%, 300px); flex-shrink: 0; }
 
 .import-card h1 { max-width: 480px; font-size: 32px; }
 .import-card .login-header { margin-bottom: 25px; }
