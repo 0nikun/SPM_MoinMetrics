@@ -2,26 +2,129 @@
 <html lang="de" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>MoinMetrics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Daten importieren - MoinMetrics</title>
     <link rel="stylesheet" th:href="@{/css/fehler.css}">
-    <script th:src="@{/vendor/chart.js/chart.umd.min.js}" defer></script>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/import.css}">
 </head>
 <body>
-<h1 th:text="${message}">Willkommen</h1>
-<div th:replace="~{fragments/fehler :: anzeige}"></div>
-<form th:action="@{/api/import}"
-      method="post"
-      enctype="multipart/form-data">
-    <label for="csv">CSV-Datei auswählen</label>
-    <input id="csv"
-           type="file"
-           name="file"
-           accept=".csv"
-           required>
-    <button type="submit">Analyse ausführen</button>
-</form>
+<main class="login-layout import-layout">
+    <header class="import-topbar">
+    <div class="brand" aria-label="MoinMetrics">
+        <span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>MoinMetrics<span class="brand-dot">.</span></span>
+    </div>
+    <form th:action="@{/logout}" method="post" class="logout-form">
+        <button type="submit" class="logout-button">Abmelden</button>
+    </form>
+    </header>
 
-<p th:text="${importErgebnis}"></p>
-<p th:text="${ergebnis}"></p>
+    <section class="login-card import-card" aria-labelledby="import-title">
+        <header class="login-header">
+            <h1 id="import-title">Daten importieren</h1>
+            <p>Lade deine CSV-Datei hoch und starte deine Analyse.</p>
+        </header>
+
+        <ol class="import-steps" aria-label="So funktioniert der Import">
+            <li><span class="step-number" aria-hidden="true">1</span> Datei auswählen</li>
+            <li><span class="step-number" aria-hidden="true">2</span> Analyse starten</li>
+            <li><span class="step-number" aria-hidden="true">3</span> Ergebnisse entdecken</li>
+        </ol>
+
+        <div th:replace="~{fragments/fehler :: anzeige}"></div>
+        <p th:if="${!#strings.isEmpty(importErgebnis)}" th:text="${importErgebnis}"
+           class="login-notice" role="status"></p>
+        <p th:if="${!#strings.isEmpty(ergebnis)}" th:text="${ergebnis}"
+           class="login-notice" role="status"></p>
+
+        <form th:action="@{/api/import}" method="post" enctype="multipart/form-data"
+              class="import-form">
+            <div class="upload-panel">
+                <div class="upload-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                         stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                        <path d="M12 16V3m-5 5 5-5 5 5M4 15v5a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-5"/>
+                    </svg>
+                </div>
+                <label for="csv">CSV-Datei auswählen</label>
+                <p id="csv-help">Datei hier ablegen oder vom Gerät auswählen.</p>
+                <input id="csv" type="file" name="file" accept=".csv"
+                       aria-describedby="csv-help" required>
+                <span class="file-type">Unterstütztes Format: .csv</span>
+            </div>
+            <p id="upload-error" class="fehler-anzeige" role="alert" hidden></p>
+            <p id="upload-status" class="upload-status" role="status" aria-live="polite"></p>
+            <button type="submit">Analyse ausführen <span aria-hidden="true">→</span></button>
+        </form>
+
+        <div class="card-footer">Nach dem Import gelangst du direkt zu deinen Ergebnissen.</div>
+    </section>
+
+</main>
+<script>
+    (() => {
+        const dropArea = document.querySelector('.import-card');
+        const fileInput = document.getElementById('csv');
+        const error = document.getElementById('upload-error');
+        const status = document.getElementById('upload-status');
+        let dragDepth = 0;
+
+        const isFileDrag = event => Array.from(event.dataTransfer?.types || []).includes('Files');
+        const resetDrag = () => {
+            dragDepth = 0;
+            dropArea.classList.remove('is-dragging');
+        };
+
+        const showSelection = () => {
+            error.hidden = true;
+            error.textContent = '';
+            status.textContent = fileInput.files.length
+                ? `Ausgewählt: ${fileInput.files[0].name}` : '';
+        };
+
+        fileInput.addEventListener('change', showSelection);
+
+        dropArea.addEventListener('dragenter', event => {
+            if (!isFileDrag(event)) return;
+            event.preventDefault();
+            dragDepth++;
+            dropArea.classList.add('is-dragging');
+        });
+
+        dropArea.addEventListener('dragover', event => {
+            if (!isFileDrag(event)) return;
+            event.preventDefault();
+            event.dataTransfer.dropEffect = 'copy';
+        });
+
+        dropArea.addEventListener('dragleave', event => {
+            if (dragDepth === 0) return;
+            event.preventDefault();
+            if (--dragDepth === 0) resetDrag();
+        });
+
+        dropArea.addEventListener('drop', event => {
+            if (!isFileDrag(event)) return;
+            event.preventDefault();
+            resetDrag();
+            const files = event.dataTransfer.files;
+
+            if (files.length !== 1 || !/\.csv$/i.test(files[0].name)) {
+                fileInput.value = '';
+                status.textContent = '';
+                error.textContent = 'Bitte genau eine CSV-Datei (.csv) ablegen.';
+                error.hidden = false;
+                return;
+            }
+
+            fileInput.files = files;
+            fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+
+        document.addEventListener('dragend', resetDrag);
+        window.addEventListener('blur', resetDrag);
+    })();
+</script>
 </body>
 </html>

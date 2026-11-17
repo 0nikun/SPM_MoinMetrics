@@ -31,7 +31,11 @@ public class SecurityConfig {
                         .defaultSuccessUrl("/import", true)
                         .permitAll()
                 )
+                .sessionManagement(session -> session
+                        .invalidSessionUrl("/login?timeout")
+                )
                 .logout(logout -> logout
+                        .deleteCookies("JSESSIONID")
                         .logoutSuccessUrl("/login?logout")
                         .permitAll()
                 );

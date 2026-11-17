@@ -3,50 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Metrics | MoinMetrics</title>
+    <title>Auswertung - MoinMetrics</title>
     <link rel="stylesheet" th:href="@{/css/fehler.css}">
     <script th:src="@{/vendor/chart.js/chart.umd.min.js}" defer></script>
-    <style>
-        body { max-width: 1200px; margin: 0 auto; padding: 24px; font-family: sans-serif; background: #f5f7fa; color: #243247; }
-        .charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 24px; margin-top: 32px; }
-        .chart-card { min-width: 0; padding: 20px; background: white; border: 1px solid #dde3eb; border-radius: 12px; }
-        .chart-card h2 { margin: 0 0 16px; font-size: 18px; }
-        .chart-container { position: relative; height: 260px; }
-        .chart-card-days { grid-column: 1 / -1; }
-        .day-charts { height: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 24px; }
-        .day-chart { min-width: 0; }
-        .day-chart h3 { margin: 0 0 8px; font-size: 16px; }
-        .day-chart-canvas { position: relative; height: 240px; }
-        .chart-scale-note { color: #536176; font-size: 14px; }
-        .rules-card { grid-column: 1 / -1; }
-        .rules-scroll { overflow-x: auto; }
-        .rules-table { width: 100%; border-collapse: collapse; }
-        .rules-table caption { text-align: left; color: #536176; margin-bottom: 16px; font-size: 14px; }
-        .rules-table th, .rules-table td { padding: 12px; border-bottom: 1px solid #dde3eb; text-align: left; vertical-align: top; }
-        .rules-table th { background: #f5f7fa; }
-        .rules-table .numeric { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
-        .heatmap-card { grid-column: 1 / -1; }
-        .heatmap-scroll { overflow-x: auto; }
-        .heatmap { border-collapse: separate; border-spacing: 2px; font-size: 12px; width: 100%; }
-        .heatmap caption { text-align: left; margin: 12px 0; color: #536176; }
-        .heatmap th { padding: 8px; background: #f5f7fa; }
-        .heatmap thead th span { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; }
-        .heatmap tbody th { position: sticky; left: 0; z-index: 1; text-align: left; white-space: nowrap; }
-        .heatmap td { min-width: 44px; height: 36px; text-align: center; font-variant-numeric: tabular-nums; }
-        .heatmap .diagonal { background: #edf0f4; color: #536176; }
-        .heatmap-legend { display: flex; align-items: center; gap: 12px; margin: 12px 0; font-size: 14px; }
-        .heatmap-gradient { width: 180px; max-width: 35vw; height: 16px; background: linear-gradient(to right, hsl(210, 70%, 97%), hsl(210, 70%, 35%)); }
-        .heatmap .axis-corner { white-space: pre-line; }
-        #confidence-content .heatmap-gradient { background: linear-gradient(to right, hsl(275, 70%, 97%), hsl(275, 70%, 35%)); }
-        .heatmap-tooltip { position: fixed; z-index: 1000; max-width: min(320px, calc(100vw - 24px)); padding: 10px 14px; border-radius: 8px; background: #243247; color: white; box-shadow: 0 4px 16px #0003; font-size: 14px; line-height: 1.5; pointer-events: none; }
-        .heatmap td:focus-visible { outline: 2px solid #243247; outline-offset: 1px; }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <link rel="stylesheet" th:href="@{/css/metrics.css}">
 </head>
 <body>
-<h1>Metrics</h1>
+<div class="metrics-layout">
+<header class="metrics-topbar">
+    <div class="brand" aria-label="MoinMetrics">
+        <span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>MoinMetrics<span class="brand-dot">.</span></span>
+    </div>
+    <nav class="metrics-actions" aria-label="Seitennavigation">
+        <a class="import-link" th:href="@{/import}">Neue Datei importieren <span aria-hidden="true">→</span></a>
+        <form th:action="@{/logout}" method="post" class="logout-form">
+            <button type="submit" class="logout-button">Abmelden</button>
+        </form>
+    </nav>
+</header>
+<main aria-labelledby="metrics-title">
+<header class="metrics-header">
+    <div>
+        <h1 id="metrics-title">Auswertung</h1>
+        <p>Umsatz, Kunden und Warenkorbanalyse</p>
+    </div>
+    <p id="renderZeit" class="render-status" role="status">Diagramme werden geladen …</p>
+</header>
 <div th:replace="~{fragments/fehler :: anzeige}"></div>
-<p th:text="${importErgebnis}"></p>
-<p id="renderZeit" aria-live="polite">Diagramme werden geladen …</p>
+<p th:if="${!#strings.isEmpty(importErgebnis)}" th:text="${importErgebnis}"
+   class="login-notice" role="status"></p>
 
 <section class="charts" aria-label="Metrics-Diagramme">
     <article class="chart-card" th:each="title, stat : ${ {
@@ -146,6 +133,8 @@
         </div>
     </article>
 </section>
+</main>
+</div>
 
 <script th:inline="javascript">
     const startzeit = performance.now();

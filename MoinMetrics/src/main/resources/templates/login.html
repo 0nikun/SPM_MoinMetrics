@@ -5,21 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login - MoinMetrics</title>
     <link rel="stylesheet" th:href="@{/css/fehler.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
-<h1 th:text="${message}">Willkommen bei MoinMetrics!</h1>
-<div th:replace="~{fragments/fehler :: anzeige}"></div>
-<form th:action="@{/login}" method="post">
-    <p>
-        <label for="username">Username</label>
-        <input id="username" type="text" name="username" autocomplete="username" required>
-    </p>
-    <p>
-        <label for="password">Passwort</label>
-        <input id="password" type="password" name="password" autocomplete="current-password" required>
-    </p>
-    <button type="submit">Login</button>
-</form>
-<p th:text="${loginErgebnis}"></p>
+<main class="login-layout">
+    <div class="brand" aria-label="MoinMetrics">
+        <span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>MoinMetrics<span class="brand-dot">.</span></span>
+    </div>
+
+    <section class="login-card" aria-labelledby="login-title">
+        <header class="login-header">
+            <h1 id="login-title">Moin, willkommen zurück.</h1>
+            <p>Melde dich an, um deine Daten zu analysieren.</p>
+        </header>
+
+        <div th:replace="~{fragments/fehler :: anzeige}"></div>
+        <p th:if="${param.error}" class="fehler-anzeige" role="alert">
+            Benutzername oder Passwort falsch.
+        </p>
+        <p th:if="${param.logout}" class="login-notice" role="status">
+            Du wurdest erfolgreich abgemeldet.
+        </p>
+        <p th:if="${param.timeout}" class="login-notice" role="status">
+            Deine Sitzung ist abgelaufen. Bitte melde dich erneut an.
+        </p>
+
+        <form th:action="@{/login}" method="post" class="login-form">
+            <div class="form-field">
+                <label for="username">Benutzername</label>
+                <input id="username" type="text" name="username" autocomplete="username"
+                       placeholder="Dein Benutzername" autocapitalize="none" spellcheck="false" required>
+            </div>
+            <div class="form-field">
+                <label for="password">Passwort</label>
+                <input id="password" type="password" name="password" autocomplete="current-password"
+                       placeholder="Dein Passwort" required>
+            </div>
+            <button type="submit">Anmelden <span aria-hidden="true">→</span></button>
+        </form>
+        <p th:if="${!#strings.isEmpty(loginErgebnis)}" th:text="${loginErgebnis}"
+           class="login-notice" role="status"></p>
+    </section>
+</main>
 </body>
 </html>

@@ -1,0 +1,209 @@
+:root {
+    color-scheme: light;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    color: #172d36;
+    background: #f3f6f5;
+    font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-width: 280px;
+    background:
+        radial-gradient(ellipse at 12% 15%, #dceee7 0, transparent 48%),
+        radial-gradient(ellipse at 95% 90%, #e1e9ef 0, transparent 45%);
+}
+
+.login-layout {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+    font-size: 25px;
+    font-weight: 750;
+    letter-spacing: -1px;
+}
+
+.brand-dot { color: #167969; }
+
+.logout-form { margin: 0; }
+
+.logout-button {
+    min-height: 44px;
+    margin: 0;
+    padding: 10px 16px;
+    border: 1px solid #ccdcd4;
+    background: #ffffffb3;
+    color: #175b4e;
+    font-size: 13px;
+}
+
+.logout-button:hover { background: #eaf3ee; border-color: #8ca9a0; }
+.logout-button:active { background: #d8e9df; }
+
+.brand-icon {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    gap: 4px;
+    width: 42px;
+    height: 42px;
+    padding: 11px;
+    border-radius: 12px;
+    background: #176b5e;
+    box-shadow: 0 4px 10px #176b5e20;
+}
+
+.brand-icon i {
+    width: 4px;
+    height: 9px;
+    border-radius: 2px;
+    background: #fff;
+}
+
+.brand-icon i:nth-child(2) { height: 15px; }
+.brand-icon i:nth-child(3) { height: 20px; }
+
+.login-card {
+    width: 100%;
+    max-width: 440px;
+    padding: 38px 36px;
+    border: 1px solid #e0e7e4;
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 20px 60px -24px #173c3b35, 0 2px 6px #173c3b05;
+}
+
+.login-header { margin-bottom: 30px; }
+
+.eyebrow {
+    margin: 0 0 14px;
+    color: #176b5e;
+    font-size: 10px;
+    font-weight: 750;
+    letter-spacing: 1.7px;
+}
+
+h1 {
+    margin: 0 0 10px;
+    font-size: 27px;
+    line-height: 1.25;
+    letter-spacing: -0.9px;
+}
+
+.login-header > p:last-child {
+    margin: 0;
+    color: #65757b;
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.login-form { display: grid; gap: 21px; }
+.form-field { display: grid; gap: 8px; }
+
+label { font-size: 13px; font-weight: 650; }
+
+input {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid #ccd7d3;
+    border-radius: 8px;
+    background: #fbfcfc;
+    color: #172d36;
+    font: inherit;
+    font-size: 16px;
+    transition: border-color 150ms, box-shadow 150ms;
+}
+
+input::placeholder { color: #7b898e; font-size: 14px; }
+input:hover { border-color: #8ca9a0; }
+input:focus-visible {
+    outline: 2px solid #176b5e;
+    outline-offset: 2px;
+    border-color: #176b5e;
+    background: #fff;
+}
+
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-height: 49px;
+    margin-top: 5px;
+    padding: 12px 20px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: #176b5e;
+    color: #fff;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 650;
+    cursor: pointer;
+    transition: background 150ms;
+}
+
+button span { font-size: 20px; line-height: 1; }
+button:hover { background: #105448; }
+button:active { background: #0c443b; }
+button:focus-visible { outline: 3px solid #176b5e; outline-offset: 3px; }
+
+.login-card .fehler-anzeige { margin: 0 0 20px; }
+
+.login-notice {
+    margin: 0 0 24px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.login-notice {
+    border: 1px solid #beddd0;
+    background: #eef8f2;
+    color: #225f45;
+}
+
+.login-form + .login-notice { margin-top: 20px; }
+
+.card-footer {
+    margin-top: 30px;
+    padding: 19px 0;
+    border-top: 1px solid #edf0ee;
+    color: #6b7c81;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.page-footer {
+    margin-top: 26px;
+    color: #687b80;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+@media (max-width: 480px) {
+    .login-layout { padding: 30px 18px; }
+    .login-card { padding: 30px 24px; border-radius: 16px; }
+    h1 { font-size: 25px; }
+    .brand { margin-bottom: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    input, button { transition: none; }
+}

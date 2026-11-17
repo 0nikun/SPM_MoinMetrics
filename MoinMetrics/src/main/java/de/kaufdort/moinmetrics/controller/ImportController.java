@@ -49,20 +49,20 @@ public class ImportController {
             String fileName = file.getOriginalFilename();
 
             if (fileName == null || fileName.isEmpty() || file.isEmpty()) {
-                throw new InvalidCSVException("Fehler: Bitte eine nicht leere Datei auswählen.");
+                throw new InvalidCSVException("Bitte eine nicht leere Datei auswählen.");
             } else if (!fileName.toLowerCase(Locale.ROOT).endsWith(".csv")) {
-                throw new InvalidCSVException("Fehler: Ungültiger Dateityp, bitte eine CSV-Datei (.csv) auswählen.");
+                throw new InvalidCSVException("Ungültiger Dateityp, bitte eine CSV-Datei (.csv) auswählen.");
             }
 
             importService.loadCSV(file);
             metricsService.init();
         } catch (InvalidCSVException e) {
             redirectAttributes.addFlashAttribute(
-                    "importErgebnis", e.getMessage());
+                    "fehler", e.getMessage());
             return "redirect:/import";
         } catch (IOException e) {
             redirectAttributes.addFlashAttribute(
-                    "importErgebnis", "Fehler beim Laden der Datei." + e.getMessage());
+                    "fehler", "Fehler beim Laden der Datei." + e.getMessage());
             return "redirect:/import";
         }
 
