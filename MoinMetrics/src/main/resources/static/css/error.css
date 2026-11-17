@@ -1,0 +1,24 @@
+.error-card { max-width: 560px; text-align: center; }
+.error-card h1 {
+    margin-bottom: 28px;
+    font-size: clamp(14px, 4.2vw, 27px);
+    white-space: nowrap;
+}
+
+.error-login-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 49px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    background: #176b5e;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.error-login-link:hover { background: #105448; }
+.error-login-link:active { background: #0c443b; }
+.error-login-link:focus-visible { outline: 3px solid #176b5e; outline-offset: 3px; }
