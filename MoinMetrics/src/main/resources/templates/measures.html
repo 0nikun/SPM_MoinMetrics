@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Measures</title>
+</head>
+<body>
+<form th:action="@{/api/measures/create}" method="post" class="login-form">
+    <div class="form-field">
+        <label for="name">Name der Marketingmaßnahme</label>
+        <input id="name" type="text" name="name" autocomplete="username"
+               placeholder="Name der Marketingmaßnahme" autocapitalize="none" spellcheck="false" required>
+    </div>
+    <div class="form-field">
+        <label for="beschreibung">Beschreibung</label>
+        <input id="beschreibung" type="text" name="beschreibung" autocomplete="current-password"
+               placeholder="Beschreibung der Maßnahme" required>
+    </div>
+    <button type="submit">Speichern <span aria-hidden="true">→</span></button>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Beschreibung</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="measure : ${measures}">
+        <td th:text="${measure.id}"></td>
+        <td th:text="${measure.name}"></td>
+        <td th:text="${measure.beschreibung}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
