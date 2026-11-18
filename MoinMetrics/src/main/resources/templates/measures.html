@@ -14,7 +14,7 @@
     <div class="form-field">
         <label for="beschreibung">Beschreibung</label>
         <input id="beschreibung" type="text" name="beschreibung" autocomplete="current-password"
-               placeholder="Beschreibung der Maßnahme" required>
+               placeholder="Beschreibung der Maßnahme">
     </div>
     <button type="submit">Speichern <span aria-hidden="true">→</span></button>
 </form>
@@ -25,6 +25,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Beschreibung</th>
+        <th>Aktionen</th>
     </tr>
     </thead>
     <tbody>
@@ -32,6 +33,12 @@
         <td th:text="${measure.id}"></td>
         <td th:text="${measure.name}"></td>
         <td th:text="${measure.beschreibung}"></td>
+        <td>
+            <form th:action="@{/api/measures/delete}" method="post">
+                <input type="hidden" name="id" th:value="${measure.id}">
+                <button type="submit">Löschen</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>

@@ -35,19 +35,21 @@ public class MeasureController {
     }
 
     @PostMapping("/api/measures/delete")
-    public void deleteMeasure(
+    public String deleteMeasure(
             @RequestParam("id") Long id
     ) {
         measureService.deleteMeasure(id);
+        return "redirect:/measures";
     }
 
     @PostMapping("/api/measures/update")
-    public void updateMeasure(
+    public String updateMeasure(
             @RequestParam("id") Long id,
             @RequestParam("name") String name,
             @RequestParam("beschreibung") String beschreibung
     ) {
         measureService.updateMeasure(id, name, beschreibung);
+        return "redirect:/measures";
     }
 
     @GetMapping("/api/measures/get")

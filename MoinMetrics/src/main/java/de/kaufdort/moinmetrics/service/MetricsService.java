@@ -93,6 +93,9 @@ public class MetricsService {
         setTimes();
     }
 
+    public boolean hasData() {
+        return !storage.getInstances().isEmpty();
+    }
 
     public Map<String, Integer> getDayRevenue() {
         Instances data = storage.getInstances();

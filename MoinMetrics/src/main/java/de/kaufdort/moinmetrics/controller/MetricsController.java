@@ -20,7 +20,11 @@ public class MetricsController {
 
     @GetMapping("/metrics")
     public String metrics() {
-        return "metrics";
+        if (metricsService.hasData()) {
+            return "metrics";
+        } else {
+            return "import";
+        }
     }
 
     // Stärkster Tag nach Umsatz
