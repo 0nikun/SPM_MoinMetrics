@@ -1,47 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Measures</title>
-</head>
-<body>
-<form th:action="@{/api/measures/create}" method="post" class="login-form">
-    <div class="form-field">
-        <label for="name">Name der Marketingmaßnahme</label>
-        <input id="name" type="text" name="name" autocomplete="username"
-               placeholder="Name der Marketingmaßnahme" autocapitalize="none" spellcheck="false" required>
-    </div>
-    <div class="form-field">
-        <label for="beschreibung">Beschreibung</label>
-        <input id="beschreibung" type="text" name="beschreibung" autocomplete="current-password"
-               placeholder="Beschreibung der Maßnahme">
-    </div>
-    <button type="submit">Speichern <span aria-hidden="true">→</span></button>
+﻿<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Marketingmaßnahmen</title><link rel="stylesheet" th:href="@{/css/login.css}"><link rel="stylesheet" th:href="@{/css/metrics.css}"></head>
+<body><script th:src="@{/js/measures.js}" defer></script><main class="metrics-layout">
+<section th:fragment="massnahmen" id="massnahmen" class="chart-card measures-card" aria-labelledby="measures-heading">
+<h2 id="measures-heading">Marketingmaßnahmen</h2>
+<p>Ideen und Maßnahmen aus deiner Auswertung festhalten.</p>
+<p class="measure-status" role="status" tabindex="-1"></p>
+<details class="measure-create">
+<summary>Maßnahme anlegen</summary>
+<form th:action="@{/api/measures/create}" method="post" class="measure-form">
+<div class="form-field"><label for="measure-name">Name der Marketingmaßnahme</label><input id="measure-name" type="text" name="name" maxlength="255" required></div>
+<div class="form-field"><label for="measure-description">Beschreibung (optional)</label><textarea id="measure-description" name="beschreibung" rows="3" maxlength="255"></textarea></div>
+<button type="submit">Speichern</button>
 </form>
-
-<table>
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Beschreibung</th>
-        <th>Aktionen</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="measure : ${measures}">
-        <td th:text="${measure.id}"></td>
-        <td th:text="${measure.name}"></td>
-        <td th:text="${measure.beschreibung}"></td>
-        <td>
-            <form th:action="@{/api/measures/delete}" method="post">
-                <input type="hidden" name="id" th:value="${measure.id}">
-                <button type="submit">Löschen</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-</body>
-</html>
+</details>
+<p th:if="${#lists.isEmpty(measures)}">Noch keine Maßnahmen vorhanden. Halte deine erste Idee aus der Auswertung fest.</p>
+<div class="rules-scroll" th:unless="${#lists.isEmpty(measures)}">
+<table class="rules-table measures-table" aria-labelledby="measures-heading">
+<thead><tr><th scope="col">Name</th><th scope="col">Beschreibung</th><th scope="col">Aktionen</th></tr></thead>
+<tbody><tr th:each="measure : ${measures}">
+<td th:text="${measure.name}"></td><td class="measure-description" th:text="${measure.beschreibung}"></td>
+<td><form th:action="@{/api/measures/delete}" method="post"><input type="hidden" name="id" th:value="${measure.id}"><button class="measure-delete" type="submit" th:attr="aria-label=|Maßnahme ${measure.name} löschen|">Löschen</button></form></td>
+</tr></tbody></table>
+</div>
+</section></main></body></html>

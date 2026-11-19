@@ -2,6 +2,8 @@ package de.kaufdort.moinmetrics.controller;
 
 import de.kaufdort.moinmetrics.model.AprioriRuleDTO;
 import de.kaufdort.moinmetrics.service.MetricsService;
+import de.kaufdort.moinmetrics.service.MeasureService;
+import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,14 +15,17 @@ import java.util.Map;
 public class MetricsController {
 
     private final MetricsService metricsService;
+    private final MeasureService measureService;
 
-    public MetricsController(MetricsService metricsService) {
+    public MetricsController(MetricsService metricsService, MeasureService measureService) {
         this.metricsService = metricsService;
+        this.measureService = measureService;
     }
 
     @GetMapping("/metrics")
-    public String metrics() {
+    public String metrics(Model model) {
         if (metricsService.hasData()) {
+            model.addAttribute("measures", measureService.getAllMeasures());
             return "metrics";
         } else {
             return "import";

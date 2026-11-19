@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.List;
 
@@ -28,18 +29,30 @@ public class MeasureController {
     @PostMapping("/api/measures/create")
     public String createMeasure(
             @RequestParam("name") String name,
-            @RequestParam("beschreibung") String beschreibung
+            @RequestParam("beschreibung") String beschreibung,
+            @RequestHeader(value = "X-Requested-With", required = false) String requestedWith,
+            Model model
     ) {
         measureService.saveMeasure(name, beschreibung);
-        return "redirect:/measures";
+        return measuresResponse(requestedWith, model);
     }
 
     @PostMapping("/api/measures/delete")
     public String deleteMeasure(
-            @RequestParam("id") Long id
+            @RequestParam("id") Long id,
+            @RequestHeader(value = "X-Requested-With", required = false) String requestedWith,
+            Model model
     ) {
         measureService.deleteMeasure(id);
-        return "redirect:/measures";
+        return measuresResponse(requestedWith, model);
+    }
+
+    private String measuresResponse(String requestedWith, Model model) {
+        if ("XMLHttpRequest".equals(requestedWith)) {
+            model.addAttribute("measures", measureService.getAllMeasures());
+            return "measures :: massnahmen";
+        }
+        return "redirect:/metrics#massnahmen";
     }
 
     @PostMapping("/api/measures/update")
@@ -49,7 +62,7 @@ public class MeasureController {
             @RequestParam("beschreibung") String beschreibung
     ) {
         measureService.updateMeasure(id, name, beschreibung);
-        return "redirect:/measures";
+        return "redirect:/metrics#massnahmen";
     }
 
     @GetMapping("/api/measures/get")
