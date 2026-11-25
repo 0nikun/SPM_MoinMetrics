@@ -179,7 +179,7 @@
 .summary-value { color: #53665e; font-size: 16px; font-variant-numeric: tabular-nums; }
 .summary-tie { color: #65757b; font-size: 12px; }
 .summary-card-days, .summary-card-rules { grid-column: 1 / -1; }
-.summary-card-articles { grid-column: span 2; }
+.summary-card-total, .summary-card-articles { grid-column: span 2; }
 .summary-card-days .summary-result { display: grid; grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)); gap: 12px; }
 .summary-day { padding: 16px; border: 1px solid #e2eae5; border-radius: 10px; background: #f8faf9; }
 .summary-day-name { margin: 0 0 14px; font-size: 13px; color: #64756d; font-weight: 600; }
@@ -202,7 +202,7 @@
 .summary-rule-confidence span { font-size: 12px; line-height: 1.5; color: #65757b; }
 @media (max-width: 1000px) {
     .metrics-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .summary-card-articles { grid-column: span 1; }
+    .summary-card-total, .summary-card-articles { grid-column: span 1; }
 }
 @media (max-width: 600px) {
     .metrics-summary { grid-template-columns: minmax(0, 1fr); gap: 16px; }

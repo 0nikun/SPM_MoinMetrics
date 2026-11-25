@@ -12,10 +12,6 @@ Aktueller Funktionsabgleich: [ANFORDERUNGSABGLEICH.md](ANFORDERUNGSABGLEICH.md).
 - [ ] Q01 nachweisen: 10.000 Datensätze einschließlich aller geforderten Analysen und sichtbarer Ergebnisse durchgängig messen; Ziel 1–2 Sekunden, höchstens 5 Sekunden. Messbedingungen festlegen.
 - [ ] Javadoc vervollständigen; WAR auf Ziel-Tomcat testen und vollständiges Abgabepaket aus WAR, Quellcode und aktuellen PDF-Dokumenten prüfen.
 
-## Metrics-Seite
-
-- [ ] Als zusätzliche Übersichtswerte Gesamtumsatz und Anzahl der Einkäufe ergänzen. Stärkste Wochentage/Uhrzeiten, Top/Flop und Leer-/Fehleranzeigen sind bereits in der einfachen Ansicht vorhanden.
-
 ## Fachliche Auswertung aus dem Frontend ins Backend verlagern
 
 Die folgenden Entscheidungen und Berechnungen liegen aktuell in JavaScript. Vorhandene Service-Methoden und API-Endpunkte zuerst auf Wiederverwendbarkeit prüfen.

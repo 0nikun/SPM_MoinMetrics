@@ -11,6 +11,20 @@ const summaryTitles = {
 const summaryEuro = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' });
 const summaryNumber = new Intl.NumberFormat('de-DE');
 
+async function loadMetricValue(element, formatter) {
+    try {
+        const response = await fetch(element.dataset.url, { headers: { Accept: 'application/json' } });
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const value = await response.json();
+        if (!Number.isFinite(value)) throw new Error('Zahlenwert erwartet');
+        element.textContent = formatter.format(value);
+        element.classList.add('summary-name');
+    } catch (error) {
+        element.textContent = 'Nicht verfügbar';
+        console.error(element.dataset.url, error);
+    }
+}
+
 function setMetricSummaryStatus(id, message) {
     const body = document.getElementById('summary-' + id);
     if (body) body.textContent = message;
@@ -94,11 +108,9 @@ function showRulesSummary(rules) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    loadMetricValue(document.getElementById('metrics-count'), summaryNumber);
+    loadMetricValue(document.getElementById('metrics-total'), summaryEuro);
     const summary = document.getElementById('metrics-summary');
-    const intro = summaryElement('header', 'summary-intro');
-    intro.append(summaryElement('h2', '', 'Deine Auswertung auf einen Blick'),
-        summaryElement('p', '', 'Die wichtigsten Ergebnisse deiner importierten Daten. Details findest du im Advanced-Modus.'));
-    summary.append(intro);
     for (const [id, title] of Object.entries(summaryTitles)) {
         const card = document.createElement('article');
         const category = id === 'rules' ? 'rules' : id === 'chart-4' ? 'days' : id.startsWith('chart-item-') ? 'articles' : 'highlight';

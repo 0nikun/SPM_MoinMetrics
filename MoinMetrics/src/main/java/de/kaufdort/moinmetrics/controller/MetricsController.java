@@ -1,10 +1,10 @@
 package de.kaufdort.moinmetrics.controller;
 
 import de.kaufdort.moinmetrics.model.AprioriRuleDTO;
-import de.kaufdort.moinmetrics.service.MetricsService;
 import de.kaufdort.moinmetrics.service.MeasureService;
-import org.springframework.ui.Model;
+import de.kaufdort.moinmetrics.service.MetricsService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -30,6 +30,18 @@ public class MetricsController {
         } else {
             return "import";
         }
+    }
+
+    @ResponseBody
+    @GetMapping("/api/metrics/count")
+    public int count() {
+        return metricsService.dataCount();
+    }
+
+    @ResponseBody
+    @GetMapping("/api/metrics/total")
+    public int total() {
+        return metricsService.total();
     }
 
     // Stärkster Tag nach Umsatz
@@ -85,7 +97,6 @@ public class MetricsController {
     public Map<String, Map<String, Double>> itemsConfidenceHeatmap() {
         return metricsService.getItemsConfidenceMatrix();
     }
-
 
     // Artikel nach Umsatz
     @ResponseBody

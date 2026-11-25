@@ -97,6 +97,24 @@ public class MetricsService {
         return !storage.getInstances().isEmpty();
     }
 
+    public int dataCount() {
+        return storage.getInstances().size();
+    }
+
+    // Gesamtsumme aller Einkäufe
+    public int total() {
+        Instances data = storage.getInstances();
+        int total = -1;
+
+        Attribute sum = data.attribute("Einkaufssumme");
+
+        for (Instance row : data) {
+            total += row.value(sum);
+        }
+
+        return total;
+    }
+
     public Map<String, Integer> getDayRevenue() {
         Instances data = storage.getInstances();
 

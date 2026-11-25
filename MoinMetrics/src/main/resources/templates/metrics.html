@@ -50,7 +50,20 @@
     <label><input type="radio" name="metrics-display" value="relative" id="relative-values" aria-label="Prozentwerte"><span>%</span></label>
 </div>
 </div>
-<section id="metrics-summary" class="metrics-summary" aria-label="Wichtigste Ergebnisse"></section>
+<section id="metrics-summary" class="metrics-summary" aria-label="Wichtigste Ergebnisse">
+    <header class="summary-intro">
+        <h2>Deine Auswertung auf einen Blick</h2>
+        <p>Die wichtigsten Ergebnisse deiner importierten Daten. Details findest du im Advanced-Modus.</p>
+    </header>
+    <article class="chart-card summary-card summary-card-highlight summary-card-total">
+        <h2>Anzahl der Datensätze</h2>
+        <div id="metrics-count" role="status" th:data-url="@{/api/metrics/count}">Wird geladen …</div>
+    </article>
+    <article class="chart-card summary-card summary-card-highlight summary-card-total">
+        <h2>Gesamtumsatz</h2>
+        <div id="metrics-total" role="status" th:data-url="@{/api/metrics/total}">Wird geladen …</div>
+    </article>
+</section>
 <section id="metrics-charts" class="charts" aria-label="Metrics-Diagramme" hidden>
     <header class="advanced-section-heading">
         <span class="advanced-section-number" aria-hidden="true">01</span>
