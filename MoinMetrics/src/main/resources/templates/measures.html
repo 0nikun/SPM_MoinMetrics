@@ -6,7 +6,7 @@
 <h2 id="measures-heading">Marketingmaßnahmen</h2>
 <p>Ideen und Maßnahmen aus deiner Auswertung festhalten.</p>
 <p class="measure-status" role="status" tabindex="-1"></p>
-<details class="measure-create">
+<details class="measure-create" name="measure-forms">
 <summary>Maßnahme anlegen</summary>
 <form th:action="@{/api/measures/create}" method="post" class="measure-form">
 <div class="form-field"><label for="measure-name">Name der Marketingmaßnahme</label><input id="measure-name" type="text" name="name" maxlength="255" required></div>
@@ -18,9 +18,33 @@
 <div class="rules-scroll" th:unless="${#lists.isEmpty(measures)}">
 <table class="rules-table measures-table" aria-labelledby="measures-heading">
 <thead><tr><th scope="col">Name</th><th scope="col">Beschreibung</th><th scope="col">Aktionen</th></tr></thead>
-<tbody><tr th:each="measure : ${measures}">
+<tbody th:each="measure : ${measures}"><tr>
 <td th:text="${measure.name}"></td><td class="measure-description" th:text="${measure.beschreibung}"></td>
-<td><form th:action="@{/api/measures/delete}" method="post"><input type="hidden" name="id" th:value="${measure.id}"><button class="measure-delete" type="submit" th:attr="aria-label=|Maßnahme ${measure.name} löschen|">Löschen</button></form></td>
+<td><div class="measure-actions">
+    <details class="measure-edit" name="measure-forms">
+        <summary th:attr="aria-label=|Maßnahme ${measure.name} bearbeiten|,aria-controls=|measure-editor-${measure.id}|">Bearbeiten</summary>
+    </details>
+    <form th:action="@{/api/measures/delete}" method="post"><input type="hidden" name="id" th:value="${measure.id}"><button class="measure-delete" type="submit" th:attr="aria-label=|Maßnahme ${measure.name} löschen|">Löschen</button></form>
+</div></td>
+</tr>
+<tr class="measure-editor" th:id="|measure-editor-${measure.id}|">
+    <td colspan="3">
+        <form th:action="@{/api/measures/update}" method="post" class="measure-form">
+            <input type="hidden" name="id" th:value="${measure.id}">
+            <div class="form-field">
+                <label th:for="|measure-name-${measure.id}|">Name der Marketingmaßnahme</label>
+                <input th:id="|measure-name-${measure.id}|" type="text" name="name" th:value="${measure.name}" maxlength="255" required>
+            </div>
+            <div class="form-field">
+                <label th:for="|measure-description-${measure.id}|">Beschreibung (optional)</label>
+                <textarea th:id="|measure-description-${measure.id}|" name="beschreibung" rows="3" maxlength="255" th:text="${measure.beschreibung}"></textarea>
+            </div>
+            <div class="measure-actions">
+                <button type="submit">Aktualisieren</button>
+                <button type="reset" class="measure-cancel">Abbrechen</button>
+            </div>
+        </form>
+    </td>
 </tr></tbody></table>
 </div>
 </section></main></body></html>

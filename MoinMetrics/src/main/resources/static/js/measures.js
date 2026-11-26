@@ -1,9 +1,36 @@
+function updateEditButton(form) {
+    const { name, beschreibung } = form.elements;
+    const changed = name.value !== name.defaultValue || beschreibung.value !== beschreibung.defaultValue;
+    form.querySelector('button[type="submit"]').disabled = !changed || Boolean(form.closest('[aria-busy="true"]'));
+}
+
+function syncEditForms(container) {
+    container.querySelectorAll('.measure-editor form').forEach(updateEditButton);
+}
+
+syncEditForms(document);
+
+document.addEventListener('input', event => {
+    const form = event.target.closest('.measure-editor form');
+    if (form) updateEditButton(form);
+});
+
+document.addEventListener('reset', event => {
+    const form = event.target;
+    if (!form.matches('.measure-editor form')) return;
+    form.querySelector('button[type="submit"]').disabled = true;
+    const details = form.closest('tbody').querySelector('.measure-edit');
+    details.open = false;
+    details.querySelector('summary').focus();
+});
+
 document.addEventListener('submit', async event => {
     const form = event.target;
     const section = form.closest('#massnahmen');
     if (!section) return;
     event.preventDefault();
     if (section.getAttribute('aria-busy') === 'true') return;
+    if (form.matches('.measure-editor form') && form.querySelector('button[type="submit"]').disabled) return;
 
     const creating = form.classList.contains('measure-form');
     const body = new URLSearchParams(new FormData(form));
@@ -22,6 +49,7 @@ document.addEventListener('submit', async event => {
         const documentFragment = new DOMParser().parseFromString(await response.text(), 'text/html');
         const replacement = documentFragment.getElementById('massnahmen');
         if (!replacement) throw new Error('Missing measures fragment');
+        syncEditForms(replacement);
         section.replaceWith(replacement);
         const message = replacement.querySelector('.measure-status');
         message.textContent = creating ? 'Maßnahme gespeichert.' : 'Maßnahme gelöscht.';
@@ -31,5 +59,6 @@ document.addEventListener('submit', async event => {
     } finally {
         section.removeAttribute('aria-busy');
         buttons.forEach(button => { button.disabled = false; });
+        syncEditForms(section);
     }
 });

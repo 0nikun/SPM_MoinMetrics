@@ -151,6 +151,14 @@
 .measure-form button { justify-self: start; margin: 0; }
 .measures-table td { overflow-wrap: anywhere; }
 .measure-description { white-space: pre-wrap; }
+.measure-editor { display: none; }
+.measures-table tbody:has(.measure-edit[open]) > .measure-editor { display: table-row; }
+.measure-editor .measure-form { margin-top: 0; max-width: none; grid-template-columns: minmax(0, 1fr); }
+.measure-editor button:disabled { background: #e3e7e5; color: #58615e; cursor: not-allowed; }
+.measure-cancel { background: white; border: 1px solid #ccd7d3; color: #175b4e; }
+.measure-cancel:hover { background: #edf5f0; }
+.measure-actions { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px; }
+.measure-edit summary { cursor: pointer; padding: 10px 14px; border: 1px solid #ccd7d3; border-radius: 8px; color: #175b4e; font-weight: 650; }
 .measure-delete { min-height: 44px; margin: 0; padding: 8px 14px; background: #fff; border: 1px solid #d9b6b6; color: #9b3030; }
 .measure-delete:hover { background: #fff0f0; }
 .metrics-display-control { display: inline-flex; margin-bottom: 24px; padding: 4px; border: 1px solid #ccdcd4; border-radius: 10px; background: #f2f7f4; }

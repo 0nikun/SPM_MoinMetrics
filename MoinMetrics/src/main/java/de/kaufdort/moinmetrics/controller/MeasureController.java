@@ -37,6 +37,18 @@ public class MeasureController {
         return measuresResponse(requestedWith, model);
     }
 
+    @PostMapping("/api/measures/update")
+    public String updateMeasure(
+            @RequestParam("id") Long id,
+            @RequestParam("name") String name,
+            @RequestParam("beschreibung") String beschreibung,
+            @RequestHeader(value = "X-Requested-With", required = false) String requestedWith,
+            Model model
+    ) {
+        measureService.updateMeasure(id, name, beschreibung);
+        return measuresResponse(requestedWith, model);
+    }
+
     @PostMapping("/api/measures/delete")
     public String deleteMeasure(
             @RequestParam("id") Long id,
@@ -52,16 +64,6 @@ public class MeasureController {
             model.addAttribute("measures", measureService.getAllMeasures());
             return "measures :: massnahmen";
         }
-        return "redirect:/metrics#massnahmen";
-    }
-
-    @PostMapping("/api/measures/update")
-    public String updateMeasure(
-            @RequestParam("id") Long id,
-            @RequestParam("name") String name,
-            @RequestParam("beschreibung") String beschreibung
-    ) {
-        measureService.updateMeasure(id, name, beschreibung);
         return "redirect:/metrics#massnahmen";
     }
 
